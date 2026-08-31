@@ -1,0 +1,29 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultTextAlignment center
+skinparam {
+  defaultFontName "Microsoft YaHei"
+  shadowing false
+  ActivityBackgroundColor #DCE9F7
+  ActivityBorderColor #2C5F8A
+  ActivityFontColor #333333
+  ActivityDiamondBackgroundColor #FFF3D6
+  ActivityDiamondBorderColor #E8833A
+  ComponentBackgroundColor #DCE9F7
+  ComponentBorderColor #2C5F8A
+  ComponentFontColor #333333
+  ArrowColor #9AA7B4
+  ArrowFontColor #333333
+}
+title 设计模式的引入决策
+start
+:识别可独立变化、\n变化频率可预期的点;
+if (存在真实变化点？) then (否)
+  :用最简单方案实现\n不引入模式;
+else (是)
+  :AI 推荐模式\n并说明动机与代价;
+  :生成模式代码骨架;
+  :评审检查\n（参与者关系/无用抽象/可替代性）;
+endif
+stop
+@enduml

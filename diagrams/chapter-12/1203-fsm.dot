@@ -1,0 +1,22 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="有限状态机（FSM）";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.6, ranksep=0.8, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=circle, style="filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.5, fontsize=12, margin="0.05,0.02"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    start [shape=point, label="", fillcolor="#333333", color="#333333"];
+    S0 [label="S0"];
+    S1 [label="S1"];
+    S2 [label="S2", peripheries=2, fillcolor="#2C5F8A", fontcolor="white"];
+
+    { rank=same; S0; S1 }
+    { rank=same; S2 }
+
+    start -> S0;
+    S0 -> S1 [xlabel="事件a"];
+    S1 -> S2 [label="事件b"];
+    S2 -> S1 [label="事件c", style=dashed, color="#E8833A", fontcolor="#E8833A"];
+    S2 -> S0 [label="事件d", style=dashed, color="#E8833A", fontcolor="#E8833A"];
+}

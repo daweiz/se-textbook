@@ -1,0 +1,23 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="LLM 分析助手四能力";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=0.7, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    A [label="自动识别\n实体类·边界类·控制类候选"];
+    B [label="自动转换\n事件流 → 交互图/类图草稿"];
+    C [label="自动发现\n分析模型的遗漏与不一致"];
+    D [label="自动生成\n数据字典与词汇表"];
+    M [label="分析人员\n业务判断与取舍", fillcolor="#2C5F8A", fontcolor="white"];
+
+    { rank=same; A; B }
+    { rank=same; M }
+    { rank=same; C; D }
+
+    A -> M [label="候选清单"];
+    B -> M [label="模型草稿"];
+    M -> C [dir=back, label="检查报告"];
+    M -> D [dir=back, label="词汇表"];
+}

@@ -1,0 +1,30 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="智能估算与专家判断的交叉校验";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.7, ranksep=0.55, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    A [label="AI 估算\n（历史数据·功能点·置信区间）"];
+    B [label="专家判断\n（Delphi·领域经验）"];
+    D [label="两者分歧\n显著？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A"];
+    C [label="停下分析原因\n（需求理解盲区\n·历史数据盲区）"];
+    F [label="修正估算", fillcolor="#FCE9DB", color="#E8833A"];
+    G [label="输出区间估计\n（而非点值）"];
+    H [label="随项目演进\n持续校准"];
+    I [label="结束", fillcolor="#2C5F8A", fontcolor="white"];
+
+    { rank=same; D; C }
+    { rank=same; G; F }
+    { rank=same; H; I }
+
+    A -> B;
+    B -> D;
+    D -> C [xlabel="是"];
+    C -> F;
+    G -> F [dir=back];
+    D -> G [label="否"];
+    G -> H;
+    H -> I;
+}

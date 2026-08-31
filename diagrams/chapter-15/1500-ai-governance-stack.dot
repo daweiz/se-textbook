@@ -1,0 +1,21 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="AI 治理与合规栈";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=0.75, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    a [label="法规层\n（EU AI Act·个人信息保护法）"];
+    b [label="风险层\n（风险评估·系统分级）"];
+    c [label="文档层\n（模型卡·数据卡·审计日志）"];
+    d [label="工程层\n（偏见检测·红队·护栏）"];
+
+    { rank=same; a; b }
+    { rank=same; c }
+    { rank=same; d }
+
+    a -> b;
+    b -> c;
+    c -> d;
+}

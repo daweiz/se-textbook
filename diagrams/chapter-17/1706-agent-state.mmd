@@ -1,0 +1,11 @@
+stateDiagram-v2
+    [*] --> idle
+    idle --> thinking: 收到任务
+    thinking --> tool_call: 需要外部数据
+    tool_call --> thinking: 工具返回结果
+    thinking --> responding: 形成答案
+    responding --> idle: 交付完成
+    thinking --> error: 步骤失败
+    error --> thinking: 重试或降级
+    error --> idle: 放弃并报告
+    idle --> [*]: 会话结束

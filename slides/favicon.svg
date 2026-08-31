@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 底：蓝色渐变圆角方片（匹配播放器主题色） -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1e3a8a"/>
+      <stop offset="0.55" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)"/>
+
+  <!-- 软件工程：代码尖括号 < > -->
+  <path d="M24 19 L13 32 L24 45" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M40 19 L51 32 L40 45" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 智能：神经网络节点链 -->
+  <line x1="32" y1="21" x2="32" y2="43" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="32" cy="24" r="3.6" fill="#fde047"/>
+  <circle cx="32" cy="32" r="3.6" fill="#fde047"/>
+  <circle cx="32" cy="40" r="3.6" fill="#fde047"/>
+</svg>

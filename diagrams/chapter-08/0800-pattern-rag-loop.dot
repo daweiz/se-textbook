@@ -1,0 +1,28 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="模式知识库的检索增强闭环";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.45, ranksep=1.15, splines=ortho, pad=0.25, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=10.5, margin="0.15,0.08"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    n1 [label="沉淀模式实例与权衡\n（团队自己的经验）"];
+    n2 [label="向量化并建立索引\n（模式知识库）"];
+    n3 [label="生成或重构时检索\n（相似问题·变化点）"];
+    n4 [label="基于知识库生成\n（而非仅凭通用训练数据）"];
+    n5 [label="评审与测试验证"];
+    n6 [label="反馈与补充入库\n（新实例·新权衡）"];
+
+    { rank=same; n1; n2; n3 }
+    { rank=same; n6; n5; n4 }
+
+    n6 -> n5 [style=invis];
+    n5 -> n4 [style=invis];
+
+    n1 -> n2;
+    n2 -> n3;
+    n3 -> n4;
+    n4 -> n5;
+    n5 -> n6;
+    n6 -> n1 [style=dashed, color="#E8833A", fontcolor="#E8833A", label="循环"];
+}

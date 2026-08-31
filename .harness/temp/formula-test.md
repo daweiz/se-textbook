@@ -1,0 +1,15 @@
+# 公式测试
+
+行内公式 $E=aL^b$ 与 $\pi\approx3.14159$。
+
+块级公式：
+
+$$\mathrm{FP} = U \times (0.65 + 0.01 \times F)$$
+
+分式与希腊字母：
+
+$$\mathrm{Precision}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}}$$
+
+$$V(G) = E - N + 2$$
+
+$$\mathrm{F1}=2\cdot\frac{P\cdot R}{P+R}$$

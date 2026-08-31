@@ -1,0 +1,29 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam {
+  defaultFontName "Microsoft YaHei"
+  shadowing false
+  ActivityBackgroundColor #DCE9F7
+  ActivityBorderColor #2C5F8A
+  ActivityFontColor #333333
+  ActivityDiamondBackgroundColor #FFF3D6
+  ActivityDiamondBorderColor #E8833A
+  ComponentBackgroundColor #DCE9F7
+  ComponentBorderColor #2C5F8A
+  ComponentFontColor #333333
+  ArrowColor #9AA7B4
+  ArrowFontColor #333333
+}
+title 架构决策的分级与人机分工
+component "关乎系统命运的决策\n体系结构风格·关键子系统·数据一致性\n由人做出，AI 提供候选与利弊" as l1
+component "影响局部的决策\n类的结构·接口设计·组件交互\nAI 生成初稿，人评审确认" as l2
+component "细节决策\n参数默认值·工具选择\nAI 按约定直接完成" as l3
+l1 -down-> l2 : 决策粒度
+l2 -down-> l3 : 决策粒度
+note right
+  AI 介入程度随决策
+  影响程度从低到高
+end note
+@enduml

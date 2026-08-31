@@ -1,0 +1,38 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="文本化建模工作流";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=0.85, splines=ortho, pad=0.25, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=10.5, margin="0.15,0.08"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    subgraph cluster_gen {
+        label="输入与生成";
+        style=dashed; color="#9AA7B4"; fillcolor="#F7FAFD"; fontcolor="#2C5F8A"; fontname="Microsoft YaHei"; fontsize=12;
+        n1 [label="自然语言需求"];
+        n2 [label="LLM 生成文本建模代码"];
+        { rank=same; n1; n2 }
+    }
+    subgraph cluster_verify {
+        label="渲染与校验";
+        style=dashed; color="#9AA7B4"; fillcolor="#F7FAFD"; fontcolor="#2C5F8A"; fontname="Microsoft YaHei"; fontsize=12;
+        n3 [label="Mermaid / PlantUML\n渲染"];
+        n4 [label="OCL 约束校验"];
+        d1 [label="校验通过？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A"];
+        { rank=same; n3; n4; d1 }
+    }
+    subgraph cluster_result {
+        label="结果";
+        style=dashed; color="#9AA7B4"; fillcolor="#F7FAFD"; fontcolor="#2C5F8A"; fontname="Microsoft YaHei"; fontsize=12;
+        ok [label="模型进入基线", fillcolor="#2C5F8A", fontcolor="white"];
+        no [label="修正模型描述", fillcolor="#FCE9DB", color="#E8833A"];
+        { rank=same; ok; no }
+    }
+
+    n1 -> n2;
+    n2 -> n3;
+    n3 -> n4;
+    n4 -> d1;
+    d1 -> ok [label="是"];
+    d1 -> no [label="否"];
+}

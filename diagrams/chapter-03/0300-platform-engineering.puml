@@ -1,0 +1,27 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultTextAlignment center
+skinparam {
+  defaultFontName "Microsoft YaHei"
+  shadowing false
+  ActivityBackgroundColor #DCE9F7
+  ActivityBorderColor #2C5F8A
+  ActivityFontColor #333333
+  ActivityDiamondBackgroundColor #FFF3D6
+  ActivityDiamondBorderColor #E8833A
+  ComponentBackgroundColor #DCE9F7
+  ComponentBorderColor #2C5F8A
+  ComponentFontColor #333333
+  ArrowColor #9AA7B4
+  ArrowFontColor #333333
+}
+title 内部开发者平台与 GitOps
+rectangle "自助服务层\n（黄金路径·模板·自助 API）" as self
+rectangle "平台能力层\n（CI/CD·环境·安全·可观测）" as plat
+rectangle "基础设施层\n（云·Kubernetes·镜像仓库）" as infra
+rectangle "Git 仓库\n（单一事实来源·声明式期望状态）" as git
+self -down-> plat
+plat -down-> infra
+git -right-> plat : 声明式同步
+plat -right-> git : 状态回写
+@enduml

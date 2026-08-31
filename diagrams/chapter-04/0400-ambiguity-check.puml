@@ -1,0 +1,29 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultTextAlignment center
+skinparam {
+  defaultFontName "Microsoft YaHei"
+  shadowing false
+  ActivityBackgroundColor #DCE9F7
+  ActivityBorderColor #2C5F8A
+  ActivityFontColor #333333
+  ActivityDiamondBackgroundColor #FFF3D6
+  ActivityDiamondBorderColor #E8833A
+  ComponentBackgroundColor #DCE9F7
+  ComponentBorderColor #2C5F8A
+  ComponentFontColor #333333
+  ArrowColor #9AA7B4
+  ArrowFontColor #333333
+}
+title 需求二义性检测的两层机制
+rectangle "句法层（规则 + 词法分析）" as syntax {
+  [标记不可验证的主观词\n"用户友好""快速"]
+  [标记指代不清的代词与术语]
+}
+rectangle "语义层（大模型 + 领域知识）" as semantic {
+  [识别相互矛盾的需求\n对照完整性检查清单]
+  [识别缺失的前提与边界情形]
+}
+syntax -down-> semantic : 第一遍过滤
+semantic -down-> [报告"看似明确实则含糊"的条目] : 交分析人员确认
+@enduml

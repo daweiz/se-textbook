@@ -1,0 +1,26 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="分析类候选的筛选漏斗";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=0.65, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    A [label="LLM 枚举候选类\n（实体/边界/控制，附识别依据）"];
+    B [label="分析人员逐项审查\n（剔除名词堆砌·判定真实职责）"];
+    C [label="合并同义词\n与取舍边界类"];
+    d [label="语义确认？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A"];
+    Y [label="进入分析类图", fillcolor="#2C5F8A", fontcolor="white"];
+    N [label="退回补充\n问题域上下文", fillcolor="#FCE9DB", color="#E8833A"];
+
+    { rank=same; A; B }
+    { rank=same; C }
+    { rank=same; d }
+    { rank=same; Y; N }
+
+    A -> B;
+    B -> C;
+    C -> d;
+    d -> Y [label="是"];
+    d -> N [label="否"];
+}

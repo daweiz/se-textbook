@@ -1,0 +1,23 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="智能化管理实践";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=0.7, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    a [label="AI 项目助理\nWBS 初稿·周报汇总"];
+    b [label="智能估算\n规模/成本/工期区间"];
+    c [label="风险仪表盘\n概率·影响·超阈值告警"];
+    d [label="配置与发布自动化\n流水线·基线·变更控制"];
+    m [label="管理者\n权衡取舍与最终决策", fillcolor="#2C5F8A", fontcolor="white"];
+
+    { rank=same; a; b }
+    { rank=same; m }
+    { rank=same; c; d }
+
+    a -> m [label="决策材料"];
+    b -> m [label="决策材料"];
+    m -> c [dir=back, label="决策材料"];
+    m -> d [dir=back, label="决策材料"];
+}

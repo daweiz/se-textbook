@@ -1,0 +1,31 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="伦理风险处置流程";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=0.8, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    A  [label="风险自评"];
+    D  [label="风险分级", shape=diamond, fillcolor="#FFF3D6", color="#E8833A"];
+    C  [label="安全与偏见评估"];
+    CC [label="合规自查"];
+    E  [label="缓解措施"];
+    F  [label="工程审批"];
+    G  [label="部署与监控"];
+    H  [label="持续复审"];
+
+    { rank=same; A; D; H }
+    { rank=same; C; CC }
+    { rank=same; E; F; G }
+
+    A -> D;
+    D -> C  [label="高风险"];
+    D -> CC [label="有限风险"];
+    C -> E;
+    CC -> E;
+    E -> F;
+    F -> G;
+    G -> H;
+    H -> A [style=dashed, color="#E8833A", fontcolor="#E8833A", xlabel="循环"];
+}

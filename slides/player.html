@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>幻灯片播放器 ·《智能软件工程基础》</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="css/player.css">
+</head>
+<body>
+  <div id="player">
+    <!-- 顶栏 -->
+    <header id="topbar">
+      <button id="btn-back" title="返回小节菜单">◀ 目录</button>
+      <span id="chapter-title">正在加载……</span>
+      <span id="count-badge"></span>
+      <div class="zoom-group">
+        <button id="btn-zoom-out" title="缩小字体（-）">A−</button>
+        <span id="zoom-label" title="当前字号（- / = 缩放，0 复位）">100%</span>
+        <button id="btn-zoom-in" title="放大字体（=）">A+</button>
+      </div>
+      <button id="btn-theme">暗色</button>
+      <button id="btn-fullscreen">全屏</button>
+    </header>
+
+    <!-- 舞台 -->
+    <main id="stage">
+      <div id="slide"></div>
+      <div id="arrows">
+        <button id="btn-prev" title="上一页（←）">◀</button>
+        <button id="btn-next" title="下一页（→）">▶</button>
+      </div>
+      <div id="dots"></div>
+    </main>
+
+    <!-- 底栏 -->
+    <footer id="bottombar">
+      <!-- 字幕条 -->
+      <div id="subtitle"></div>
+
+      <!-- 控制条 -->
+      <div id="controls">
+        <div class="ctl-group">
+          <button id="btn-tts" class="primary">朗读</button>
+          <button id="btn-stop">停止</button>
+          <label><input type="checkbox" id="auto-next">读完自动下一页</label>
+        </div>
+
+        <div class="ctl-group">
+          <label>音色
+            <select id="voice-select" title="选择中文语音（浏览器内置 TTS）"><option value="">加载中…</option></select>
+          </label>
+          <label>语速 <input type="range" id="rate" min="0.5" max="2" step="0.1" value="1"></label>
+          <label>音调 <input type="range" id="pitch" min="0.5" max="2" step="0.1" value="1"></label>
+          <label>音量 <input type="range" id="volume" min="0" max="1" step="0.05" value="1"></label>
+        </div>
+
+        <div class="ctl-group">
+          <label><input type="checkbox" id="subtitle-toggle" checked>字幕</label>
+          <button id="btn-record" title="录制屏幕并下载 WebM。要录 TTS 语音请选「此标签页」并勾选『同时分享标签页中的音频』（顶部会有提示条）">⏺ 开始录屏</button>
+          <label><input type="checkbox" id="mic">混入麦克风</label>
+        </div>
+
+        <!-- 录制时钟（控制条右侧） -->
+        <span id="rec-indicator" title="正在录制"><span id="rec-dot"></span><span class="rec-label">录制中</span> <span id="rec-timer">00:00:00</span></span>
+      </div>
+
+      <!-- 进度条 -->
+      <div id="progress"><div id="progress-bar"></div></div>
+    </footer>
+  </div>
+
+  <!-- 网格总览 -->
+  <div id="overview" style="display:none">
+    <h2>幻灯片总览（点击跳转，Esc / O 关闭）</h2>
+    <div id="ov-grid"></div>
+  </div>
+
+  <!-- 提示 -->
+  <div id="toast"></div>
+
+  <!-- 加载失败提示 -->
+  <div id="load-error">
+    <div class="err-title">无法加载幻灯片</div>
+    <div class="err-msg"></div>
+    <a href="index.html"><button class="primary">返回小节菜单</button></a>
+  </div>
+
+  <!-- 数据（脚本标签方式加载，file:// 下不受 CORS 限制） -->
+  <script src="data/_manifest.js"></script>
+  <script src="js/player.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="LLM 应用的分层架构";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=0.6, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=10.5, margin="0.15,0.09"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    subgraph cluster_app {
+        label="应用层";
+        style="rounded,dashed";
+        color="#4A90D9";
+        fontcolor="#2C5F8A";
+        ui [label="对话界面"];
+        biz [label="业务系统接入"];
+        gov [label="治理入口\n（审批·审计）"];
+        { rank=same; ui; biz; gov }
+    }
+
+    subgraph cluster_orch {
+        label="编排层";
+        style="rounded,dashed";
+        color="#4A90D9";
+        fontcolor="#2C5F8A";
+        prompt [label="提示词组装"];
+        route [label="路由与缓存"];
+        retr [label="检索与工具调用"];
+        { rank=same; prompt; route; retr }
+    }
+
+    subgraph cluster_model {
+        label="模型层";
+        style="rounded,dashed";
+        color="#4A90D9";
+        fontcolor="#2C5F8A";
+        router [label="多模型路由", fillcolor="#2C5F8A", fontcolor="white"];
+        base [label="基础模型"];
+        ft [label="垂直微调模型"];
+        { rank=same; router; base; ft }
+    }
+
+    subgraph cluster_data {
+        label="数据与工具层";
+        style="rounded,dashed";
+        color="#4A90D9";
+        fontcolor="#2C5F8A";
+        kb [label="知识库\n（向量+关键词）"];
+        data [label="业务数据"];
+        tools [label="工具 API"];
+        { rank=same; kb; data; tools }
+    }
+
+    ui -> prompt;
+    biz -> prompt;
+    gov -> prompt;
+    prompt -> route;
+    route -> retr;
+    retr -> router;
+    router -> base;
+    router -> ft;
+    kb -> retr;
+    data -> retr;
+    tools -> retr;
+}

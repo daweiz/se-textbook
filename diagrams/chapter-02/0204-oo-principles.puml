@@ -1,0 +1,29 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam {
+  defaultFontName "Microsoft YaHei"
+  shadowing false
+  ActivityBackgroundColor #DCE9F7
+  ActivityBorderColor #2C5F8A
+  ActivityFontColor #333333
+  ActivityDiamondBackgroundColor #FFF3D6
+  ActivityDiamondBorderColor #E8833A
+  ComponentBackgroundColor #DCE9F7
+  ComponentBorderColor #2C5F8A
+  ComponentFontColor #333333
+  ArrowColor #9AA7B4
+  ArrowFontColor #333333
+}
+title 面向对象方法四原则
+component "面向对象方法" as oo
+component "封装\n数据与行为捆绑\n隐藏实现细节" as enc
+component "继承\n子类复用父类\n扩展与覆盖" as inh
+component "多态\n同一接口\n多种实现" as pol
+component "关联\n对象间协作\n聚合与组合" as aso
+oo --> enc
+oo --> inh
+oo --> pol
+oo --> aso
+@enduml

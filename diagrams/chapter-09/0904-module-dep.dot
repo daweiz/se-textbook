@@ -1,0 +1,20 @@
+digraph G {
+    rankdir=LR;
+    node [fontname="Microsoft YaHei", shape=box, style=rounded, fontsize=12];
+    edge [fontname="Microsoft YaHei", fontsize=10];
+    subgraph cluster_cycle {
+        label="环形依赖（应消除）";
+        color="red";
+        fontname="Microsoft YaHei";
+        "模块A" -> "模块B";
+        "模块B" -> "模块C";
+        "模块C" -> "模块A";
+    }
+    subgraph cluster_clean {
+        label="单向依赖（正确）";
+        color="green";
+        fontname="Microsoft YaHei";
+        "模块X" -> "模块Y";
+        "模块Y" -> "模块Z";
+    }
+}

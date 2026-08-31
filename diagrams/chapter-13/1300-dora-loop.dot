@@ -1,0 +1,32 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="DORA 指标驱动的效能改进环";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.4, ranksep=0.9, splines=ortho, pad=0.25, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=10.5, margin="0.15,0.08"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    a1 [label="度量四指标\n（交付周期·部署频率\n·变更失败率·MTTR）"];
+    a2 [label="建立基线\n并设定目标"];
+    a3 [label="改进实践\n（持续交付·小批量·自动化）"];
+    a4 [label="重新度量"];
+    d1 [label="达到目标？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A"];
+    d2 [label="持续改进？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A"];
+    b1 [label="分析瓶颈\n并调整", fillcolor="#FCE9DB", color="#E8833A"];
+    fin [label="结束", fillcolor="#2C5F8A", fontcolor="white"];
+
+    { rank=same; a1; a2; a3 }
+    { rank=same; a4 }
+    { rank=same; d1; d2; fin }
+    { rank=same; b1 }
+
+    a1 -> a2;
+    a2 -> a3;
+    a3 -> a4;
+    a4 -> d1;
+    d1 -> d2 [xlabel="是"];
+    d1 -> b1 [label="否"];
+    d2 -> fin [xlabel="否"];
+    b1 -> a3 [style=dashed, color="#E8833A", fontcolor="#E8833A", constraint=false, label="调整后\n再改进"];
+    d2 -> a3 [style=dashed, color="#E8833A", fontcolor="#E8833A", constraint=false, label="是·继续\n改进"];
+}

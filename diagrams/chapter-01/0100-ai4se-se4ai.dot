@@ -1,0 +1,46 @@
+digraph G {
+    rankdir=LR;
+    labelloc="t";
+    label="AI4SE 与 SE4AI 的双向关系";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.4, ranksep=0.8, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=10, margin="0.18,0.09"];
+    edge [fontname="Microsoft YaHei", fontsize=9, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.1];
+
+    subgraph cluster_left {
+        label="AI4SE：AI 赋能软件工程";
+        style=dashed; color="#9AA7B4"; fontcolor="#2C5F8A"; fontname="Microsoft YaHei"; fontsize=12;
+        a1 [label="智能需求抽取\n与一致性检查"];
+        a2 [label="智能建模与设计"];
+        a3 [label="智能编码与补全"];
+        a4 [label="智能测试生成"];
+        a5 [label="智能化维护\n与逆向工程"];
+        a6 [label="智能化项目管理"];
+        a1 -> a4 [style=invis];
+        a2 -> a5 [style=invis];
+        a3 -> a6 [style=invis];
+    }
+
+    hub [label="智能软件工程\n人机协同范式\n提示词·RAG·智能体", fillcolor="#2C5F8A", fontcolor="white"];
+
+    subgraph cluster_right {
+        label="SE4AI：软件工程支撑 AI";
+        style=dashed; color="#9AA7B4"; fontcolor="#2C5F8A"; fontname="Microsoft YaHei"; fontsize=12;
+        b1 [label="数据工程\n与数据版本"];
+        b2 [label="模型开发与评测"];
+        b3 [label="部署与监控\n（MLOps）"];
+        b4 [label="AI 系统质量\n与安全"];
+        b1 -> b3 [style=invis];
+        b2 -> b4 [style=invis];
+    }
+
+    hub -> a1 [dir=both, color="#4A90D9"];
+    hub -> a2 [dir=both, color="#4A90D9"];
+    hub -> a3 [dir=both, color="#4A90D9"];
+    hub -> a4 [dir=both, color="#4A90D9"];
+    hub -> a5 [dir=both, color="#4A90D9"];
+    hub -> a6 [dir=both, color="#4A90D9"];
+    hub -> b1 [dir=both, color="#4A90D9"];
+    hub -> b2 [dir=both, color="#4A90D9"];
+    hub -> b3 [dir=both, color="#4A90D9"];
+    hub -> b4 [dir=both, color="#4A90D9"];
+}

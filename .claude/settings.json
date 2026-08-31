@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx tsx .claude/hooks/user-prompt-submit.ts",
+            "timeout": 30,
+            "statusMessage": "正在记录交互日志..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx tsx .claude/hooks/stop.ts",
+            "timeout": 30,
+            "statusMessage": "正在保存会话输出日志..."
+          }
+        ]
+      }
+    ]
+  }
+}

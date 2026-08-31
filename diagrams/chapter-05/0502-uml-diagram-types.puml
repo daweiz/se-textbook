@@ -1,0 +1,29 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam {
+  defaultFontName "Microsoft YaHei"
+  shadowing false
+  ActivityBackgroundColor #DCE9F7
+  ActivityBorderColor #2C5F8A
+  ActivityFontColor #333333
+  ActivityDiamondBackgroundColor #FFF3D6
+  ActivityDiamondBorderColor #E8833A
+  ComponentBackgroundColor #DCE9F7
+  ComponentBorderColor #2C5F8A
+  ComponentFontColor #333333
+  ArrowColor #9AA7B4
+  ArrowFontColor #333333
+}
+title UML 图的分类
+component "UML 图" as uml
+component "结构图\n描述静态结构" as st
+component "行为图\n描述动态行为" as bh
+rectangle "类图·对象图\n构件图·部署图\n包图" as st1
+rectangle "用例图·活动图\n状态图·时序图\n通信图·组件图" as bh1
+uml --> st
+uml --> bh
+st --> st1
+bh --> bh1
+@enduml

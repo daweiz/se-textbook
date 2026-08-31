@@ -1,0 +1,8 @@
+{
+  "name": "book",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "tsx": "^4.23.12"
+  }
+}

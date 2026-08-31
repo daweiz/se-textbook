@@ -1,0 +1,10 @@
+digraph G {
+    rankdir=LR;
+    node [fontname="Microsoft YaHei", shape=box, style=rounded, fontsize=12];
+    edge [fontname="Microsoft YaHei", fontsize=10];
+    "顾客" -> "订单" [label="提交"];
+    "订单" -> "订单项" [label="包含"];
+    "商品" -> "订单项" [label="对应"];
+    "订单" -> "支付记录" [label="产生"];
+    "顾客" -> "支付记录" [label="完成"];
+}

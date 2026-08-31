@@ -1,0 +1,27 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultTextAlignment center
+skinparam {
+  defaultFontName "Microsoft YaHei"
+  shadowing false
+  ActivityBackgroundColor #DCE9F7
+  ActivityBorderColor #2C5F8A
+  ActivityFontColor #333333
+  ActivityDiamondBackgroundColor #FFF3D6
+  ActivityDiamondBorderColor #E8833A
+  ComponentBackgroundColor #DCE9F7
+  ComponentBorderColor #2C5F8A
+  ComponentFontColor #333333
+  ArrowColor #9AA7B4
+  ArrowFontColor #333333
+}
+title 可观测性与 SLO 驱动运维
+rectangle "观测数据\n（日志·指标·追踪）" as obs
+rectangle "SLO 定义\n（服务水平目标·错误预算）" as slo
+rectangle "告警与归因\n（告警风暴治理·自动定位）" as alert
+rectangle "改进行动\n（重构·扩容·混沌演练）" as act
+obs -down-> slo
+slo -down-> alert
+alert -down-> act
+act -right-> obs
+@enduml

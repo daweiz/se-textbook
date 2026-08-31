@@ -1,0 +1,18 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="智能工具链的分层架构";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.7, ranksep=0.5, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    app  [label="应用层：编码助手 · 测试生成 · 需求分析"];
+    cap  [label="能力层：提示词模板 · 检索增强 · 工具调用 · 智能体编排"];
+    model [label="模型服务层：通用大模型 · 领域微调模型"];
+    note [label="提示词与模型配置作为配置项纳入版本管理",
+          shape=box, style="rounded,filled,dashed", fillcolor="#FFF3D6", color="#E8833A", fontcolor="#333333"];
+
+    app -> cap [label="调用"];
+    cap -> model [label="调用"];
+    model -> note [style=invis];
+}

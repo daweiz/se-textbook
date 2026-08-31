@@ -1,0 +1,37 @@
+digraph G {
+    rankdir=LR;
+    labelloc="t";
+    label="智能编码提交前的质量关卡";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.55, ranksep=0.8, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    n1 [label="AI 编码助手\n生成/补全代码"];
+    n2 [label="AI 编码助手\n规范自检\n（命名/注释/结构）"];
+    n3 [label="自动检查工具\n静态分析与安全扫描\n（SonarQube 等）"];
+    n4 [label="自动检查工具\n编译与单元测试"];
+    d1 [label="自动检查\n通过？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A", fontcolor="#333333"];
+    n5 [label="工程师\n人工审查高风险改动\n（内存/并发/异常路径）"];
+    d2 [label="评审\n通过？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A", fontcolor="#333333"];
+    n6 [label="提交前就绪", fillcolor="#2C5F8A", fontcolor="white"];
+    f1 [label="AI 编码助手\n修正缺陷\n返回重新检查", fillcolor="#FCE9DB", color="#E8833A"];
+    f2 [label="AI 编码助手\n按评审意见修改", fillcolor="#FCE9DB", color="#E8833A"];
+
+    { rank=same; n1; n6 }
+    { rank=same; n2; d2; f2 }
+    { rank=same; n3; n5 }
+    { rank=same; n4; d1; f1 }
+
+    n1 -> n2;
+    n2 -> n3;
+    n3 -> n4;
+    n4 -> d1;
+    d1 -> n5 [xlabel="是"];
+    n5 -> d2;
+    d2 -> n6 [xlabel="是"];
+    d1 -> f1 [xlabel="否", style=dashed, color="#E8833A", fontcolor="#E8833A"];
+    n4 -> f1 [style=invis];
+    f1 -> n4 [constraint=false, style=dashed, color="#E8833A", fontcolor="#E8833A"];
+    d2 -> f2 [xlabel="否", style=dashed, color="#E8833A", fontcolor="#E8833A"];
+    f2 -> n5 [style=dashed, color="#E8833A", fontcolor="#E8833A"];
+}
