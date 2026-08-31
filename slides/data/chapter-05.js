@@ -1,122 +1,303 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "chapter": "chapter-05",
   "num": 5,
   "slug": "chapter-05",
-  "title": "统一建模语言 UML",
-  "subtitle": "UML（Unified Modeling Language，统一建模语言）是一种直观化、明确化、构建和文档化软件系统产物的通用可视化建模语言",
+  "title": "软件设计与设计模式",
+  "subtitle": "软件设计是在分析模型的基础上研究软件实现问题，形成实现环境下的设计模型，其目标是在满足功能需求的前提下追求高内聚、低耦合的结构，使系统易于理解、修改与复用",
   "slides": [
     {
       "id": "chapter05-title",
       "type": "title",
-      "title": "第5章　统一建模语言 UML",
+      "title": "第5章　软件设计与设计模式",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第五章，统一建模语言 UML。UML 是一种直观化、明确化、构建和文档化软件系统产物的通用可视化建模语言。本章先讲 UML 的构成与各类图，再重点讨论 AI 如何辅助建模、让模型重新成为活文档。"
+      "narration": "欢迎学习《智能软件工程基础》第5章，软件设计与设计模式。软件设计是在分析模型的基础上研究软件实现问题，形成实现环境下的设计模型，其目标是在满足功能需求的前提下追求高内聚、低耦合的结构，使系统易于理解、修改与复用。"
     },
     {
       "id": "chapter05-1",
       "type": "section",
-      "title": "UML 的构成",
-      "body": "<p class=\"lead\">UML 由三部分构成：<strong>事物</strong>（things）、<strong>关系</strong>（relationships）与<strong>图</strong>（diagrams）。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-03.png\" alt=\"\" style=\"width:55%\"></div>\n<ul><li><strong>事物</strong>表示系统中的元素，分为四类：结构事物（类、接口、构件、协作等）、行为事物（交互、状态机）、分组事物（包）与注释事物（注解）。</li><li>其中，类是描述属性和操作的结构事物，属性写作 <code>[可见性] 名称[: 类型] [= 默认值]</code>，操作写作 <code>[可见性] 名称[(参数列表)][: 返回类型]</code>；</li><li>可见性包括公有的 <code>+</code>、受保护的 <code>#</code> 与私有的 <code>-</code>。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-04.png\" alt=\"\" style=\"width:50%\"></div>\n<ul><li><strong>关系</strong>表示元素之间如何连接，包括：<strong>关联</strong>（描述一组对象间的结构连接，可带角色、多重性与限定符，聚合与组合是其整体—部分特例）、<strong>依赖</strong>（使用关系，一个事物的变化影响另一事物）、<strong>泛化</strong>（特殊与一般的关系，即继承）、<strong>实现</strong>（一个类元指定由另一类元保证执行的契约，如接口与其实现类之间）。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-12.png\" alt=\"\" style=\"width:50%\"></div>",
-      "narration": "UML 由三部分构成：事物、关系与图。事物表示系统中的元素，分为结构事物、行为事物、分组事物和注释事物四类。类是最核心的结构事物，属性写作可见性、名称、类型和默认值，操作写作可见性、名称、参数和返回类型，可见性包括公有的加号、受保护的和私有的减号。关系表示元素之间如何连接，包括关联、依赖、泛化和实现四类。"
+      "title": "设计原理",
+      "body": "<p class=\"lead\">设计的基本原理包括：</p>\n<ul><li><strong>模块化</strong>：将复杂系统分解为若干相对简单的子系统，通过抽象、逐步求精与信息隐藏组织模块层次；</li><li><strong>模块独立</strong>：用<strong>耦合性</strong>度量子系统之间的关联程度，用<strong>内聚性</strong>度量子系统内部的相关程度。耦合越松、内聚越高，系统越易维护；</li><li><strong>复用</strong>：利用已开发的软件元素生成新系统，提高效率与质量——工具包强调类级代码复用，架构强调构件级设计复用，模式强调方法的复用；</li><li><strong>启发规则</strong>：改进结构提高独立性、模块规模适中、深度宽度扇出扇入适当、作用域落在控制域之内、降低接口复杂度、设计单入口单出口模块等。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap07-design-01.png\" alt=\"\" style=\"width:50%\"></div>\n<ul><li>其中，内聚性自低到高分为偶然、逻辑、时间、过程、通信、顺序、功能七类，功能性内聚最优；</li><li>耦合性自弱到强分为非直接、数据、特征、控制、外部、公共、内容七类，数据耦合最优。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap07-design-03.png\" alt=\"\" style=\"width:60%\"></div>\n<ul><li>模块的规模与结构可用<strong>扇入扇出</strong>度量：设模块间调用关系为 <i>M\\to M'</i>（<i>M</i> 调用 <i>M'</i>），则模块 <i>M</i> 直接调用的模块数称为扇出，直接调用 <i>M</i> 的模块数称为扇入，度量式为：</li></ul>",
+      "narration": "设计原理。设计的基本原理包括："
     },
     {
       "id": "chapter05-2",
       "type": "section",
-      "title": "UML 的构成（续）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-15.png\" alt=\"\" style=\"width:50%\"></div>\n<p class=\"lead\">UML 图按描述静态结构还是动态行为可分为两大类，常见的图归类如下表所示。</p>\n<table><thead><tr><th>类别</th><th>所包含的图</th><th>描述内容</th></tr></thead><tbody><tr><td>结构图</td><td>类图、对象图、组件图、部署图、包图</td><td>系统的静态结构</td></tr><tr><td>行为图</td><td>用例图、顺序图、协作图、状态图、活动图</td><td>系统的动态行为</td></tr></tbody></table>\n<ul><li>结构图与行为图的分类关系如图所示。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0502-uml-diagram-types.svg\" alt=\"\" style=\"width:55%\"></div>",
-      "narration": "UML 的图按描述静态结构还是动态行为，分为两大类：结构图包括类图、对象图、组件图、部署图和包图，描述系统的静态结构；行为图包括用例图、顺序图、协作图、状态图和活动图，描述系统的动态行为。这两类图分别从静态和动态两个角度刻画系统。"
+      "title": "设计原理（续）",
+      "body": "<p class=\"lead\">$<i>f_{out}(M)=\\#\\{M'\\mid M\\to M'\\},\\qquad f_{in}(M)=\\#\\{M'\\mid M'\\to M\\}</i>$</p>\n<ul><li>扇出过大说明模块承担职责过多、依赖面过宽，扇入过高则说明模块被过度共享、改动牵一发而动全身——启发规则中\"深度宽度扇出扇入适当\"正是对这两个度量的约束。</li><li>耦合与内聚各自的七级划分可由弱到强对照如下表所示。</li></ul>\n<table><thead><tr><th>耦合等级</th><th>说明</th><th>内聚等级</th><th>说明</th></tr></thead><tbody><tr><td>非直接耦合</td><td>模块间无直接联系</td><td>偶然内聚</td><td>元素无关联、机械组合</td></tr><tr><td>数据耦合</td><td>仅通过参数传递数据</td><td>逻辑内聚</td><td>若干逻辑功能合于一体</td></tr><tr><td>特征耦合</td><td>传递整个数据结构</td><td>时间内聚</td><td>同一时间执行的元素聚拢</td></tr><tr><td>控制耦合</td><td>传递控制信号</td><td>过程内聚</td><td>按特定顺序执行的元素</td></tr><tr><td>外部耦合</td><td>访问同一全局数据</td><td>通信内聚</td><td>访问同一数据集</td></tr><tr><td>公共耦合</td><td>共享公共数据环境</td><td>顺序内聚</td><td>前者的输出是后者的输入</td></tr><tr><td>内容耦合</td><td>直接访问内部内容</td><td>功能内聚</td><td>完成单一功能</td></tr></tbody></table>",
+      "narration": "继续讨论设计原理。设计的基本原理包括："
     },
     {
       "id": "chapter05-3",
       "type": "section",
-      "title": "UML 的图",
-      "body": "<p class=\"lead\">UML 2.0 定义了 13 种图，按视图可以分为三类：</p>\n<table><thead><tr><th>类别</th><th>图</th><th>用途</th></tr></thead><tbody><tr><td>功能视图</td><td>用例图</td><td>需求获取、系统功能，测试依据</td></tr><tr><td>结构视图</td><td>类图、对象图、组件图、部署图</td><td>静态结构、物理架构</td></tr><tr><td>行为视图</td><td>顺序图、协作图、状态图、活动图</td><td>动态行为、交互与控制流</td></tr></tbody></table>\n<ul><li><strong>用例图</strong>从系统外部描述功能需求，表示用例、参与者及其关系。</li><li>用例是系统功能被描述成的一系列事件，最终对参与者产生可观测、有价值的成果。</li><li>用例之间存在<strong>包含</strong>（基本用例引用共性用例）、<strong>扩展</strong>（异常或可选分支作为独立用例）、<strong>泛化</strong>（一般与特殊关系）三种关系。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-19.png\" alt=\"\" style=\"width:55%\"></div>\n<ul><li><strong>类图</strong>描述系统的静态结构，包括类、关系及属性和操作，在需求、设计、实现三个阶段分别以概念层、说明层、实现层不同抽象层次出现。</li><li><strong>对象图</strong>是类图在某一时刻的实例快照。</li></ul>",
-      "narration": "UML 2.0 定义了 13 种图，按视图分为三类：功能视图只有用例图，用于需求获取，也是测试的依据；结构视图包括类图、对象图、组件图和部署图，刻画静态结构和物理架构；行为视图包括顺序图、协作图、状态图和活动图，刻画动态行为与交互。其中用例图从系统外部描述功能需求，用例之间存在包含、扩展、泛化三种关系。"
+      "title": "体系结构设计",
+      "body": "<p class=\"lead\">软件体系结构包括一组软件部件、部件的外部可见特性及其相互关系。体系结构设计的内容包括系统的总体组织与全局控制结构、通信与数据访问协议、设计元素的功能分配、非功能需求、物理部署以及备选方案的选择。</p>\n<ul><li>典型的体系结构风格有：</li></ul>\n<ul><li><strong>仓库/知识库结构</strong>：以中心数据库为核心，适合数据由一个子系统产生、其他子系统使用的情形，如编译器与 CASE 工具；</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap06-architecture-05.png\" alt=\"\" style=\"width:45%\"></div>\n<ul><li><strong>模型/视图/控制器（MVC）</strong>：把交互系统分为模型（业务数据与逻辑）、视图（用户界面）与控制器（响应输入、更新视图与模型），适合同一模型需要多个视图的交互式系统；</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap06-architecture-07.png\" alt=\"\" style=\"width:50%\"></div>",
+      "narration": "体系结构设计。软件体系结构包括一组软件部件、部件的外部可见特性及其相互关系。体系结构设计的内容包括系统的总体组织与全局控制结构、通信与数据访问协议、设计元素的功能分配、非功能需求、物理部署以及备选方案的选择。"
     },
     {
       "id": "chapter05-4",
       "type": "section",
-      "title": "UML 的图（续）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-25.png\" alt=\"\" style=\"width:55%\"></div>\n<p class=\"lead\"><strong>顺序图</strong>描述完成某项行为的对象间传递消息的时间顺序，由对象、生命线、控制焦点与消息组成，常用于表达一个用例的事件流。<strong>协作图</strong>反映收发消息的对象间结构组织，与顺序图同构、可以互转。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-27.png\" alt=\"\" style=\"width:55%\"></div>\n<ul><li><strong>状态图</strong>描述单个对象在其生命周期中的状态序列与触发状态转移的外部事件，包含状态（初态、终态、中间态、组合态、历史态）、事件、转换、活动与动作等元素。</li></ul>\n<div class=\"img-pair\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-31.png\" alt=\"\" style=\"width:50%\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-34.png\" alt=\"\" style=\"width:55%\"></div>",
-      "narration": "顺序图描述完成某项行为时对象间传递消息的时间顺序，由对象、生命线、控制焦点和消息组成，常用于表达一个用例的事件流。协作图反映收发消息的对象间结构组织，与顺序图同构、可以互转。状态图描述单个对象在其生命周期中的状态序列，以及触发状态转移的外部事件。"
+      "title": "体系结构设计（续）",
+      "body": "<ul><li><strong>控制结构</strong>：集中式控制由一个子系统统一协调，基于事件的控制则让各子系统响应外部事件，适合事件驱动系统；</li><li><strong>客户机/服务器结构</strong>：服务器提供服务、客户机负责交互，分为瘦客户机（处理集中在服务器）与胖客户机（应用逻辑在客户端），三层结构进一步分离表示、逻辑与存储；</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap06-architecture-10.png\" alt=\"\" style=\"width:55%\"></div>\n<ul><li><strong>分层体系结构</strong>：将软件组织为类的层次，同层完成特定目的、层间通过接口通信，典型的三层为表示层、应用逻辑层与存储层。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap06-architecture-11.png\" alt=\"\" style=\"width:55%\"></div>\n<p class=\"lead\">体系结构设计应避免包之间的循环依赖，并通过 SDD 文档（IEEE 1016-1998）记录分解、依赖关系与接口说明。典型风格的组织结构、全局控制与适用场景可对照如下表所示。</p>",
+      "narration": "继续讨论体系结构设计。软件体系结构包括一组软件部件、部件的外部可见特性及其相互关系。体系结构设计的内容包括系统的总体组织与全局控制结构、通信与数据访问协议、设计元素的功能分配、非功能需求、物理部署以及备选方案的选择。"
     },
     {
       "id": "chapter05-5",
       "type": "section",
-      "title": "UML 的图（续）",
-      "body": "<p class=\"lead\"><strong>组件图</strong>表示系统的静态实现视图，描述组件及其依赖关系；<strong>部署图</strong>反映软件与硬件的物理架构，表示运行时的处理节点及组件配置。</p>\n<div class=\"img-pair\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-35.png\" alt=\"\" style=\"width:50%\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-36.png\" alt=\"\" style=\"width:50%\"></div>",
-      "narration": "组件图表示系统的静态实现视图，描述组件及其依赖关系；部署图反映软件与硬件的物理架构，表示运行时的处理节点及组件配置。这两张图通常用于描述系统的物理组织。"
+      "title": "体系结构设计（续）",
+      "body": "<table><thead><tr><th>风格</th><th>组织结构</th><th>全局控制</th><th>适用场景</th></tr></thead><tbody><tr><td>仓库/知识库</td><td>以中心数据库为核心，子系统围绕存取</td><td>数据驱动的集中协调</td><td>编译器、CASE 工具</td></tr><tr><td>MVC</td><td>模型/视图/控制器分离</td><td>事件驱动更新视图</td><td>同一模型多视图的交互系统</td></tr><tr><td>控制结构</td><td>集中式或基于事件</td><td>显式协调或事件响应</td><td>事件驱动系统</td></tr><tr><td>客户机/服务器</td><td>服务与客户分离、三层结构</td><td>请求/应答</td><td>分布式业务系统</td></tr><tr><td>分层体系结构</td><td>层间通过接口通信</td><td>层间协议</td><td>表示/逻辑/存储分离的系统</td></tr></tbody></table>\n<p class=\"lead\">分层体系结构中的模块按单向依赖组织，各层依赖关系如图所示。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0703-dep-graph.svg\" alt=\"\" style=\"width:85%\"></div>",
+      "narration": "继续讨论体系结构设计。软件体系结构包括一组软件部件、部件的外部可见特性及其相互关系。体系结构设计的内容包括系统的总体组织与全局控制结构、通信与数据访问协议、设计元素的功能分配、非功能需求、物理部署以及备选方案的选择。"
     },
     {
       "id": "chapter05-6",
       "type": "section",
-      "title": "AI 辅助建模",
-      "body": "<p class=\"lead\">传统建模依赖建模者逐图手工绘制，工作量大且容易与代码脱节。AI 辅助建模改变了这一局面：大语言模型可以从自然语言需求<strong>智能提取</strong>并生成用例图、类图与顺序图的初始版本；</p>\n<ul><li>从已有代码<strong>逆向生成</strong> UML 模型，保持模型与实现同步；</li><li>从 UML 模型<strong>生成测试用例与文档</strong>，并利用 OCL 约束校验模型一致性。</li><li>人机协作的典型分工是：人类确定语义与边界，AI 完成符号转换与版本维护，从而把建模的重心从\"画图\"拉回\"思考\"。</li></ul>\n<ul><li>模型生成的质量取决于输入描述的精确程度与校验闭环的完备程度。</li><li>自然语言到 UML（NL2UML）的生成要得到可用结果，通常需要给出足够的语义约束：类之间的关系是关联还是聚合、消息的触发顺序如何、状态转移的条件是什么——这些在生成前必须由建模者明确，否则模型虽\"形似\"却\"神离\"。</li><li>因此 AI 辅助建模不是\"一句话生成模型\"，而是\"人提供语义骨架，AI 填充图形符号\"，生成结果必须经过可执行校验——检查类间关系的合法性、状态的完备性与一致性——才能进入基线。</li></ul>\n<ul><li>另一个必须正视的问题是<strong>模型与代码的漂移</strong>。</li><li>传统项目中模型往往在开发后即束之高阁，与实现渐行渐远；</li><li>AI 时代的双向转换让\"模型—代码\"同步的成本大幅下降——从需求生成模型、从模型生成代码、从代码逆向模型可以形成闭环，使模型重新成为\"活文档\"。</li></ul>\n<ul><li>模型与代码双向同步的闭环如图所示。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0500-model-sync.svg\" alt=\"\" style=\"width:80%\"></div>\n<ul><li>NL2UML 要生成可用模型，关键是把语义约束写进提示词。</li><li>所谓语义约束，是描述中已经明确的类间关系类型、多重性、消息触发顺序与状态转移条件——这些必须在生成前由建模者确认，模型才会\"形似且神离不\"。</li><li>一个从自然语言生成类图与顺序图草稿的提示词模板如下：</li></ul>",
-      "narration": "传统建模依赖建模者逐图手工绘制，工作量大且容易与代码脱节。AI 辅助建模改变了这一点：大语言模型可以从自然语言需求生成用例图、类图和顺序图的初始版本，从已有代码逆向生成 UML 模型，还能从模型生成测试用例和文档。人机协作的典型分工是：人类确定语义与边界，AI 完成符号转换与版本维护，把建模的重心从画图拉回思考。"
+      "title": "案例：高内聚低耦合的两种设计",
+      "body": "<p class=\"lead\"><strong>高内聚、低耦合</strong>不是抽象口号，而是能在类图上直接判断的性质。以“订单处理”需求为例：用户提交订单后，系统需校验库存、计算价格、更新库存并生成账单。</p>\n<ul><li>同一需求，两种设计方案差别一目了然。</li></ul>\n<ul><li><strong>坏设计——“一个类扛下所有”</strong>：把校验、计价、更新、开账全部塞进一个订单服务类，方法间用共享变量传递中间结果；其他模块需要价格时直接调用其内部方法。类职责混杂、改动一处影响处处，属于低内聚；模块间直接访问内部内容，属于内容耦合。</li><li><strong>好设计——“职责拆分、依赖接口”</strong>：把订单处理拆为库存校验、价格计算、库存更新、账单生成四个各司其职的类，彼此经接口依赖，实现可独立替换。每个类高内聚，模块间仅经接口通信，属于低耦合。</li></ul>\n<table><thead><tr><th>维度</th><th>坏设计</th><th>好设计</th></tr></thead><tbody><tr><td>内聚</td><td>职责挤于一类的偶然内聚</td><td>单一职责的功能内聚</td></tr><tr><td>耦合</td><td>直接访问内部内容的内容耦合</td><td>仅经接口传数据的数据耦合</td></tr><tr><td>可维护性</td><td>改一处价格规则要重测整个类</td><td>替换实现类即可，其余不受影响</td></tr><tr><td>可扩展性</td><td>新增促销规则要改动核心类</td><td>新增实现并登记到接口即可</td></tr></tbody></table>\n<ul><li>两种设计实现了相同的功能，演进代价却截然不同——内聚与耦合度量的价值，正在于把“哪个设计更好”的争论，变成可按七级划分直接判定的检查。</li></ul>",
+      "narration": "案例：高内聚低耦合的两种设计。高内聚、低耦合不是抽象口号，而是能在类图上直接判断的性质。以“订单处理”需求为例：用户提交订单后，系统需校验库存、计算价格、更新库存并生成账单。"
     },
     {
       "id": "chapter05-7",
       "type": "section",
-      "title": "AI 辅助建模（续）",
-      "body": "<pre class=\"prompt\"><code>你是资深建模师。请根据下列需求描述生成 PlantUML 类图与顺序图草稿：\n需求描述：&lt;粘贴用例事件流或需求条目&gt;\n语义约束（逐条遵守）：\n1. 关系类型：仅在描述出现\"包含/拥有/由…组成\"等整体—部分语义时使用组合或聚合，其余一律用普通关联，禁止臆测；\n2. 多重性：无明确数量关系时用 0..*，并标注\"待确认\"；\n3. 顺序图：只画描述中明确出现的消息，按编号排列；触发顺序不明确时列出候选顺序并说明；\n4. 命名：类、属性、方法用英文命名，附中文注释说明职责；\n5. 输出可编译的 PlantUML 代码，随后给出 100 字以内的语义假设说明。</code></pre>\n<p class=\"lead\">模板中的\"禁止臆测\"\"待确认\"\"候选顺序\"都是把不确定性显式化的写法：让模型对描述未覆盖的部分明示而非补全，建模者据此决定是补充需求还是调整模型。语义约束的常见写法如下表所示。</p>\n<table><thead><tr><th>语义约束</th><th>模板写法</th><th>目的</th></tr></thead><tbody><tr><td>关系类型</td><td>仅在出现整体—部分语义时用组合/聚合</td><td>防止臆造聚合关系</td></tr><tr><td>多重性</td><td>无明确数量关系时用 0..* 并标注待确认</td><td>把不确定性显式化</td></tr><tr><td>消息顺序</td><td>触发顺序不明确时列出候选顺序</td><td>暴露时序缺口</td></tr><tr><td>属性与操作</td><td>只保留描述中出现的属性，禁止杜撰</td><td>控制模型补全</td></tr><tr><td>命名与注释</td><td>英文命名 + 中文注释职责</td><td>保证可读可追溯</td></tr></tbody></table>\n<ul><li>生成结果不能凭\"看起来对\"就进入基线，而应逐项校验。</li><li>建模校验清单按关系合法性与状态完备性两组组织：</li></ul>",
-      "narration": "智能建模的常用载体是文本化建模语言，比如 Mermaid 和 PlantUML。用文本描述图形结构，既便于版本管理，又天然适合由大模型生成。实践要点有三条：先定语义后生成符号，让模型输出可编译的建模文本；定期用代码逆向生成类图，与设计文档比对，防止模型与实现漂移；用 OCL 约束语言描述关键不变式，把人工看图升级为机器校验。"
+      "title": "样例：体系结构风格选型",
+      "body": "<p class=\"lead\">体系结构风格没有绝对优劣，只有是否匹配场景。以三类典型场景为例，选型由非功能需求推动，而非设计者的偏好。</p>\n<table><thead><tr><th>场景</th><th>推荐风格</th><th>理由</th></tr></thead><tbody><tr><td>高并发读多写少（如商品详情页）</td><td>分层体系结构加缓存</td><td>读请求经缓存层卸载、写请求进入存储层，读路径与写路径分离，可独立扩容</td></tr><tr><td>强一致性交易（如订单支付）</td><td>客户机/服务器（三层）加集中式控制</td><td>强一致要求读写在统一事务边界内完成，请求/应答式交互便于服务端管控事务</td></tr><tr><td>快速迭代原型（如内部工具）</td><td>模型/视图/控制器（MVC）</td><td>界面、模型、控制分离，改界面不动模型、改模型不动界面，便于频繁试错</td></tr></tbody></table>\n<ul><li>同一系统不同子系统的非功能需求不同，选型亦可混合：读多写少的展示面用分层加缓存，交易面用三层结构，原型化模块用 MVC。</li><li>选型的关键是把“数据在哪、谁控制、如何交互”与场景的读写比例、一致性要求、变化频率逐一对照，而不是把某种风格当作唯一正确解。</li></ul>",
+      "narration": "样例：体系结构风格选型。体系结构风格没有绝对优劣，只有是否匹配场景。以三类典型场景为例，选型由非功能需求推动，而非设计者的偏好。"
     },
     {
       "id": "chapter05-8",
       "type": "section",
-      "title": "AI 辅助建模（续）",
-      "body": "<table><thead><tr><th>校验组</th><th>检查项</th></tr></thead><tbody><tr><td>关系合法性</td><td>关联/聚合/组合的使用与描述一致，无凭空臆测的聚合或组合</td></tr><tr><td>关系合法性</td><td>多重性数值与描述一致，标注\"待确认\"的项已逐一核实</td></tr><tr><td>关系合法性</td><td>泛化方向正确（子类指向父类），无循环继承</td></tr><tr><td>状态完备性</td><td>每个状态图都有明确的初态与终态</td></tr><tr><td>状态完备性</td><td>每个状态转移都标注触发事件与条件，无无条件跳转</td></tr><tr><td>状态完备性</td><td>状态在生命周期内可达且可到达终态，无死状态</td></tr><tr><td>一致性</td><td>顺序图消息可追溯到用例事件流，无多余或缺失的消息</td></tr></tbody></table>\n<p class=\"lead\">把校验清单写成可执行断言，就是\"建模即代码\"的雏形：关系合法性可用脚本扫描模型文本，状态完备性可由状态机工具验证，二者均可接入 CI，让模型在每次变更后像代码一样自动回归。除了语义约束，建模者还要决定生成哪类图、细到什么程度——不同阶段对抽象层次的要求不同，需求阶段的概念层类图只表达领域概念，设计阶段的说明层才细化操作与可见性。</p>\n<ul><li>常见做法是让 LLM 按抽象层次分别生成，避免一张类图\"既想表达概念又想表达实现\"，抽象层次的选择要点如下表所示。</li></ul>\n<table><thead><tr><th>抽象层次</th><th>建模对象</th><th>AI 生成要点</th></tr></thead><tbody><tr><td>概念层</td><td>领域概念与关系</td><td>只保留名词性概念，不写操作与可见性</td></tr><tr><td>说明层</td><td>接口与协作</td><td>补操作签名、消息序列</td></tr><tr><td>实现层</td><td>类与代码对应</td><td>补属性类型、可见性，可与代码逆向互检</td></tr></tbody></table>\n<ul><li>从需求文本出发，各类图的生成顺序也有讲究：通常先用例图界定系统边界，再以类图沉淀概念结构，顺序图与状态图补充动态行为。</li><li>一次让模型同时产出四类图，往往彼此矛盾；</li><li>按\"边界 → 结构 → 行为\"分步生成、逐次校验，更容易定位不一致。</li></ul>",
-      "narration": "文本化建模的工作流，让模型以文本形式存在，天然可版本化、可评审、可被 LLM 生成与修改。这里要提醒几个常见误区：以为一句话就能生成模型是不对的，生成之前必须明确关联还是聚合、时序如何、状态条件是什么；结果必须经过可执行校验才能进入基线；模型也不该沦为代码的镜像，它要沉淀设计决策。"
+      "title": "故事：从单体到微服务的演进",
+      "body": "<p class=\"lead\">典型互联网公司的软件架构大多走过同一条路：先是小而美的单体应用，随业务增长逐渐拆分为微服务。推动演进的典型力量是规模、团队与部署频率。</p>\n<ul><li><strong>单体阶段</strong>：业务简单、团队不大，一个应用部署即上线；随功能与代码量增长，一次部署牵连所有模块，版本发布越来越慢，改动牵一发动全身的问题日益凸显。</li><li><strong>拆分阶段</strong>：业务线增多、团队按业务拆成小分队后，单体成为瓶颈——某团队改一行代码也要全量回归、与别组协同排期。按业务能力拆为微服务后，各服务独立开发、独立部署、独立扩容。</li><li><strong>权衡而非银弹</strong>：拆分把模块间调用改为网络通信，本地事务变成分布式事务，运维从管一个应用变成管数十个服务；服务粒度划分不当或过度拆分，同样带来接口繁杂、调试与追踪困难的新代价。</li></ul>\n<ul><li>典型实践是“从单体起步、以模块边界识别服务边界、按规模演进”：能用一个模块解决的，就不必为了“时尚”拆成服务。</li><li>拆分是权衡——用分布式复杂度换取团队自治与部署自由。</li></ul>",
+      "narration": "故事：从单体到微服务的演进。典型互联网公司的软件架构大多走过同一条路：先是小而美的单体应用，随业务增长逐渐拆分为微服务。推动演进的典型力量是规模、团队与部署频率。"
     },
     {
       "id": "chapter05-9",
       "type": "section",
-      "title": "AI 辅助建模（续）",
-      "body": "<table><thead><tr><th>步骤</th><th>生成图</th><th>校验重点</th></tr></thead><tbody><tr><td>1</td><td>用例图</td><td>参与者完整、用例覆盖需求</td></tr><tr><td>2</td><td>类图</td><td>关系合法、多重性合理</td></tr><tr><td>3</td><td>顺序图</td><td>消息可追溯、时序清晰</td></tr><tr><td>4</td><td>状态图</td><td>初态终态齐备、转移条件完整</td></tr></tbody></table>\n<p class=\"lead\">这四步生成的图共同构成模型的多个视图，视图之间的一致正是\"模型与代码不漂移\"的前提。</p>\n<ul><li>校验清单的分工也需要明确：机器可以自动检查多重性、转移条件是否齐备，但\"这个多重性是否符合业务实际\"\"这条转移条件是否覆盖了异常路径\"仍须建模者对照业务确认。</li><li>清单的价值在于把校验变成可勾选的流程，让\"人工看图\"变成\"机器检查 + 人工裁决\"。</li></ul>",
-      "narration": "自然语言到 UML 的生成，质量控制靠两道闸门：语义约束和可执行校验。建模的初衷始终是，模型是思考与沟通的工具。AI 让画图变得廉价，从而把建模者的精力还给想清楚，语义边界、关系取舍与决策沉淀，这些仍然只能由人完成。"
+      "title": "案例：设计文档缺失的代价",
+      "body": "<p class=\"lead\">体系结构设计的价值在项目正常运转时不显山露水，而在人员流动后彻底暴露。一个典型案例：某项目自启动起便没有留下体系结构记录，模块划分、依赖方向与关键权衡都只存在少数几位设计者的脑中。</p>\n<ul><li><strong>无人能答“为什么”</strong>：核心设计者陆续离职后，新工程师面对一团代码，无人能回答“订单与库存为何这样划分”“这个依赖方向为何被刻意避免”。</li><li><strong>反复试错</strong>：后人在不掌握原始权衡的情况下修改设计，屡屡撞上当初刻意绕开的坑；绕开一次是代价，反复绕开就是累积的维护负债。</li><li><strong>文档化的价值</strong>：体系结构文档记录的不只是“设计成什么样”，更是“为什么这样设计”，让后人站在前人的权衡之上，而不是重新交一遍学费。</li></ul>\n<ul><li><strong>体系结构文档（如 SDD、ADR）是设计的“记忆”</strong>：它把决策理由从个人经验转存为团队资产。</li><li>文档化的成本在当下，收益却在每一次人员交接、每一次架构变更时兑现——这正是设计原理中信息隐藏与可维护性的初衷。</li></ul>",
+      "narration": "案例：设计文档缺失的代价。体系结构设计的价值在项目正常运转时不显山露水，而在人员流动后彻底暴露。一个典型案例：某项目自启动起便没有留下体系结构记录，模块划分、依赖方向与关键权衡都只存在少数几位设计者的脑中。"
     },
     {
       "id": "chapter05-10",
       "type": "section",
-      "title": "智能建模实践",
-      "body": "<p class=\"lead\">智能建模的常用载体是<strong>文本化建模语言</strong>：Mermaid 与 PlantUML 用文本描述图形结构，既便于版本管理，又天然适合由大模型生成——建模者用自然语言描述需求，LLM 输出对应的文本建模代码，再渲染为图形。实践要点如下：</p>\n<ul><li><strong>先定语义后生成符号</strong>：在提示词中明确类、关系与边界条件，让模型输出可编译的建模文本，避免直接生成位图式图片；</li><li><strong>以代码逆向保持同步</strong>：定期让 LLM 从当前代码库逆向生成类图与调用关系，与设计文档比对，及时发现模型与实现的偏差；</li><li><strong>用约束语言校验</strong>：对关键不变式用 OCL（对象约束语言）或等效断言描述，由工具检查模型是否违反约束，把\"人工看图\"升级为\"机器校验\"。</li></ul>\n<ul><li>模型一致性校验与形式化方法一脉相承，第 12 章将讨论 OCL 约束如何与形式化验证结合。</li><li>就本章而言，记住建模的初衷即可：模型是思考与沟通的工具，AI 让\"画图\"变得廉价，从而把建模者的精力还给\"想清楚\"。</li><li>常用文本化建模语言的对比如下表所示。</li></ul>\n<table><thead><tr><th>语言</th><th>特点</th><th>适合场景</th></tr></thead><tbody><tr><td>Mermaid</td><td>语法简洁、图表类型丰富</td><td>快速绘制流程图、时序图</td></tr><tr><td>PlantUML</td><td>面向 UML、支持类图/活动图/时序图</td><td>规范化的 UML 建模</td></tr></tbody></table>\n<ul><li>文本化建模的工作流——从自然语言到可校验的模型——如图所示。</li></ul>",
-      "narration": "前沿的建模即代码实践，把模型作为文本形式的工程资产。生成链的各个环节是：模型文本化，用 Mermaid 或 PlantUML 源码表达；AI 从需求生成建模文本，降低门槛；渲染图形用于沟通；再生成代码和测试，在 CI 中自动校验。图形只是渲染视图，模型本身是可执行、可版本化、可校验的资产，这正是 AI 时代建模的核心形态。好，这就是第五章的内容，我们下一章见。"
+      "title": "面向对象设计",
+      "body": "<p class=\"lead\">面向对象设计（OOD）在分析模型基础上进行系统设计与对象设计两个层次的工作。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap07-design-04.png\" alt=\"\" style=\"width:55%\"></div>\n<ul><li><strong>系统设计</strong>的主要步骤：设计系统的体系结构（选择策略、建立总体结构）、识别设计元素（类和子系统及接口）、定义数据存储策略（数据文件、关系数据库或面向对象数据库，依据并发、跨平台、查询复杂度等选择）、部署子系统（将子系统分配到物理节点）、检查系统设计（正确性、一致性、完整性、可行性）。</li></ul>\n<ul><li><strong>对象设计</strong>需要细化模型：精化类的属性与操作（明确参数、类型、可见性与实现逻辑）、明确类之间的关系、整理优化模型。</li><li>分析类向设计类的映射遵循原则：简单、代表单一逻辑抽象的分析类直接映射为设计类；</li><li>职责复杂者映射为子系统接口；</li></ul>\n<table><thead><tr><th>分析类类型</th><th>设计映射</th><th>设计考虑</th></tr></thead><tbody><tr><td>简单分析类</td><td>直接映射为设计类</td><td>代表单一逻辑抽象</td></tr><tr><td>职责复杂的类</td><td>映射为子系统接口</td><td>符合高内聚低耦合</td></tr><tr><td>边界类</td><td>设计界面工具与数量</td><td>明确与外部交互点</td></tr><tr><td>实体类</td><td>考虑性能需求</td><td>数据持久化策略</td></tr><tr><td>控制类</td><td>审视必要性、细分与事务</td><td>事务处理要求</td></tr></tbody></table>",
+      "narration": "面向对象设计。面向对象设计（OOD）在分析模型基础上进行系统设计与对象设计两个层次的工作。"
     },
     {
       "id": "chapter05-11",
       "type": "section",
-      "title": "智能建模实践（续）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0501-text-modeling.svg\" alt=\"\" style=\"width:80%\"></div>\n<p class=\"lead\">模型以文本形式存在，天然可版本化、可评审，也天然适合由 LLM 生成与修改。</p>\n<ul><li>一个完整的智能建模实例：需求为\"读者注册后可多次借书，一本书同一时间只能被一人借出，逾期未还要缴纳滞纳金\"。</li><li>建模者的提示词为：</li></ul>\n<pre class=\"prompt\"><code>根据借阅需求生成类图草稿：涉及读者、图书、借阅记录三类；读者可多次借书，一本书同一时间只能被借出一次；借阅记录保存借出日期与归还日期，逾期产生滞纳金。\n输出 PlantUML 类图，明确关系类型、多重性，并标注描述中未明确的部分。</code></pre>\n<ul><li>AI 首版输出 Reader、Book、BorrowRecord 三个类，把\"读者—借阅记录\"与\"图书—借阅记录\"均识别为 1..* 关联，属性含借出日期、归还日期与滞纳金金额。</li><li>评估发现两处问题：其一，\"一本书同一时间只能被借出一次\"是唯一性约束而非关系，首版模型没有表达；</li><li>其二，滞纳金是派生结果，作为属性存储与事实不符，应记录归还日期、由规则计算。</li></ul>",
-      "narration": "接下来看一个完整的智能建模实例：读者注册后可多次借书，一本书同一时间只能被一人借出。AI 首版输出读者、图书、借阅记录三个类，但有两处问题：同一时间唯一借出是唯一性约束而非关系；滞纳金是派生结果，应记录归还日期、由规则计算，而不是直接存储。"
+      "title": "面向对象设计（续）",
+      "body": "<p class=\"lead\">面向对象设计在分析模型之上进行系统设计与对象设计两层工作，如图所示。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0701-ood-two-level.svg\" alt=\"\" style=\"width:75%\"></div>\n<ul><li>系统设计确定总体结构与部署，对象设计细化每个类的细节，两层工作共同把分析模型转化为可实现的解决方案。</li></ul>",
+      "narration": "继续讨论面向对象设计。面向对象设计（OOD）在分析模型基础上进行系统设计与对象设计两个层次的工作。"
     },
     {
       "id": "chapter05-12",
       "type": "section",
-      "title": "智能建模实践（续）",
-      "body": "<table><thead><tr><th>项目</th><th>AI 首版</th><th>人工修正</th></tr></thead><tbody><tr><td>关系识别</td><td>读者、图书与借阅记录均 1..* 关联</td><td>补充\"同一时间唯一借出\"的唯一性约束</td></tr><tr><td>属性处理</td><td>直接存储滞纳金金额</td><td>删除，改由归还日期与规则计算</td></tr><tr><td>约束表达</td><td>把约束混入关系</td><td>单独标注唯一性约束与逾期判断条件</td></tr></tbody></table>\n<p class=\"lead\">与人工建模对比，人工建模同样先要澄清\"同一时间唯一借出\"这类约束，AI 首版把建模者的注意力从\"画图\"拉到\"约束表达\"，这正是语义层面的核心工作；模型以文本形式生成，可 diff、可版本化，审查对象从图片变成可追溯的文本。</p>\n<ul><li>工具层面，文本化建模已足够支撑多数团队：编辑器的 Mermaid 预览可即时渲染，PlantUML 更适合规范的 UML 图形；</li><li>需要跨团队共享模型基线时，可选用带版本管理的在线建模平台，但选型不必复杂——能用文本管理、能被 CI 校验，就是底线。</li><li>实践的合理节奏是：需求确认后先让 LLM 生成类图与顺序图草稿，评审定稿后接入模型校验，代码变更时逆向生成比对，形成\"生成 → 评审 → 校验 → 同步\"的循环。</li></ul>\n<h3>AI 辅助建模的要点与误区</h3>\n<ul><li>AI 辅助建模的常见误区，是以为\"一句话就能生成模型\"，或把自动同步当作模型维护的替代。</li><li>要点与误区对照如下表所示。</li></ul>",
-      "narration": "继续看这个实例的修正结果：AI 首版把唯一性约束混入关系，人工修正为单独标注；滞纳金属性删除，改由归还日期与规则计算。AI 首版的价值，是把建模者的注意力从画图拉到约束表达；模型以文本形式生成，可比较、可版本化，审查对象从图片变成可追溯的文本。"
+      "title": "智能化设计",
+      "body": "<p class=\"lead\">智能化设计工具可以显著加速上述过程：AI 依据分析模型<strong>生成</strong>体系结构风格建议与类图初稿，根据 SOLID 等原则给出耦合内聚的<strong>重构提示</strong>，从需求与非功能属性<strong>推导</strong>数据存储策略候选，并在设计评审时对照检查清单<strong>发现</strong>遗漏的边界条件与不一致。</p>\n<ul><li>智能化设计的关键在于把人类的架构判断与 AI 的细节生成结合起来——体系结构风格这类关乎系统命运的决策仍应由有经验的工程师做出，而 AI 的价值体现在快速试错、一致性检查与文档同步，让设计者把精力集中于创造性决策。</li></ul>\n<ul><li>架构决策可以按风险与影响分级对待：<strong>关乎系统命运的决策</strong>——体系结构风格的选择、关键子系统划分、数据一致性策略——必须由有经验的工程师基于非功能需求权衡做出，AI 在此提供的是候选方案与利弊分析，帮助决策者看得更全；</li><li><strong>影响局部的决策</strong>——类的结构、接口设计、组件交互方式——可以由 AI 生成初稿，经设计评审确认；</li><li><strong>细节决策</strong>——参数默认值、工具选择——则可以放手让 AI 按约定完成。</li></ul>\n<ul><li>架构决策的分级与 AI 分工如图所示。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0700-arch-decision.svg\" alt=\"\" style=\"width:60%\"></div>\n<ul><li>设计文档的同步是智能化设计的另一项红利。</li><li>传统设计中模型、设计说明（SDD）与代码经常脱节；</li><li>AI 可以从最终实现反推设计视图、根据变更自动更新文档，让设计决策持续可追溯。</li></ul>",
+      "narration": "智能化设计。智能化设计工具可以显著加速上述过程：AI 依据分析模型生成体系结构风格建议与类图初稿，根据 SOLID 等原则给出耦合内聚的重构提示，从需求与非功能属性推导数据存储策略候选，并在设计评审时对照检查清单发现遗漏的边界条件与不一致。"
     },
     {
       "id": "chapter05-13",
       "type": "section",
-      "title": "智能建模实践（续）",
-      "body": "<table><thead><tr><th>误区</th><th>典型表现</th><th>应对要点</th></tr></thead><tbody><tr><td>一句话生成模型</td><td>不给语义约束就出类图</td><td>先定语义后生成符号，明确关联/聚合、时序与状态条件</td></tr><tr><td>结果不校验</td><td>\"形似神离\"的模型进入基线</td><td>生成结果须经可执行校验（关系合法性、状态完备一致）</td></tr><tr><td>过度依赖自动同步</td><td>模型沦为代码镜像</td><td>模型应沉淀设计决策，同步与维护并重</td></tr><tr><td>直接生成位图</td><td>模型无法版本管理与审查</td><td>用 Mermaid、PlantUML 等文本化建模语言</td></tr></tbody></table>\n<p class=\"lead\">自然语言到 UML 生成的质量控制——以语义约束和可执行校验为两道闸门——如图所示。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0500-nl2uml.svg\" alt=\"\" style=\"width:65%\"></div>\n<ul><li>建模的初衷始终是：模型是思考与沟通的工具。</li><li>AI 让\"画图\"变得廉价，从而把建模者的精力还给\"想清楚\"——语义边界、关系取舍与决策沉淀，这些仍然只能由人完成。</li></ul>\n<h3>前沿演进：建模即代码与模型生成链</h3>",
-      "narration": "继续看智能建模的要点与误区。常见误区包括：一句话生成模型、结果不校验、过度依赖自动同步、直接生成位图。自然语言到 UML 的质量控制，靠语义约束和可执行校验两道闸门。记住，模型是思考与沟通的工具，AI 让画图变得廉价，把建模者的精力还给想清楚。"
+      "title": "智能化设计（续）",
+      "body": "<p class=\"lead\">把智能化设计落到工程流程，可以归纳为\"设计方案生成\"的五步工作流：</p>\n<ul><li>1. <strong>明确输入与约束</strong>：整理需求文档、分析模型（用例、类图、状态图）与非功能需求（性能、可用性、可维护性），并写明已有系统的技术栈与限制；</li><li>2. <strong>生成候选方案</strong>：以提示词让 AI 基于输入生成多个备选设计（体系结构风格、关键类结构、数据存储策略），并要求给出每个候选的理由与取舍；</li><li>3. <strong>对照权衡矩阵</strong>：请 AI 按可扩展性、性能、成本、团队熟悉度等维度输出候选对比表，显式说明\"选 A 的代价是什么\"；</li></ul>\n<ul><li>从需求与分析模型生成候选设计方案的提示词模板如下：</li></ul>\n<pre class=\"prompt\"><code>你是资深软件架构师。请基于以下输入，为系统生成 2~3 个候选设计方案，不要直接下结论。\n需求：&lt;一段话描述核心功能与非功能目标&gt;\n约束：&lt;技术栈、性能、成本、团队能力等限制&gt;\n分析模型：&lt;用例、类图、状态图的摘要&gt;\n请逐方案输出：\n1. 方案名称与采用的体系结构风格（分层、客户机/服务器、事件驱动等）\n2. 核心模块划分与关键设计决策\n3. 该方案的优势、代价与主要风险\n最后给出三列对照表：方案 | 优势 | 代价与风险</code></pre>\n<ul><li>在\"分级对待\"之上，体系结构决策的 AI 辅助与人工把关可进一步细化为下表——AI 负责把方案摊开、把利弊摆全，人负责按下决策键。</li></ul>",
+      "narration": "继续讨论智能化设计。智能化设计工具可以显著加速上述过程：AI 依据分析模型生成体系结构风格建议与类图初稿，根据 SOLID 等原则给出耦合内聚的重构提示，从需求与非功能属性推导数据存储策略候选，并在设计评审时对照检查清单发现遗漏的边界条件与不一致。"
     },
     {
       "id": "chapter05-14",
       "type": "section",
-      "title": "智能建模实践（续）",
-      "body": "<p class=\"lead\">前沿建模实践强调<strong>模型以文本形式存在</strong>（Mermaid、PlantUML、OCL），从而可版本化、可审查、可由 AI 生成与维护。模型不再是\"画出来的图\"，而是与代码同级的工程资产：从模型文本渲染图形用于沟通，从模型生成代码骨架与测试，在 CI 中自动校验模型的语法与一致性，让\"模型—代码—文档\"三者持续同步。</p>\n<ul><li>生成链的各环节如下表所示。</li></ul>\n<table><thead><tr><th>环节</th><th>做法</th><th>价值</th></tr></thead><tbody><tr><td>模型文本化</td><td>Mermaid/PlantUML 源码</td><td>可版本管理、可 diff 审查</td></tr><tr><td>AI 生成</td><td>从需求生成建模文本</td><td>降低建模门槛</td></tr><tr><td>渲染与沟通</td><td>文本渲染为图形</td><td>多视图一致</td></tr><tr><td>生成与校验</td><td>生成代码/测试，CI 校验</td><td>模型可执行、可验证</td></tr></tbody></table>\n<ul><li>建模即代码的生成链——从建模文本到同步的基线——如图所示。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0500-model-as-code.svg\" alt=\"\" style=\"width:80%\"></div>\n<ul><li>建模即代码把 UML 从\"文档\"变成\"程序\"：图形只是渲染视图，模型本身是可执行、可版本化、可校验的资产——这正是 AI 时代建模的核心形态。</li></ul>",
-      "narration": "接下来看前沿演进：建模即代码与模型生成链。模型以文本形式存在，可版本化、可审查，可由 AI 生成与维护，不再是画出来的图，而是与代码同级的工程资产。生成链包括模型文本化、AI 生成、渲染沟通与 CI 校验，图形只是渲染视图，模型本身是可执行、可版本化、可校验的资产。"
+      "title": "智能化设计（续）",
+      "body": "<table><thead><tr><th>体系结构决策</th><th>AI 辅助产出</th><th>人工把关</th></tr></thead><tbody><tr><td>体系结构风格选择</td><td>按非功能需求生成候选风格与利弊分析</td><td>基于权衡拍板，否决\"看似合理\"的方案</td></tr><tr><td>子系统划分</td><td>依据职责边界提出划分候选</td><td>校验高内聚低耦合，并匹配团队结构</td></tr><tr><td>数据一致性策略</td><td>汇总候选策略与其取舍</td><td>依据业务一致性要求定夺</td></tr><tr><td>非功能需求权衡</td><td>生成约束冲突与敏感性分析</td><td>定义优先级与预算</td></tr></tbody></table>\n<p class=\"lead\">这类工作可直接使用对话式编码工具（如 Cursor、Claude Code 等）配合架构文档知识库完成，选型要点是\"让模型读到真实约束\"，避免它仅凭通用知识臆测系统背景；团队也可把 ADR 写成模板让 AI 续写，把决策理由持续沉淀。</p>\n<ul><li>智能化设计同样存在局限与失败模式，如下表所示。</li></ul>\n<table><thead><tr><th>失败模式</th><th>典型表现</th><th>应对</th></tr></thead><tbody><tr><td>方案幻觉</td><td>生成\"看似合理实则不可行\"的架构</td><td>要求输出逐条引用约束，人工核对非功能需求</td></tr><tr><td>上下文缺失</td><td>忽略已有系统技术栈与限制</td><td>提示词注入真实约束，必要时检索架构文档</td></tr><tr><td>候选同质化</td><td>只给出常见风格的变体</td><td>要求列出风格组合与混合方案</td></tr><tr><td>提示词偏差</td><td>候选倾向随提示词措辞漂移</td><td>固定模板、多轮对照，跟踪采纳率</td></tr></tbody></table>",
+      "narration": "继续讨论智能化设计。智能化设计工具可以显著加速上述过程：AI 依据分析模型生成体系结构风格建议与类图初稿，根据 SOLID 等原则给出耦合内聚的重构提示，从需求与非功能属性推导数据存储策略候选，并在设计评审时对照检查清单发现遗漏的边界条件与不一致。"
     },
     {
       "id": "chapter05-15",
       "type": "section",
+      "title": "智能化设计（续）",
+      "body": "<p class=\"lead\">这套工作流的前提是约束写不真、候选就不可信：AI 往往只优化一个目标（如性能）而忽略另一个（如可维护性），把多目标权衡显式写进提示词，是避免\"看起来最优、用起来失衡\"的有效手段。识别并规避上述失败模式，是智能化设计从\"演示可用\"走向\"工程可用\"的分水岭。</p>",
+      "narration": "继续讨论智能化设计。智能化设计工具可以显著加速上述过程：AI 依据分析模型生成体系结构风格建议与类图初稿，根据 SOLID 等原则给出耦合内聚的重构提示，从需求与非功能属性推导数据存储策略候选，并在设计评审时对照检查清单发现遗漏的边界条件与不一致。"
+    },
+    {
+      "id": "chapter05-16",
+      "type": "section",
+      "title": "智能化设计实践",
+      "body": "<p class=\"lead\">智能化设计实践的落点可以分为三类。</p>\n<ul><li><strong>体系结构设计</strong>：让 AI 依据需求与非功能属性生成备选的体系结构风格（分层、客户机/服务器、事件驱动等）及其权衡分析，工程师用架构决策记录（ADR）逐项采纳或否决，形成\"候选生成—权衡比较—决策记录\"的流程。</li><li><strong>界面与原型设计</strong>：低代码平台（如 OutSystems、Mendix）与 AI 界面生成工具（如 v0、Figma 的 AI 助手）把需求描述直接转换为可运行的界面原型，让用户在早期就\"看得见\"系统，减少需求误解。</li><li><strong>数据与对象设计</strong>：AI 从业务规则推导概念数据模型与类图初稿，生成数据库表结构候选，工程师根据访问模式与一致性要求调整。</li></ul>\n<ul><li>设计活动与 AI 辅助的分工如下表所示。</li></ul>\n<table><thead><tr><th>设计活动</th><th>AI 能力</th><th>人工把关</th></tr></thead><tbody><tr><td>体系结构设计</td><td>生成风格候选与利弊分析</td><td>选择与评估体系结构风格</td></tr><tr><td>详细设计</td><td>生成类图、接口与交互初稿</td><td>校验语义、确定权衡</td></tr><tr><td>界面设计</td><td>生成界面原型与组件方案</td><td>确认可用性与交互逻辑</td></tr><tr><td>数据设计</td><td>推导数据模型与表结构</td><td>确定一致性策略与性能约束</td></tr></tbody></table>\n<ul><li>无论哪个层次，都适用同一条原则：<strong>AI 生成的是候选，决定权在人</strong>。</li><li>设计审查仍然是必要的环节，尤其要警惕 AI 生成的架构\"看似合理实则难以演进\"。</li><li>当系统以机器学习模型为核心时，架构还需要为模型推理、数据流水线留出位置，相关设计考量将在第 10 章结合 AI 系统的体系结构讨论。</li></ul>",
+      "narration": "智能化设计实践。智能化设计实践的落点可以分为三类。"
+    },
+    {
+      "id": "chapter05-17",
+      "type": "section",
+      "title": "智能化设计实践（续）",
+      "body": "<p class=\"lead\">一个完整的智能化设计实例如下。需求是：某电商系统的订单结算模块需支持满减、折扣、优惠券与会员积分多种促销规则，且促销规则会不断新增。</p>\n<ul><li>工程师写下的提示词为：</li></ul>\n<pre class=\"prompt\"><code>为订单结算模块生成 2 个候选设计方案。需求：订单结算需支持满减、折扣、\n优惠券与会员积分，后续会不断新增促销规则；结算规则复杂、变化频繁，其余模块稳定。\n约束：Java/Spring 技术栈、单机事务、结算响应时间 &lt;200ms。\n请给出候选方案、权衡与建议，不要直接下结论。</code></pre>\n<ul><li>AI 输出了两个候选。</li><li>方案 A 采用\"策略模式 + 规则引擎\"，每种促销实现为策略类、按优先级链式结算，优势是新增规则只需新增策略类、符合开闭原则，代价是策略类随规则增多、组合测试复杂度上升；</li><li>方案 B 采用\"领域模型 + 规则表驱动\"，促销规则存表由引擎解释执行，优势是运营可配置规则、无需改代码，代价是引入规则解释器、性能与可调试性下降。</li></ul>\n<ul><li>与人工流程相比：人工设计同样要经历\"枚举候选—权衡—决策\"三步，但更慢、且依赖个人经验覆盖的范围；</li><li>AI 让候选枚举与利弊分析在几分钟内完成，工程师把时间从\"想方案\"转移到\"验约束、定取舍\"。</li><li>但\"叠加规则的顺序与事务边界\"这类约束仍需工程师基于领域知识补全——AI 不会主动提出它没有被提示的约束。</li></ul>\n<h3>智能化设计的要点与误区</h3>",
+      "narration": "继续讨论智能化设计实践。智能化设计实践的落点可以分为三类。"
+    },
+    {
+      "id": "chapter05-18",
+      "type": "section",
+      "title": "智能化设计实践（续）",
+      "body": "<p class=\"lead\">智能化设计的关键误区，是让 AI 触碰关乎系统命运的架构判断，或让设计文档沦为代码的复述。要点与误区如下表所示。</p>\n<table><thead><tr><th>误区</th><th>典型表现</th><th>应对要点</th></tr></thead><tbody><tr><td>AI 决定架构</td><td>体系结构风格由模型拍板</td><td>系统命运级决策由工程师基于非功能需求做出</td></tr><tr><td>决策不留痕</td><td>只记录结果不记录理由</td><td>以 ADR 沉淀理由、权衡与备选方案</td></tr><tr><td>文档替代决策</td><td>同步文档却无决策发生</td><td>先有决策，再谈文档同步</td></tr><tr><td>全盘放手细节</td><td>低价值细节也由人逐行处理</td><td>细节决策交给 AI 按约定完成</td></tr></tbody></table>\n<ul><li>架构决策记录（ADR）流程——从候选生成到权衡记录——如图所示。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0700-adr-flow.svg\" alt=\"\" style=\"width:55%\"></div>\n<ul><li>分级对待的好处是既不让 AI 触碰高风险的架构判断，也不让工程师淹没在低价值的细节里；</li><li>而 AI 擅长记录决策的结果，决策的理由与权衡仍需设计者以 ADR 等形式沉淀，否则文档只会变成代码的复述而非设计的沉淀。</li></ul>",
+      "narration": "继续讨论智能化设计实践。智能化设计实践的落点可以分为三类。"
+    },
+    {
+      "id": "chapter05-19",
+      "type": "section",
+      "title": "智能化设计实践（续）",
+      "body": "<h3>前沿演进：可演化架构与架构适应度函数</h3>\n<p class=\"lead\">传统设计追求\"一次设计到位\"，前沿架构思想则承认架构必然演化。<strong>可演化架构</strong>（evolutionary architecture）把架构决策、适应度与持续交付结合：架构决策通过<strong>适应度函数</strong>（fitness function）表达为自动化检查，在 CI 中持续验证架构是否仍然满足约束（如依赖方向、耦合度、延迟预算）。</p>\n<ul><li>AI 辅助可演化架构：自动分析模块依赖与循环依赖、生成架构评估报告、提出重构候选方案。</li><li>常见适应度函数示例如下表所示。</li></ul>\n<table><thead><tr><th>架构关注点</th><th>适应度函数</th><th>工具</th></tr></thead><tbody><tr><td>依赖方向</td><td>禁止核心模块反向依赖</td><td>ArchUnit、JDepend</td></tr><tr><td>循环依赖</td><td>无循环依赖检查</td><td>依赖分析工具</td></tr><tr><td>耦合度</td><td>模块间引用计数阈值</td><td>SonarQube 等</td></tr><tr><td>延迟预算</td><td>端到端延迟不超过 SLO</td><td>链路追踪</td></tr></tbody></table>\n<ul><li>可演化架构的持续演进——适应度函数驱动的改进环——如图所示。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0700-evolutionary-architecture.svg\" alt=\"\" style=\"width:70%\"></div>",
+      "narration": "继续讨论智能化设计实践。智能化设计实践的落点可以分为三类。"
+    },
+    {
+      "id": "chapter05-20",
+      "type": "section",
+      "title": "智能化设计实践（续）",
+      "body": "<p class=\"lead\">可演化架构把\"架构治理\"从评审会议迁移到持续自动化验证：架构约束不再依赖个别架构师的记忆，而是由 CI 中执行的适应度函数持续守护，AI 则让适应度函数的编写与分析更加廉价。</p>\n<ul><li>以上智能化设计与可演化架构着眼于系统的整体结构，而设计实践中还有大量反复出现的局部问题。</li><li>设计模式正是这类局部经验的沉淀——把成功实践提炼为可复用的解决方案，供设计者按需取用。</li></ul>\n<ul><li>设计模式描述软件设计过程中常见问题的解决方案，是从大量成功实践中总结出来并被广泛公认的经验。</li><li>经典著作《设计模式》（GoF，四人组 Gamma、Helm、Johnson、Vlissides 著）收录了 23 个面向对象设计模式，成为软件工程领域最具影响力的著作之一。</li></ul>",
+      "narration": "继续讨论智能化设计实践。智能化设计实践的落点可以分为三类。"
+    },
+    {
+      "id": "chapter05-21",
+      "type": "section",
+      "title": "模式的基本要素与价值",
+      "body": "<p class=\"lead\">一个完整的设计模式包含四个要素：</p>\n<ul><li><strong>模式名称</strong>：一个助记名，便于交流与思考；</li><li><strong>问题</strong>：说明在何时使用模式，解释设计问题及其前因后果；</li><li><strong>解决方案</strong>：描述设计的组成部分、相互关系、各自职责与协作方式；</li><li><strong>效果</strong>：描述模式应用的效果与权衡。</li></ul>\n<ul><li>设计模式的价值在于：使人们可以简便地复用已有的良好设计；</li><li>提供一套开发人员之间交流的语言；</li><li>提升看待问题的抽象程度；</li></ul>\n<table><thead><tr><th>要素</th><th>说明</th></tr></thead><tbody><tr><td>模式名称</td><td>助记名，便于交流与思考</td></tr><tr><td>问题</td><td>何时使用，设计问题及其前因后果</td></tr><tr><td>解决方案</td><td>组成部分、相互关系、职责与协作</td></tr><tr><td>效果</td><td>应用效果与权衡</td></tr></tbody></table>\n<ul><li>模式的四要素构成完整的设计经验描述，如图所示。</li></ul>",
+      "narration": "模式的基本要素与价值。一个完整的设计模式包含四个要素："
+    },
+    {
+      "id": "chapter05-22",
+      "type": "section",
+      "title": "模式的基本要素与价值（续）",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0801-pattern-four.svg\" alt=\"\" style=\"width:85%\"></div>\n<p class=\"lead\">四要素缺一不可：缺少\"问题\"与\"效果\"的模式只能看到结构，无法判断何时该用、用了得失如何。</p>",
+      "narration": "继续讨论模式的基本要素与价值。一个完整的设计模式包含四个要素："
+    },
+    {
+      "id": "chapter05-23",
+      "type": "section",
+      "title": "模式的分类",
+      "body": "<p class=\"lead\">GoF 将 23 个模式分为三类：</p>\n<ul><li><strong>创建型模式</strong>解决对象实例化的问题，把\"创建什么\"与\"如何创建\"分离。</li><li>典型模式包括：<strong>单例</strong>（Singleton，保证一个类仅有一个实例并提供全局访问点）、<strong>工厂方法</strong>（Factory Method，由子类决定创建哪个产品）、<strong>抽象工厂</strong>（Abstract Factory，创建一族相关对象）、<strong>生成器</strong>（Builder，分步构造复杂对象）、<strong>原型</strong>（Prototype，通过克隆创建新对象）。</li></ul>\n<div class=\"img-pair\"><img src=\"../src/chapter-05/images/singleton_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"><img src=\"../src/chapter-05/images/factory-method-implementation-uml-class-diagram.png\" alt=\"\" style=\"width:45%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/abstract-factory-pattern.png\" alt=\"\" style=\"width:45%\"></div>\n<ul><li><strong>结构型模式</strong>组织类与对象的结构，避免类被赋予过多职责而破坏封装。</li><li>典型模式包括：<strong>适配器</strong>（Adapter，转换接口使不兼容的类协同工作）、<strong>桥接</strong>（Bridge，将抽象与实现解耦）、<strong>组成</strong>（Composite，将对象组成树形整体—部分结构）、<strong>装饰</strong>（Decorator，动态为对象添加职责）、<strong>外观</strong>（Facade，为子系统提供统一入口）、<strong>享元</strong>（Flyweight，共享细粒度对象节省内存）、<strong>代理</strong>（Proxy，用替身控制对对象的访问）。</li></ul>",
+      "narration": "模式的分类。GoF 将 23 个模式分为三类："
+    },
+    {
+      "id": "chapter05-24",
+      "type": "section",
+      "title": "模式的分类（续）",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/composite-design-pattern-example-uml-class-diagram.png\" alt=\"\" style=\"width:45%\"></div>\n<p class=\"lead\"><strong>行为模式</strong>分配对象职责、为对象间协作建模。典型模式包括：<strong>职责链</strong>（Chain of Responsibility，把请求沿处理链传递）、<strong>命令</strong>（Command，把请求封装为对象以支持撤销与排队）、<strong>解释器</strong>、<strong>迭代器</strong>、<strong>中介者</strong>（Mediator，集中协调对象间交互）、<strong>备忘录</strong>、<strong>观察者</strong>（Observer，定义一对多的依赖，状态变化时通知所有依赖者）、<strong>状态</strong>（State，状态改变时对象改变自身行为）、<strong>策略</strong>（Strategy，封装可互换的算法族）、<strong>模板方法</strong>（Template Method，父类定义算法骨架、子类填充细节）、<strong>访问者</strong>（Visitor，在不改动元素类的前提下为对象结构增加操作）。</p>\n<div class=\"img-pair\"><img src=\"../src/chapter-05/images/observer_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"><img src=\"../src/chapter-05/images/strategy_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"></div>\n<ul><li>以<strong>抽象工厂</strong>为例：它封装具体平台，使应用程序可以在不同平台上运行——用户只与抽象工厂及其产品接口打交道，更换平台只需替换具体工厂。</li><li>以<strong>观察者</strong>为例：新闻社（被观察者）发布新闻时，所有订阅者自动得到通知并更新，符合\"开放—封闭\"原则。</li><li>GoF 三类的模式清单与作用可归纳如下表所示。</li></ul>",
+      "narration": "继续讨论模式的分类。GoF 将 23 个模式分为三类："
+    },
+    {
+      "id": "chapter05-25",
+      "type": "section",
+      "title": "模式的分类（续）",
+      "body": "<table><thead><tr><th>类别</th><th>作用</th><th>代表模式</th></tr></thead><tbody><tr><td>创建型</td><td>解决对象实例化，分离\"创建什么\"与\"如何创建\"</td><td>单例、工厂方法、抽象工厂、生成器、原型</td></tr><tr><td>结构型</td><td>组织类与对象结构，避免职责过多</td><td>适配器、桥接、组成、装饰、外观、享元、代理</td></tr><tr><td>行为型</td><td>分配职责、为协作建模</td><td>策略、观察者、命令、状态、模板方法、访问者等</td></tr></tbody></table>\n<p class=\"lead\">GoF 模式的三类划分与典型模式目录如图所示。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0803-pattern-catalog.svg\" alt=\"\" style=\"width:75%\"></div>",
+      "narration": "继续讨论模式的分类。GoF 将 23 个模式分为三类："
+    },
+    {
+      "id": "chapter05-26",
+      "type": "section",
+      "title": "样例：策略模式的应用",
+      "body": "<p class=\"lead\">订单折扣计算是<strong>策略模式</strong>（Strategy，封装可互换的算法族）的典型场景。假设一个电商系统按订单计算折扣：普通用户不打折、会员享 95 折、节假日全场 85 折。</p>\n<ul><li>若用 if-else 硬编码，每新增一种折扣都要改动计算逻辑本身，违背开闭原则；</li><li>把每种折扣封装成一个策略类、用统一接口替换分支，是教科书式的解法：</li></ul>\n<pre class=\"prompt\"><code>interface Discount {\n    double calc(double price);\n}\nclass NormalDiscount implements Discount {\n    public double calc(double price) { return price; }\n}\nclass MemberDiscount implements Discount {\n    public double calc(double price) { return price * 0.95; }\n}\nclass FestivalDiscount implements Discount {\n    public double calc(double price) { return price * 0.85; }\n}\nclass Order {\n    private Discount discount = new NormalDiscount();\n    public void setDiscount(Discount d) { this.discount = d; }\n    public double total(double price) { return discount.calc(price); }\n}</code></pre>\n<ul><li>代码中的角色分工如下表所示。</li></ul>\n<table><thead><tr><th>角色</th><th>本例中的类</th><th>职责</th></tr></thead><tbody><tr><td>策略接口</td><td>Discount</td><td>定义算法统一入口</td></tr><tr><td>具体策略</td><td>Normal/Member/FestivalDiscount</td><td>实现各折扣算法</td></tr><tr><td>上下文</td><td>Order</td><td>持有策略并委托调用</td></tr></tbody></table>",
+      "narration": "样例：策略模式的应用。订单折扣计算是策略模式（Strategy，封装可互换的算法族）的典型场景。假设一个电商系统按订单计算折扣：普通用户不打折、会员享 95 折、节假日全场 85 折。"
+    },
+    {
+      "id": "chapter05-27",
+      "type": "section",
+      "title": "样例：策略模式的应用（续）",
+      "body": "<p class=\"lead\">改动从\"改分支\"变成\"加类\"：新增折扣只须写一个新策略类并注入订单，原有代码一字不动，这就是<strong>开闭原则</strong>的直接体现。</p>",
+      "narration": "继续讨论样例：策略模式的应用。订单折扣计算是策略模式（Strategy，封装可互换的算法族）的典型场景。假设一个电商系统按订单计算折扣：普通用户不打折、会员享 95 折、节假日全场 85 折。"
+    },
+    {
+      "id": "chapter05-28",
+      "type": "section",
+      "title": "样例：观察者模式的应用",
+      "body": "<p class=\"lead\">天气 App 的\"订阅推送\"是<strong>观察者模式</strong>（Observer，定义一对多的依赖，状态变化时通知所有依赖者）的典型场景。气象站测得新数据后，手机通知、首页卡片、地图图层等多个界面都要同步更新，且新增界面不应改动气象站。</p>\n<ul><li>把气象站作为主题、各界面作为观察者，即构成发布—订阅关系：</li></ul>\n<table><thead><tr><th>角色</th><th>类</th><th>职责</th></tr></thead><tbody><tr><td>主题（被观察者）</td><td>WeatherStation</td><td>维护观察者列表，数据更新时逐一通知</td></tr><tr><td>观察者接口</td><td>Observer</td><td>定义 update 数据的统一入口</td></tr><tr><td>具体观察者</td><td>PushAlert、CardView、MapLayer</td><td>收到通知后各自刷新</td></tr></tbody></table>\n<ul><li>运行流程是：</li></ul>\n<ul><li>1. 界面启动时调用 subscribe 向气象站注册自己；</li><li>2. 气象站测得新数据，遍历观察者列表调用 update；</li><li>3. 各界面收到数据后自行刷新，气象站不关心界面的具体类型。</li></ul>\n<ul><li>新界面只需实现 Observer 接口并注册，无需改动气象站；</li><li>观察者之间也互不感知——这正是\"一对多\"协作的解耦方式。</li></ul>",
+      "narration": "样例：观察者模式的应用。天气 App 的\"订阅推送\"是观察者模式（Observer，定义一对多的依赖，状态变化时通知所有依赖者）的典型场景。气象站测得新数据后，手机通知、首页卡片、地图图层等多个界面都要同步更新，且新增界面不应改动气象站。"
+    },
+    {
+      "id": "chapter05-29",
+      "type": "section",
+      "title": "案例：模式滥用的反例",
+      "body": "<p class=\"lead\">一个<strong>典型的反例</strong>是：为只有两三个类的简单逻辑，强行套上十几层模式。某团队曾为一个\"取文件路径并保存\"的小需求，引入抽象工厂创建路径、外观封装接口、装饰叠加缓存、代理拦截访问，还配了一套观察者做变更通知——实际上一个函数就能完成。</p>\n<ul><li>结果代码行数暴涨、调用链深不可测，新人读不懂，改一处要顺着多个间接层排查。</li><li>这样的设计\"模式齐全\"却毫无可维护性：问题不在模式本身，而在滥用。</li></ul>\n<ul><li>对照下表可以看清\"该用\"与\"不该用\"的界限。</li></ul>\n<table><thead><tr><th>情形</th><th>该用的地方</th><th>不该用的地方</th></tr></thead><tbody><tr><td>变化点</td><td>存在可独立、频繁且可预期的变化</td><td>结构固定，短期内不会变化</td></tr><tr><td>扩展方式</td><td>需求以新增种类、算法为主</td><td>以修改既有行为为主</td></tr><tr><td>复杂度</td><td>分支众多且纠缠，直写难维护</td><td>两三行分支即可直读直改</td></tr><tr><td>代价</td><td>间接层换来可扩展，收益明确</td><td>间接层徒增理解与调试成本</td></tr></tbody></table>\n<ul><li>判断口诀很朴素：<strong>模式服务于变化点，不为用而用</strong>。</li><li>先写最简单满足需求的方案，变化真实到来且频率可预期时再引入模式，才是健康的演进路径。</li></ul>",
+      "narration": "案例：模式滥用的反例。一个典型的反例是：为只有两三个类的简单逻辑，强行套上十几层模式。某团队曾为一个\"取文件路径并保存\"的小需求，引入抽象工厂创建路径、外观封装接口、装饰叠加缓存、代理拦截访问，还配了一套观察者做变更通知——实际上一个函数就能完成。"
+    },
+    {
+      "id": "chapter05-30",
+      "type": "section",
+      "title": "故事：GoF 与《设计模式》",
+      "body": "<p class=\"lead\">1994 年，Erich Gamma、Richard Helm、Ralph Johnson 与 John Vlissides 四位软件工程师合作出版了《设计模式》（Design Patterns: Elements of Reusable Object-Oriented Software，Addison-Wesley），后世称这四人为\"<strong>四人组</strong>\"（GoF）。这本书后来成为软件工程领域被引用最多的著作之一，也是\"模式运动\"的开端。</p>\n<ul><li><strong>由来</strong>：四人在面向对象程序设计大会 OOPSLA 上相识；Gamma 在博士阶段构建的 C++ 框架 ET++ 中积累了可复用结构，其余三人也各有研究，遂把这些反复出现的解法提炼为\"模式\"。</li><li><strong>思想源头</strong>：\"模式\"一词借鉴自建筑学家克里斯托弗·亚历山大，他把城市规划中反复成功的方案写成\"模式语言\"，GoF 把同样的思想引入软件设计。</li><li><strong>内容</strong>：全书收录 23 个模式，分创建型、结构型与行为型三类，按名称、问题、解决方案与效果四要素书写。</li><li><strong>影响</strong>：\"设计复用\"思想随畅销迅速传播，催生了 PLoP 等模式会议，\"设计模式\"从此成为软件行业的通用词汇。</li></ul>\n<ul><li>模式把\"好设计\"从大师经验变成可传递的公共知识。</li><li>今天人们谈论观察者、策略时，都在沿用这本书建立的坐标系。</li></ul>",
+      "narration": "故事：GoF 与《设计模式》。1994 年，Erich Gamma、Richard Helm、Ralph Johnson 与 John Vlissides 四位软件工程师合作出版了《设计模式》（Design Patterns: Elements of Reusable Object Oriented Software，Addison Wesley），后世称这四人为\"四人组\"（GoF）。这本书后来成为软件工程领域被引用最多的著作之一，也是\"模式运动\"的开端。"
+    },
+    {
+      "id": "chapter05-31",
+      "type": "section",
+      "title": "模式与 AI 代码生成",
+      "body": "<p class=\"lead\">设计模式是 AI 代码生成最擅长复用的知识之一。大语言模型在训练中接触了大量模式实例，能够：依据\"何时用何种模式\"的描述<strong>推荐</strong>合适的模式；</p>\n<ul><li>从类图或需求<strong>生成</strong>模式对应的代码骨架；</li><li>根据 SOLID 与 DRY 原则对已有代码<strong>提出</strong>重构建议；</li><li>在评审时<strong>识别</strong>模式滥用与过度设计。</li></ul>\n<ul><li>但模式的本质是权衡，AI 生成模式代码时往往会\"有得无失\"地套用，因此需要工程师把关：只有当下注目的可变化点对应模式的适用场景时，引入模式才有价值。</li><li>理解模式背后的动机与代价，是运用 AI 生成模式代码的前提。</li></ul>\n<ul><li>模式推荐的正确条件并非\"某个类需要解耦\"，而是\"存在一个可以独立变化、且变化频率可预期的点\"——变化点是引入模式的理由，没有变化点，模式就是负担。</li><li>AI 在推荐模式时应被要求说明\"它正在解决哪个变化点、带来了什么代价\"，而不是只输出\"建议使用观察者模式\"。</li><li>这种条件化的输出让工程师不必逐条推敲模型推荐的动机，可以直接基于变化点的真实性做出判断。</li></ul>\n<ul><li>防范过度设计需要双向的纪律：一方面要求 AI 在生成代码时<strong>优先给出最简单满足需求的方案</strong>，仅在指明变化点时引入模式；</li><li>另一方面在评审时让 AI 对照\"是否过度设计\"的检查清单（是否存在无使用者的抽象、是否可以用更简单的结构替代、模式是否增加了不必要的间接层）扫描代码。</li><li>模式是解决特定问题的良方，不是所有问题的答案——这一点对人与 AI 同样适用。</li></ul>\n<ul><li>是否引入设计模式的决策流程如图所示。</li></ul>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0800-pattern-decision.svg\" alt=\"\" style=\"width:55%\"></div>",
+      "narration": "模式与 AI 代码生成。设计模式是 AI 代码生成最擅长复用的知识之一。大语言模型在训练中接触了大量模式实例，能够：依据\"何时用何种模式\"的描述推荐合适的模式；"
+    },
+    {
+      "id": "chapter05-32",
+      "type": "section",
+      "title": "模式与 AI 代码生成（续）",
+      "body": "<p class=\"lead\">面对 23 个模式，过去工程师靠记忆与经验完成\"问题—模式\"的匹配；AI 辅助把这一步变成可复用的工作流，工程师的角色从\"背模式目录\"转向\"验证模式动机\"。</p>\n<ul><li>模式选择辅助可以归纳为四步工作流：</li></ul>\n<ul><li>1. <strong>描述问题与变化点</strong>：用自然语言说明\"哪个对象在什么情况下需要变化、变化频率如何、有哪些关注方\"，而不是直接说出模式名；</li><li>2. <strong>映射候选模式</strong>：让 AI 依据问题特征推荐候选模式，并要求说明\"该模式正在解决哪个变化点\"；</li><li>3. <strong>对照权衡</strong>：请 AI 给出候选模式的效果与代价对比表，标注\"何时不该用\"；</li></ul>\n<ul><li>大语言模型在训练语料中见过大量模式应用案例，能把\"对象创建方式可能变化\"\"一对多通知\"这类问题特征映射到相应模式，这是其推荐能力的来源；</li><li>但同一问题可以有多种措辞，措辞不同推荐可能不同，所以工作流第一步刻意用固定结构描述问题，降低推荐的偶然性。</li><li>常见的问题特征与候选模式类别的对应如下表所示。</li></ul>\n<table><thead><tr><th>问题特征</th><th>适用模式</th></tr></thead><tbody><tr><td>对象创建方式可能变化</td><td>创建型：工厂方法、抽象工厂、生成器</td></tr><tr><td>接口不兼容、需协同工作</td><td>适配器、外观</td></tr><tr><td>一对多状态变化、需同步通知</td><td>观察者</td></tr><tr><td>算法族可互换</td><td>策略</td></tr><tr><td>行为随内部状态变化</td><td>状态</td></tr><tr><td>职责可动态叠加</td><td>装饰</td></tr><tr><td>需在不动元素类时增加操作</td><td>访问者</td></tr></tbody></table>\n<ul><li>需要说明的是，上表是启发式的对应关系而非判定规则——同一问题特征可能对应多种模式，具体选择还取决于变化频率、代价承受与既有结构。</li><li>AI 的推荐价值在于缩小候选范围，最终取舍仍要回到变化点与权衡上。</li></ul>",
+      "narration": "继续讨论模式与 AI 代码生成。设计模式是 AI 代码生成最擅长复用的知识之一。大语言模型在训练中接触了大量模式实例，能够：依据\"何时用何种模式\"的描述推荐合适的模式；"
+    },
+    {
+      "id": "chapter05-33",
+      "type": "section",
+      "title": "模式与 AI 代码生成（续）",
+      "body": "<p class=\"lead\">以报表导出为例：某模块需把多种导出格式（PDF、Excel、CSV）与报表逻辑分离，且格式会持续新增。按工作流第一步，工程师应写出\"导出格式会不断新增，需在不改报表逻辑的前提下扩展\"，AI 据此推荐策略模式；</p>\n<ul><li>若只写\"类之间耦合太高\"，模型就可能给出适配器、外观等若干不相关的候选。</li><li>输入描述越贴近变化点，推荐越收敛。</li></ul>\n<ul><li>AI 生成模式代码的质量门禁，可以概括为五道关卡，其中自动化检查与人工把关各司其职。</li></ul>\n<table><thead><tr><th>关卡</th><th>执行者</th><th>检查内容</th><th>通过标准</th></tr></thead><tbody><tr><td>静态检查</td><td>工具/CI</td><td>编译、lint、类型检查</td><td>无语法与低级错误</td></tr><tr><td>结构校验</td><td>AI + 工具</td><td>参与者、关系对照标准结构</td><td>角色与协作符合模式定义</td></tr><tr><td>语义保真</td><td>人工</td><td>变化点是否真实存在并被对应</td><td>模式动机与实现一致</td></tr><tr><td>单元测试</td><td>CI</td><td>行为正确、扩展性可验证</td><td>用例全部通过</td></tr><tr><td>人工评审</td><td>工程师</td><td>无用抽象、权衡与代价</td><td>无过度设计，理由可追溯</td></tr></tbody></table>\n<ul><li>五道关卡中，前两道可由工具与 AI 自动完成，后三道必须以人或测试把关：语义保真回答\"模式用对没有\"，单元测试回答\"行为正确没有\"，人工评审回答\"值得用没有\"。</li><li>把门禁写成项目约定，让 AI 在生成时就自报变化点与权衡，可显著减少评审阶段的返工。</li><li>把\"模式选择 + 质量门禁\"编码为提示词模板如下：</li></ul>",
+      "narration": "继续讨论模式与 AI 代码生成。设计模式是 AI 代码生成最擅长复用的知识之一。大语言模型在训练中接触了大量模式实例，能够：依据\"何时用何种模式\"的描述推荐合适的模式；"
+    },
+    {
+      "id": "chapter05-34",
+      "type": "section",
+      "title": "模式与 AI 代码生成（续）",
+      "body": "<pre class=\"prompt\"><code>你是资深软件工程师。请根据问题描述推荐设计模式并生成代码骨架：\n问题：&lt;描述对象、变化点与关注方，例如\"订单状态变化时，多个界面与通知\n需同步更新，且后续可能新增关注方\"&gt;\n要求：\n1. 先说明推荐哪个模式、该模式解决哪个变化点、带来什么代价；\n2. 仅当变化点真实存在时才引入模式，否则给出最简单的直写方案；\n3. 生成骨架代码，命名用驼峰式，注释说明各参与者职责；\n4. 最后给出 100 字以内的权衡说明，标注\"何时不该用此模式\"。</code></pre>\n<p class=\"lead\">质量门禁的落地依赖测试支撑——观察者、策略这类行为模式的验证需要单元测试构造关注方与变化场景，测试用例设计将在第 6 章详细展开；\"可编译不等于可维护\"的判断标准则已在第 6 章软件实现中讨论。</p>\n<ul><li>AI 生成模式代码进入基线前必须通过门禁，这条纪律与人工编写代码完全相同。</li></ul>\n<ul><li>模式与 AI 代码生成同样存在局限与失败模式，如下表所示。</li></ul>\n<table><thead><tr><th>失败模式</th><th>典型表现</th><th>应对</th></tr></thead><tbody><tr><td>结构套用</td><td>生成\"教科书结构\"却无对应变化点</td><td>先问变化点，再谈模式</td></tr><tr><td>变体误选</td><td>单例/工厂/生成器选错，引入不必要的全局状态</td><td>要求模型说明创建场景与变体差异</td></tr><tr><td>双标准代码</td><td>生成代码与既有风格、依赖不一致</td><td>提示词注入项目规范，必要时参考既有模式实例</td></tr><tr><td>单模式遗漏</td><td>真实系统需多模式组合，AI 只给单模式</td><td>要求列出候选组合与组合带来的约束</td></tr></tbody></table>",
+      "narration": "继续讨论模式与 AI 代码生成。设计模式是 AI 代码生成最擅长复用的知识之一。大语言模型在训练中接触了大量模式实例，能够：依据\"何时用何种模式\"的描述推荐合适的模式；"
+    },
+    {
+      "id": "chapter05-35",
+      "type": "section",
+      "title": "模式与 AI 代码生成（续）",
+      "body": "<p class=\"lead\">设计模式是详细设计层面的复用单位，与本章前文讨论的体系结构风格互补——前者解决类级协作，后者解决系统级组织；本章聚焦模式与 AI 的组合应用。</p>",
+      "narration": "继续讨论模式与 AI 代码生成。设计模式是 AI 代码生成最擅长复用的知识之一。大语言模型在训练中接触了大量模式实例，能够：依据\"何时用何种模式\"的描述推荐合适的模式；"
+    },
+    {
+      "id": "chapter05-36",
+      "type": "section",
+      "title": "AI 生成模式代码的实践",
+      "body": "<p class=\"lead\">让 AI 可靠地生成模式代码，关键在于提示词中给出足够的结构信息。一个常用的做法是\"意图 + 变化点\"式描述：不仅告诉模型\"用观察者模式\"，还说明\"库存变化时多个界面需要同步更新，且后续可能新增关注方\"，模型据此生成的代码才能贴合并可维护。</p>\n<ul><li>若仅有模式名而无意图，模型往往套用教科书结构，产生大量无用抽象。</li></ul>\n<ul><li>工程上可以进一步把模式知识组织为可检索资源：团队把沉淀的模式实例、适用场景与权衡记录整理入库，通过检索增强生成（RAG）让模型基于团队自己的经验作答，而不是仅凭通用训练数据。</li><li>评审 AI 生成的模式代码时，建议对照以下清单：</li></ul>\n<ul><li>变化点是否真实存在且需要提前支持？</li><li>模式的参与者、关系是否符合其标准结构？</li><li>是否引入了无使用者的接口或抽象？</li><li>现有代码中是否存在可被该模式替代的重复结构？</li></ul>\n<ul><li>模式代码与普通代码一样，需要经过测试与评审才能进入基线。</li><li>评审 AI 生成的模式代码，可对照以下清单逐项检查。</li></ul>\n<table><thead><tr><th>评审问题</th><th>检查要点</th></tr></thead><tbody><tr><td>变化点是否真实存在？</td><td>是否确需提前支持变化</td></tr><tr><td>参与者是否符合标准结构？</td><td>模式的角色与关系是否正确</td></tr><tr><td>是否存在无用抽象？</td><td>无使用者的接口或抽象</td></tr><tr><td>是否可替代重复结构？</td><td>现有代码中可被该模式替代的部分</td></tr></tbody></table>",
+      "narration": "AI 生成模式代码的实践。让 AI 可靠地生成模式代码，关键在于提示词中给出足够的结构信息。一个常用的做法是\"意图 + 变化点\"式描述：不仅告诉模型\"用观察者模式\"，还说明\"库存变化时多个界面需要同步更新，且后续可能新增关注方\"，模型据此生成的代码才能贴合并可维护。"
+    },
+    {
+      "id": "chapter05-37",
+      "type": "section",
+      "title": "AI 生成模式代码的实践（续）",
+      "body": "<p class=\"lead\">让 AI 生成模式代码并以评审清单把关的流程如图所示。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0802-pattern-prompt.svg\" alt=\"\" style=\"width:65%\"></div>\n<ul><li>\"意图+变化点\"式描述让模型生成贴合的代码，评审清单则防止模式被盲目套用。</li><li>对 AI 生成代码的评测、幻觉防范与责任归属，将在第 11 章系统讨论。</li></ul>\n<ul><li>一个完整的实例如下。</li><li>需求是：订单状态变化时，邮件、短信与日志三个关注方需要同步更新，且后续可能新增关注方（如推送、审计）。</li><li>工程师按\"意图 + 变化点\"的方式写下的提示词为：</li></ul>\n<pre class=\"prompt\"><code>订单状态变化时，邮件、短信与日志三个关注方需要同步更新，且后续可能新增关注方。\n请推荐模式并生成骨架代码：先说明推荐理由与变化点，再生成实现，最后给出权衡。</code></pre>",
+      "narration": "继续讨论AI 生成模式代码的实践。让 AI 可靠地生成模式代码，关键在于提示词中给出足够的结构信息。一个常用的做法是\"意图 + 变化点\"式描述：不仅告诉模型\"用观察者模式\"，还说明\"库存变化时多个界面需要同步更新，且后续可能新增关注方\"，模型据此生成的代码才能贴合并可维护。"
+    },
+    {
+      "id": "chapter05-38",
+      "type": "section",
+      "title": "AI 生成模式代码的实践（续）",
+      "body": "<p class=\"lead\">AI 推荐观察者模式，理由是\"关注方集合可以独立扩展\"，并生成了 <code>OrderObserver</code> 接口、<code>OrderService</code> 维护观察者列表、<code>changeState</code> 遍历通知的骨架代码。工程师对照评审清单评估发现：变化点真实存在、参与者符合观察者标准结构，但有两处契约细节缺失——其一，通知顺序未约定，多个关注方并发订阅时行为不确定；</p>\n<ul><li>其二，未处理\"观察者抛异常导致状态更新中断\"的异常路径。</li><li>工程师把这两点写入提示词（\"按订阅顺序通知、观察者异常隔离\"）后生成第二版，补齐了顺序通知与异常捕获，经单元测试（模拟新增关注方、注入异常）验证后进入基线。</li></ul>\n<ul><li>这个实例说明两点：AI 生成的第一版往往\"结构对而契约缺\"——模式骨架标准，但边界与异常路径这类非模式本身的细节仍需补全；</li><li>把\"意图 + 变化点\"与评审清单写进提示词，能显著提高首版质量。</li><li>与纯人工相比，效率提升集中在接口设计与样板代码，而\"模式动机的判断与权衡把关\"始终属于人——评审清单不是流程摆设，而是把人的经验外化，供 AI 生成、工程师审查共同使用。</li></ul>\n<h3>模式与 AI 的要点对照</h3>\n<ul><li>设计模式是 AI 代码生成最擅长复用的知识，也是过度设计的高发区。</li><li>模式的四要素——名称、问题、解决方案与效果——共同决定了模式的价值边界。</li><li>评审 AI 生成的模式代码，可对照以下清单。</li></ul>\n<table><thead><tr><th>评审检查项</th><th>说明</th></tr></thead><tbody><tr><td>变化点是否真实存在</td><td>是否存在可独立变化、且变化频率可预期的点</td></tr><tr><td>模式结构是否符合标准</td><td>参与者、关系与协作是否贴合标准结构</td></tr><tr><td>是否引入无用抽象</td><td>是否存在无使用者的接口或抽象类</td></tr><tr><td>是否有可替代的简单方案</td><td>能否用更简单的结构达成同样目的</td></tr><tr><td>是否说明权衡与代价</td><td>模式带来效果上的\"有得有失\"</td></tr></tbody></table>",
+      "narration": "继续讨论AI 生成模式代码的实践。让 AI 可靠地生成模式代码，关键在于提示词中给出足够的结构信息。一个常用的做法是\"意图 + 变化点\"式描述：不仅告诉模型\"用观察者模式\"，还说明\"库存变化时多个界面需要同步更新，且后续可能新增关注方\"，模型据此生成的代码才能贴合并可维护。"
+    },
+    {
+      "id": "chapter05-39",
+      "type": "section",
+      "title": "AI 生成模式代码的实践（续）",
+      "body": "<p class=\"lead\">设计模式的四要素结构如图所示。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0800-pattern-elements.svg\" alt=\"\" style=\"width:60%\"></div>\n<ul><li>对 AI 生成模式代码的评审应当双向进行：一方面要求 AI 优先给出最简单满足需求的方案、仅在指明变化点时引入模式；</li><li>另一方面让 AI 对照\"是否过度设计\"的检查清单扫描已有代码，把模式的应用建立在变化点真实性的判断之上。</li></ul>\n<h3>前沿演进：模式知识库与 AI 驱动的重构</h3>\n<ul><li>模式知识的前沿实践是把团队沉淀的模式实例、适用场景与权衡记录组织为<strong>可检索的知识库</strong>，通过 RAG 让 AI 基于团队自己的经验生成建议，而非仅凭通用训练数据。</li><li>同时，AI 驱动的重构（自动识别重复结构、坏味道，生成重构方案）把\"模式应用\"从人工判断推向自动化辅助；</li><li>架构重构（模块化拆分、依赖清理）也借助 AI 的全局分析能力。</li></ul>",
+      "narration": "继续讨论AI 生成模式代码的实践。让 AI 可靠地生成模式代码，关键在于提示词中给出足够的结构信息。一个常用的做法是\"意图 + 变化点\"式描述：不仅告诉模型\"用观察者模式\"，还说明\"库存变化时多个界面需要同步更新，且后续可能新增关注方\"，模型据此生成的代码才能贴合并可维护。"
+    },
+    {
+      "id": "chapter05-40",
+      "type": "section",
+      "title": "AI 生成模式代码的实践（续）",
+      "body": "<table><thead><tr><th>实践</th><th>做法</th><th>价值</th></tr></thead><tbody><tr><td>实例沉淀</td><td>记录成功/失败模式案例</td><td>经验可复用</td></tr><tr><td>知识入库</td><td>向量化并索引</td><td>支撑 RAG 检索</td></tr><tr><td>按需检索</td><td>生成时按变化点检索</td><td>建议贴合团队</td></tr><tr><td>反馈闭环</td><td>新案例回流入库</td><td>知识持续生长</td></tr></tbody></table>\n<p class=\"lead\">模式知识库的检索增强闭环——从沉淀到反馈——如图所示。</p>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/0800-pattern-rag-loop.svg\" alt=\"\" style=\"width:85%\"></div>\n<ul><li>模式知识库把\"经验\"变成组织资产：团队的每一次重构、每一个成功或失败的模式应用都沉淀为知识，AI 生成的建议因此越来越贴合项目实际——知识库的质量，取决于团队沉淀与校验的纪律。</li></ul>",
+      "narration": "继续讨论AI 生成模式代码的实践。让 AI 可靠地生成模式代码，关键在于提示词中给出足够的结构信息。一个常用的做法是\"意图 + 变化点\"式描述：不仅告诉模型\"用观察者模式\"，还说明\"库存变化时多个界面需要同步更新，且后续可能新增关注方\"，模型据此生成的代码才能贴合并可维护。"
+    },
+    {
+      "id": "chapter05-41",
+      "type": "section",
       "title": "本章小结",
-      "body": "<p class=\"lead\">UML 是可视化建模的表示标准，由事物、关系与图三部分构成，结构图与行为图分别描述系统的静态结构与动态行为。智能建模把 LLM 引入模型生成、代码逆向与一致性校验，让\"画图\"变得廉价，但 NL2UML 生成的前提是\"先定语义后出符号\"——关系类型、多重性、消息顺序与状态条件必须在提示词中显式约束，生成结果须经关系合法性与状态完备性的可执行校验才能进入基线。</p>\n<ul><li>模型是思考与沟通的工具，AI 时代它以文本形式存在，成为与代码同级、可版本化可校验的工程资产；</li><li>语义边界与决策沉淀仍属于人。</li></ul>\n<ul><li><strong>思考与讨论：</strong> 1. 为什么 NL2UML 生成必须\"先定语义后出符号\"？</li><li>不给语义约束会得到什么结果？</li><li>2. 请用本章的建模校验清单检查一个你熟悉系统的类图与状态图，看看会发现哪些问题。</li></ul>",
-      "narration": "本章小结。UML 是可视化建模的表示标准，由事物、关系与图构成，结构图和行为图分别描述系统的静态结构与动态行为。智能建模让画图变得廉价，但 NL2UML 的前提是先定语义、后出符号，生成结果必须经过可执行校验才能进入基线。人机协同、验证优先：AI 负责符号转换，语义边界与决策沉淀仍属于人。"
+      "body": "<p class=\"lead\">软件设计基于分析模型追求高内聚、低耦合，涵盖设计原理、体系结构设计与面向对象设计；智能化设计让 AI 参与候选生成、权衡分析与文档同步，可演化架构以适应度函数把架构治理迁移到持续验证。</p>\n<ul><li>设计模式是从成功实践总结的常见问题解决方案，四要素决定其价值边界；</li><li>AI 生成模式代码需经质量门禁把关，过度设计需要双向纪律约束，变化点真实性是引入模式的唯一理由。</li><li>两者的共同原则：AI 生成候选与初稿，人负责架构判断与变化点裁决——验证优先，决策在人。</li></ul>\n<ul><li><strong>思考与讨论：</strong> 1. 为什么体系结构风格这类\"系统命运级\"决策必须由人拍板，而参数默认值这类细节可以交给 AI？</li><li>2. 请分别为\"候选设计方案生成\"与\"从问题描述推荐模式\"编写一条提示词，并说明如何保证其中约束真实、避免过度设计。</li><li>3. 若 AI 生成的候选方案\"看似合理实则不可行\"，你会用什么方法识别并规避？</li></ul>",
+      "narration": "本章小结。软件设计基于分析模型追求高内聚、低耦合，涵盖设计原理、体系结构设计与面向对象设计；智能化设计让 AI 参与候选生成、权衡分析与文档同步，可演化架构以适应度函数把架构治理迁移到持续验证。"
     }
   ]
 };

@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 20,
   "slug": "unit-20",
@@ -8,7 +7,7 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "",
   "chapters": [
-    "第11章　软件演化与软件质量"
+    "第7章　软件演化与质量保证"
   ],
   "subtitle": "",
   "count": 36,
@@ -18,14 +17,14 @@ window.SLIDES = {
       "type": "title",
       "title": "第20节　软件演化、维护与再工程",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 20 节《软件演化、维护与再工程》。本节建议用时 60 分钟。我们将理解软件演化的规律，掌握维护的四种类型，并了解再工程与逆向工程的目的与方法。"
+      "narration": ""
     },
     {
       "id": "unit20-1",
       "type": "section",
       "title": "软件演化的规律（概述）",
       "body": "<p class=\"lead\">软件演化是一种循环过程：环境变化产生软件修改，软件修改又继续促进环境变化。Lehman 的软件演化定律揭示了几个重要事实：软件的不断修改会导致软件退化（修改引入新错误、故障率升高）；</p>",
-      "narration": "软件演化是环境变化与软件修改相互促进的循环过程。Lehman 定律揭示：不断修改会导致软件退化，开发效率与人员数量无关，新功能添加会带来新缺陷。软件维护做局部变更，软件再工程则重新设计编码部分模块，提高可维护性。"
+      "narration": "设计的基本原理有模块化、模块独立、复用和启发规则四个方面。模块化通过抽象、逐步求精与信息隐藏组织模块层次；模块独立用耦合性度量子系统之间的关联、内聚性度量子系统内部的相关，耦合越松、内聚越高越易维护。复用则强调类级、构件级与方法的代码复用。"
     },
     {
       "id": "unit20-2",
@@ -38,7 +37,7 @@ window.SLIDES = {
       "id": "unit20-3",
       "type": "section",
       "title": "软件演化的规律（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-11/images/chap01-software-fauler.png\" alt=\"\" style=\"width:50%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap01-software-fauler.png\" alt=\"\" style=\"width:50%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -67,7 +66,7 @@ window.SLIDES = {
       "type": "section",
       "title": "软件维护（概述）",
       "body": "<p class=\"lead\">软件维护是软件投入运行后对软件产品进行的修改，分为三类：</p>",
-      "narration": "软件维护是软件投入运行后对其进行的修改，分为三类：改正性维护，修改缺陷；适应性维护，适应硬件与操作系统变化；完善性维护，增加或修改功能适应业务变化。广义上还有预防性维护，改进可维护性、防止未来退化。"
+      "narration": "接着看耦合与内聚的分级。内聚性自低到高分为偶然、逻辑、时间、过程、通信、顺序、功能七类，功能性内聚最优；耦合性由弱到强同样分为七级，非直接耦合最弱。模块结构用扇入扇出度量，扇出过大说明模块职责过多、依赖面过宽，扇入过高则说明模块被过度共享，启发规则中的扇入扇出适当正是对这两个度量的约束。"
     },
     {
       "id": "unit20-8",
@@ -80,7 +79,7 @@ window.SLIDES = {
       "id": "unit20-9",
       "type": "section",
       "title": "软件维护（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-11/images/chap11-evolution-01.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap11-evolution-01.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -122,7 +121,7 @@ window.SLIDES = {
       "id": "unit20-15",
       "type": "section",
       "title": "软件维护（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-11/images/1102-maintenance-cost.svg\" alt=\"\" style=\"width:70%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-11/images/chap11-evolution-02.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/1102-maintenance-cost.svg\" alt=\"\" style=\"width:70%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap11-evolution-02.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -136,7 +135,7 @@ window.SLIDES = {
       "id": "unit20-17",
       "type": "section",
       "title": "软件维护（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-11/images/chap11-evolution-04.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap11-evolution-04.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -144,13 +143,13 @@ window.SLIDES = {
       "type": "section",
       "title": "软件再工程与逆向工程（概述）",
       "body": "<p class=\"lead\"><strong>软件再工程</strong>重新构造或编写现有系统的一部分或全部而不改变其功能，目的是使系统更易维护。其优势在于降低风险（重新开发在用的系统风险很高）与降低成本（再工程比重新开发便宜得多）。</p>",
-      "narration": "软件再工程重新构造现有系统而不改变功能，以降低风险、降低成本。逆向工程以复原规格说明与设计为目标，弥补文档缺失。遗留系统再工程常面临文档不充分、业务规则藏在代码里等困难，投入前应综合系统质量与业务价值评估。"
+      "narration": "这张表把几种典型风格做了对照。仓库知识库适合编译器与 CASE 工具，MVC 适合同一模型多视图的交互系统，控制结构适合事件驱动系统，客户机服务器适合分布式业务系统，分层体系结构适合表示、逻辑、存储分离的系统。分层体系结构中的模块按单向依赖组织，各层依赖关系如图所示。"
     },
     {
       "id": "unit20-19",
       "type": "section",
       "title": "软件再工程与逆向工程（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-11/images/chap11-evolution-05.png\" alt=\"\" style=\"width:55%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-11/images/chap11-evolution-06.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap11-evolution-05.png\" alt=\"\" style=\"width:55%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap11-evolution-06.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -172,7 +171,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：遗留系统的维护困境（概述）",
       "body": "<p class=\"lead\"><strong>遗留系统</strong>（legacy system）指仍在运行、但维护成本极高的旧系统。一个典型的场景是：银行存贷款核心业务仍运行在数十年历史的 COBOL 体系上，这是行业中的普遍现实，而非个别现象。</p>",
-      "narration": "遗留系统指仍在运行、但维护成本极高的旧系统，比如银行核心业务仍运行在数十年历史的 COBOL 体系上。这类系统的共同特征是：懂它的人越来越少，文档缺失或过时，改动如履薄冰。它们风险大，却恰恰最不能停机。"
+      "narration": "高内聚、低耦合不是抽象口号，而是能在类图上直接判断的性质。以订单处理需求为例，同一需求有两种设计方案：坏设计把校验、计价、更新、开账全部塞进一个订单服务类，类职责混杂、改动一处影响处处，属于低内聚与内容耦合；好设计拆为库存校验、价格计算、库存更新、账单生成四个各司其职的类，彼此经接口依赖、可独立替换，每个类高内聚，模块间仅经接口通信，属于低耦合。"
     },
     {
       "id": "unit20-23",
@@ -200,7 +199,7 @@ window.SLIDES = {
       "type": "section",
       "title": "故事：Y2K 全球维护战役（概述）",
       "body": "<p class=\"lead\">二十世纪七八十年代写下的程序，普遍用<strong>两位数字</strong>保存年份——\"99\"表示 1999。2000 年临近时，人们猛然意识到：跨过世纪之交，\"00\"会被程序误读为 1900，日期计算全面错乱，利息、账龄、排程都可能崩溃。</p>",
-      "narration": "七八十年代的程序普遍用两位数字存年份，2000 年临近时人们意识到，00 会被误读为 1900，日期计算全面错乱，这就是千年虫危机。各国按清查、改造、测试、过渡四步推进，全球投入的改造成本数以百亿美元计。"
+      "narration": "体系结构风格没有绝对优劣，只有是否匹配场景，选型由非功能需求推动。高并发读多写少适合分层体系结构加缓存，读路径与写路径分离、可独立扩容；强一致性交易适合客户机服务器三层加集中式控制，便于服务端管控事务边界；快速迭代原型适合 MVC，改界面不动模型、便于频繁试错。同一系统不同子系统的非功能需求不同，选型亦可混合。"
     },
     {
       "id": "unit20-27",
@@ -242,7 +241,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：重构还是重写（概述）",
       "body": "<p class=\"lead\">面对一个难以维护的模块，工程师常纠结于<strong>重构</strong>还是<strong>重写</strong>。这本质是一次风险与收益的权衡，典型决策依据如下表所示。</p>",
-      "narration": "面对难以维护的模块，工程师常纠结于重构还是重写，这本质是风险与收益的权衡。一般认为，能读懂就重构，读不懂才考虑重写；先补测试再重构是稳妥流程，先用用例锁定行为，再小步重构、每步回归。"
+      "narration": "典型互联网公司的架构大多从小而美的单体应用逐步拆分为微服务，推动力量是规模、团队与部署频率。单体阶段一个应用部署即上线，但随代码量增长，一次部署牵连所有模块、改动牵一发动全身；拆分阶段按业务能力拆为微服务，各服务独立开发、独立部署、独立扩容。但拆分只是权衡而非银弹，本地事务变成分布式事务，运维也从管一个应用变成管数十个服务。"
     },
     {
       "id": "unit20-33",

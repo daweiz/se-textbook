@@ -2,8 +2,8 @@
 //
 // 用法：node slides/tools/verify.js
 // 校验内容：
-//   1. 章节清单与数据文件一一对应（19 章）；每张幻灯片 id 唯一、type 合法、旁白非空
-//   2. 小节清单共 32 节；每节数据字段一致、时长 ∈ [35,60]、含封面片、旁白完整
+//   1. 章节清单与数据文件一一对应（16 章）；每张幻灯片 id 唯一、type 合法、旁白非空
+//   2. 小节清单共 37 节；每节数据字段一致、时长 ∈ [35,60]、含封面片、旁白完整
 //   3. 数据中引用的每张图片在书稿 src/chapter-NN/images/ 下真实存在
 //   4. 每节讲解 deck 页数 ≥ 30（内容片覆盖数由 tools/units.js 与章节数据动态对照，不重不漏）
 // 全部通过输出"校验通过"并返回 0；否则输出问题清单并返回 1。
@@ -87,7 +87,7 @@ function main() {
     console.error('[清单] ' + e.message);
     process.exit(1);
   }
-  if (manifest.length !== 19) fail(`章节清单应有 19 章，实际 ${manifest.length} 章`);
+  if (manifest.length !== 16) fail(`章节清单应有 16 章，实际 ${manifest.length} 章`);
 
   for (const entry of manifest) {
     let d;
@@ -117,7 +117,7 @@ function main() {
     console.error('[小节清单] ' + e.message);
     process.exit(1);
   }
-  if (unitManifest.length !== 32) fail(`小节清单应有 32 节，实际 ${unitManifest.length} 节`);
+  if (unitManifest.length !== 37) fail(`小节清单应有 37 节，实际 ${unitManifest.length} 节`);
 
   for (const entry of unitManifest) {
     let d;

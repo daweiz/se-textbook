@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 25,
   "slug": "unit-25",
@@ -8,24 +7,24 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "交流",
   "chapters": [
-    "第13章　软件项目管理"
+    "第8章　软件项目管理"
   ],
   "subtitle": "",
-  "count": 54,
+  "count": 62,
   "slides": [
     {
       "id": "unit25-cover",
       "type": "title",
       "title": "第25节　配置管理与智能化项目管理",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 25 节《配置管理与智能化项目管理》。本节建议用时 60 分钟，欢迎交流。我们将理解软件配置管理中的版本控制、变更管理与基线，并了解智能化项目管理如何辅助决策。"
+      "narration": ""
     },
     {
       "id": "unit25-1",
       "type": "section",
       "title": "软件配置管理（概述）",
       "body": "<p class=\"lead\">软件在变化过程中产生新版本，配置管理是一种标识、组织和控制修改的技术。<strong>配置项</strong>是为配置管理而作为单独实体处理的工作产品；</p>",
-      "narration": "接下来看软件配置管理。配置管理是一种标识、组织和控制修改的技术。配置项是作为单独实体处理的工作产品；基线是已通过正式复审、可作为开发基础的中间产品，只有经正式变更控制才能改变。配置管理活动包括配置项标识、版本管理、系统构建与变更控制。"
+      "narration": "面对二十三个模式，过去工程师靠记忆与经验完成问题与模式的匹配，AI 辅助则把这一步变成可复用的工作流，工程师的角色从背模式目录转向验证模式动机。工作流包括描述问题与变化点、映射候选模式、对照权衡等步骤。"
     },
     {
       "id": "unit25-2",
@@ -38,7 +37,7 @@ window.SLIDES = {
       "id": "unit25-3",
       "type": "section",
       "title": "软件配置管理（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-13/images/chap13-management-conf-03.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/chap13-management-conf-03.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -52,7 +51,7 @@ window.SLIDES = {
       "id": "unit25-5",
       "type": "section",
       "title": "软件配置管理（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-13/images/chap13-management-conf-08.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/chap13-management-conf-08.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -60,7 +59,7 @@ window.SLIDES = {
       "type": "section",
       "title": "智能化管理（概述）",
       "body": "<p class=\"lead\">AI 正在重塑项目管理的多个环节：根据历史数据与功能点<strong>自动估算</strong>规模与成本；分析风险清单与项目状态<strong>预测</strong>风险并推荐应对策略；</p>",
-      "narration": "再看智能化管理。AI 正在重塑项目管理的多个环节：自动估算规模成本、预测风险并推荐应对、生成进展报告、在 CI/CD 中自动构建测试发布。核心变化是把管理者的精力从收集信息转向做出决策；智能估算的价值在于把估算从拍脑袋推向有依据。"
+      "narration": "以报表导出为例：导出格式会不断新增，须在不改报表逻辑的前提下扩展，AI 据此推荐策略模式；若只写类之间耦合太高，模型就可能给出不相关的候选。质量门禁则按静态检查、结构校验等关卡把关。"
     },
     {
       "id": "unit25-7",
@@ -108,7 +107,7 @@ window.SLIDES = {
       "id": "unit25-13",
       "type": "section",
       "title": "智能化管理（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-13/images/1301-ai-mgmt.svg\" alt=\"\" style=\"width:85%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/1301-ai-mgmt.svg\" alt=\"\" style=\"width:85%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -200,7 +199,7 @@ window.SLIDES = {
       "type": "section",
       "title": "智能化管理实践（概述）",
       "body": "<p class=\"lead\">智能化管理的落地工具覆盖项目管理的各个环节：</p>",
-      "narration": "接着看智能化管理实践。落地工具覆盖项目管理各环节：项目助理生成任务分解与周报，智能估算与计划给出规模成本区间、与传统模型交叉校验，风险仪表盘持续监控并自动告警，配置与发布自动化把构建测试发布固化为流水线、变更控制保留人工审批。"
+      "narration": "AI 推荐观察者模式，理由是关注方集合可以独立扩展，并生成了 OrderObserver 接口与遍历通知的骨架代码。对照评审清单发现，通知顺序与观察者抛异常两处契约细节缺失；写入提示词补齐后，经单元测试验证进入基线。"
     },
     {
       "id": "unit25-27",
@@ -227,7 +226,7 @@ window.SLIDES = {
       "id": "unit25-30",
       "type": "section",
       "title": "智能化管理实践（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-13/images/1300-mgmt-assistant.svg\" alt=\"\" style=\"width:65%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/1300-mgmt-assistant.svg\" alt=\"\" style=\"width:65%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -318,7 +317,7 @@ window.SLIDES = {
       "id": "unit25-43",
       "type": "section",
       "title": "智能化管理实践（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-13/images/1300-estimate-cross-check.svg\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/1300-estimate-cross-check.svg\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -353,7 +352,7 @@ window.SLIDES = {
       "id": "unit25-48",
       "type": "section",
       "title": "智能化管理实践（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-13/images/1300-dora-loop.svg\" alt=\"\" style=\"width:75%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/1300-dora-loop.svg\" alt=\"\" style=\"width:75%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -366,19 +365,75 @@ window.SLIDES = {
     {
       "id": "unit25-50",
       "type": "section",
-      "title": "本章小结（概述）",
-      "body": "<p class=\"lead\">软件项目管理以计划、组织和控制达成成本、进度与质量目标。沟通渠道公式与估算模型揭示了\"控制变化、降低复杂性\"的数量化根源；</p>",
-      "narration": "本章小结。软件项目管理以计划、组织和控制达成成本、进度与质量目标。智能管理把 AI 引入估算、进度、风险与度量全流程：AI 把信息与选项准备好，管理者做最后判断并承担后果；采纳率、交付周期、缺陷率等指标用于改进而非考核，呼应了本章强调的智能管理边界。"
+      "title": "项目复盘与度量闭环（概述）",
+      "body": "<p class=\"lead\">度量与改进之间需要一道闭环：度量揭示瓶颈之后，只有经过<strong>项目复盘</strong>转化为行动，改进才会真正发生。项目复盘（retrospective）是迭代或里程碑结束时，团队共同回顾\"哪些做得好、哪些可以改进、下一轮尝试什么\"，并产出可执行改进项的例行活动。</p>",
+      "narration": "项目复盘与度量闭环。度量与改进之间需要一道闭环：度量揭示瓶颈之后，只有经过项目复盘转化为行动，改进才会真正发生。项目复盘（retrospective）是迭代或里程碑结束时，团队共同回顾\"哪些做得好、哪些可以改进、下一轮尝试什么\"，并产出可执行改进项的例行活动。"
     },
     {
       "id": "unit25-51",
+      "type": "section",
+      "title": "项目复盘与度量闭环（要点）",
+      "body": "<ul><li>它与事后追责不同：复盘面向整体过程而非单一事件，目的是持续改进而非追究责任。</li><li>常用复盘方法各有侧重，如下表所示。</li></ul>",
+      "narration": "本页要点：它与事后追责不同：复盘面向整体过程而非单一事件，目的是持续改进而非追究责任。 常用复盘方法各有侧重，如下表所示。。"
+    },
+    {
+      "id": "unit25-52",
+      "type": "section",
+      "title": "项目复盘与度量闭环（表格）",
+      "body": "<table><thead><tr><th>复盘方法</th><th>做法</th><th>产出</th><th>适用场景</th></tr></thead><tbody><tr><td>时间线复盘</td><td>按时间顺序回顾关键事件与转折点</td><td>关键决策与失误清单</td><td>里程碑或阶段结束</td></tr><tr><td>KPT 复盘</td><td>分保持（Keep）/ 问题（Problem）/ 尝试（Try）三栏讨论</td><td>下一步行动清单</td><td>迭代周期结束，最常用</td></tr><tr><td>五个为什么</td><td>对问题连续追问\"为什么\"直至根因</td><td>根因与预防措施</td><td>单个问题的深入分析</td></tr></tbody></table>",
+      "narration": "请看这张表，它概括了本节的关键信息。"
+    },
+    {
+      "id": "unit25-53",
+      "type": "section",
+      "title": "项目复盘与度量闭环（要点 2）",
+      "body": "<ul><li>复盘必须落到<strong>行动项</strong>：每条改进都有负责人、时限与验证方式，并在下一轮复盘时复核完成情况。</li><li>没有行动项与复核的复盘，会退化为\"谈谈感想\"。</li></ul>",
+      "narration": "本页要点：复盘必须落到 行动项 ：每条改进都有负责人、时限与验证方式，并在下一轮复盘时复核完成情况。 没有行动项与复核的复盘，会退化为\"谈谈感想\"。。"
+    },
+    {
+      "id": "unit25-54",
+      "type": "section",
+      "title": "项目复盘与度量闭环（要点 3）",
+      "body": "<ul><li><strong>度量仪表盘</strong>把分散的度量结果集中呈现，让团队随时看见\"健康度\"而非仅在报告期看到数字。</li><li>进度（SPI/CPI 与里程碑偏差）、质量（缺陷密度与测试通过率）、效能（DORA 四指标）与成本，是仪表盘最常监控的四类指标；</li><li>仪表盘的价值不在指标多少，而在<strong>口径统一与及时刷新</strong>——数据失真或过期，监控就退化为\"自我安慰\"。</li></ul>",
+      "narration": "本页要点：度量仪表盘 把分散的度量结果集中呈现，让团队随时看见\"健康度\"而非仅在报告期看到数字。 进度（SPI/CPI 与里程碑偏差）、质量（缺陷密度与测试通过率）、效能（DORA 四指标）与成本，是仪表盘最常监控的四类指标； 仪表盘的价值不在指标多少，而在 口径统一与及时刷新 ——数据失真或过期，监控就退化为\"自我安慰\"。。"
+    },
+    {
+      "id": "unit25-55",
+      "type": "section",
+      "title": "项目复盘与度量闭环（要点 4）",
+      "body": "<ul><li>AI 让闭环更容易运转：依据燃尽图与历史速度<strong>预测</strong>交付日期，按阈值持续<strong>预警</strong>超限风险，从<strong>会议纪要</strong>自动提取\"决策—行动项—责任人\"，并在<strong>知识沉淀</strong>中把决策原因与经验教训结构化保存、供后续迭代复用。</li><li>但复盘的实质是团队面对面的坦诚讨论——AI 只把材料准备好，改进承诺仍由人做出。</li></ul>",
+      "narration": "本页要点：AI 让闭环更容易运转：依据燃尽图与历史速度 预测 交付日期，按阈值持续 预警 超限风险，从 会议纪要 自动提取\"决策—行动项—责任人\"，并在 知识沉淀 中把决策原因与经验教训结构化保存、供后续迭代复用。 但复盘的实质是团队面对面的坦诚讨论——AI 只把材料准备好，改进承诺仍由人做出。。"
+    },
+    {
+      "id": "unit25-56",
+      "type": "section",
+      "title": "项目复盘与度量闭环（要点 5）",
+      "body": "<ul><li>度量—复盘—行动—再度量构成的闭环，是项目管理\"控制变化\"在过程层面的落地：每一轮循环都让估算更准、风险更明、协作更顺，如图所示。</li></ul>",
+      "narration": "本页要点：度量—复盘—行动—再度量构成的闭环，是项目管理\"控制变化\"在过程层面的落地：每一轮循环都让估算更准、风险更明、协作更顺，如图所示。。"
+    },
+    {
+      "id": "unit25-57",
+      "type": "section",
+      "title": "项目复盘与度量闭环（图示）",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/1301-retro-loop.svg\" alt=\"\" style=\"width:55%\"></div>",
+      "narration": "请看本页图示，帮助理解本节内容。"
+    },
+    {
+      "id": "unit25-58",
+      "type": "section",
+      "title": "本章小结（概述）",
+      "body": "<p class=\"lead\">软件项目管理以计划、组织和控制达成成本、进度与质量目标。沟通渠道公式与估算模型揭示了\"控制变化、降低复杂性\"的数量化根源；</p>",
+      "narration": "本章小结。软件项目管理以计划、组织和控制达成成本、进度与质量目标。沟通渠道公式与估算模型揭示了\"控制变化、降低复杂性\"的数量化根源；"
+    },
+    {
+      "id": "unit25-59",
       "type": "section",
       "title": "本章小结（要点）",
       "body": "<ul><li>风险识别与配置管理把不确定性变成可处置的清单。</li><li>智能管理把 AI 引入估算、进度、风险与度量全流程：AI 把信息与选项准备好，管理者做最后的判断并承担后果。</li><li>采纳率、交付周期、缺陷率等指标用于改进而非考核；</li></ul>",
       "narration": "本页要点：风险识别与配置管理把不确定性变成可处置的清单。 智能管理把 AI 引入估算、进度、风险与度量全流程：AI 把信息与选项准备好，管理者做最后的判断并承担后果。 采纳率、交付周期、缺陷率等指标用于改进而非考核；。"
     },
     {
-      "id": "unit25-52",
+      "id": "unit25-60",
       "type": "section",
       "title": "本章小结（要点 2）",
       "body": "<ul><li><strong>思考与讨论：</strong> 1. 为什么 AI 估算应给出区间而非点值？</li><li>它与专家判断互为校验的价值在哪里？</li><li>2. 用本章的风险识别模板分析一个你熟悉的项目，AI 的产出与你的人工判断有何异同？</li></ul>",
@@ -388,8 +443,8 @@ window.SLIDES = {
       "id": "unit25-end",
       "type": "section",
       "title": "本节小结",
-      "body": "<ul><li>软件配置管理</li><li>智能化管理</li><li>智能化管理实践</li><li>本章小结</li></ul>",
-      "narration": "本节主要内容就介绍到这里，我们依次学习了：软件配置管理、智能化管理、智能化管理实践、本章小结。"
+      "body": "<ul><li>软件配置管理</li><li>智能化管理</li><li>智能化管理实践</li><li>项目复盘与度量闭环</li><li>本章小结</li></ul>",
+      "narration": "本节主要内容就介绍到这里，我们依次学习了：软件配置管理、智能化管理、智能化管理实践、项目复盘与度量闭环、本章小结。"
     }
   ]
 };

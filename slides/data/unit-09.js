@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 9,
   "slug": "unit-09",
@@ -8,7 +7,7 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "",
   "chapters": [
-    "第5章　统一建模语言 UML"
+    "第3章　需求工程与用例建模"
   ],
   "subtitle": "",
   "count": 68,
@@ -18,20 +17,20 @@ window.SLIDES = {
       "type": "title",
       "title": "第9节　UML 构成、图与 AI 辅助建模",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 9 节《UML 构成、图与 AI 辅助建模》。本节建议用时 60 分钟。我们将掌握 UML 的构成，认识用例图、类图、顺序图等核心图，并了解 AI 如何辅助建模。"
+      "narration": ""
     },
     {
       "id": "unit09-1",
       "type": "section",
       "title": "UML 的构成（概述）",
       "body": "<p class=\"lead\">UML 由三部分构成：<strong>事物</strong>（things）、<strong>关系</strong>（relationships）与<strong>图</strong>（diagrams）。</p>",
-      "narration": "UML 由三部分构成：事物、关系与图。事物表示系统中的元素，分为结构事物、行为事物、分组事物和注释事物四类。类是最核心的结构事物，属性写作可见性、名称、类型和默认值，操作写作可见性、名称、参数和返回类型，可见性包括公有的加号、受保护的和私有的减号。关系表示元素之间如何连接，包括关联、依赖、泛化和实现四类。"
+      "narration": "UML 的构成。UML 由三部分构成：事物（things）、关系（relationships）与图（diagrams）。"
     },
     {
       "id": "unit09-2",
       "type": "section",
       "title": "UML 的构成（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-03.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-03.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -45,7 +44,7 @@ window.SLIDES = {
       "id": "unit09-4",
       "type": "section",
       "title": "UML 的构成（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-04.png\" alt=\"\" style=\"width:50%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-04.png\" alt=\"\" style=\"width:50%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -59,7 +58,7 @@ window.SLIDES = {
       "id": "unit09-6",
       "type": "section",
       "title": "UML 的构成（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-12.png\" alt=\"\" style=\"width:50%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-15.png\" alt=\"\" style=\"width:50%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-12.png\" alt=\"\" style=\"width:50%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-15.png\" alt=\"\" style=\"width:50%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -87,7 +86,7 @@ window.SLIDES = {
       "id": "unit09-10",
       "type": "section",
       "title": "UML 的构成（图示 4）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0502-uml-diagram-types.svg\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/0502-uml-diagram-types.svg\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -95,7 +94,7 @@ window.SLIDES = {
       "type": "section",
       "title": "UML 的图（概述）",
       "body": "<p class=\"lead\">UML 2.0 定义了 13 种图，按视图可以分为三类：</p>",
-      "narration": "UML 2.0 定义了 13 种图，按视图分为三类：功能视图只有用例图，用于需求获取，也是测试的依据；结构视图包括类图、对象图、组件图和部署图，刻画静态结构和物理架构；行为视图包括顺序图、协作图、状态图和活动图，刻画动态行为与交互。其中用例图从系统外部描述功能需求，用例之间存在包含、扩展、泛化三种关系。"
+      "narration": "UML 的图。UML 2.0 定义了 13 种图，按视图可以分为三类："
     },
     {
       "id": "unit09-12",
@@ -115,7 +114,7 @@ window.SLIDES = {
       "id": "unit09-14",
       "type": "section",
       "title": "UML 的图（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-19.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-19.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -129,7 +128,7 @@ window.SLIDES = {
       "id": "unit09-16",
       "type": "section",
       "title": "UML 的图（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-25.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-25.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -143,7 +142,7 @@ window.SLIDES = {
       "id": "unit09-18",
       "type": "section",
       "title": "UML 的图（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-27.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-27.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -157,7 +156,7 @@ window.SLIDES = {
       "id": "unit09-20",
       "type": "section",
       "title": "UML 的图（图示 4）",
-      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-31.png\" alt=\"\" style=\"width:50%\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-34.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-31.png\" alt=\"\" style=\"width:50%\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-34.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -171,7 +170,7 @@ window.SLIDES = {
       "id": "unit09-22",
       "type": "section",
       "title": "UML 的图（图示 5）",
-      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-35.png\" alt=\"\" style=\"width:50%\"><img src=\"../src/chapter-05/images/chap04-model-03-uml-36.png\" alt=\"\" style=\"width:50%\"></div>",
+      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-35.png\" alt=\"\" style=\"width:50%\"><img src=\"../src/chapter-03/images/chap04-model-03-uml-36.png\" alt=\"\" style=\"width:50%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -179,7 +178,7 @@ window.SLIDES = {
       "type": "section",
       "title": "AI 辅助建模（概述）",
       "body": "<p class=\"lead\">传统建模依赖建模者逐图手工绘制，工作量大且容易与代码脱节。AI 辅助建模改变了这一局面：大语言模型可以从自然语言需求<strong>智能提取</strong>并生成用例图、类图与顺序图的初始版本；</p>",
-      "narration": "传统建模依赖建模者逐图手工绘制，工作量大且容易与代码脱节。AI 辅助建模改变了这一点：大语言模型可以从自然语言需求生成用例图、类图和顺序图的初始版本，从已有代码逆向生成 UML 模型，还能从模型生成测试用例和文档。人机协作的典型分工是：人类确定语义与边界，AI 完成符号转换与版本维护，把建模的重心从画图拉回思考。"
+      "narration": "AI 辅助建模。传统建模依赖建模者逐图手工绘制，工作量大且容易与代码脱节。AI 辅助建模改变了这一局面：大语言模型可以从自然语言需求智能提取并生成用例图、类图与顺序图的初始版本；"
     },
     {
       "id": "unit09-24",
@@ -213,7 +212,7 @@ window.SLIDES = {
       "id": "unit09-28",
       "type": "section",
       "title": "AI 辅助建模（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0500-model-sync.svg\" alt=\"\" style=\"width:80%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/0500-model-sync.svg\" alt=\"\" style=\"width:80%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -305,7 +304,7 @@ window.SLIDES = {
       "type": "section",
       "title": "智能建模实践（概述）",
       "body": "<p class=\"lead\">智能建模的常用载体是<strong>文本化建模语言</strong>：Mermaid 与 PlantUML 用文本描述图形结构，既便于版本管理，又天然适合由大模型生成——建模者用自然语言描述需求，LLM 输出对应的文本建模代码，再渲染为图形。实践要点如下：</p>",
-      "narration": "前沿的建模即代码实践，把模型作为文本形式的工程资产。生成链的各个环节是：模型文本化，用 Mermaid 或 PlantUML 源码表达；AI 从需求生成建模文本，降低门槛；渲染图形用于沟通；再生成代码和测试，在 CI 中自动校验。图形只是渲染视图，模型本身是可执行、可版本化、可校验的资产，这正是 AI 时代建模的核心形态。好，这就是第五章的内容，我们下一章见。"
+      "narration": "智能建模实践。智能建模的常用载体是文本化建模语言：Mermaid 与 PlantUML 用文本描述图形结构，既便于版本管理，又天然适合由大模型生成——建模者用自然语言描述需求，LLM 输出对应的文本建模代码，再渲染为图形。实践要点如下："
     },
     {
       "id": "unit09-42",
@@ -318,8 +317,8 @@ window.SLIDES = {
       "id": "unit09-43",
       "type": "section",
       "title": "智能建模实践（要点 2）",
-      "body": "<ul><li>模型一致性校验与形式化方法一脉相承，第 12 章将讨论 OCL 约束如何与形式化验证结合。</li><li>就本章而言，记住建模的初衷即可：模型是思考与沟通的工具，AI 让\"画图\"变得廉价，从而把建模者的精力还给\"想清楚\"。</li><li>常用文本化建模语言的对比如下表所示。</li></ul>",
-      "narration": "本页要点：模型一致性校验与形式化方法一脉相承，第 12 章将讨论 OCL 约束如何与形式化验证结合。 就本章而言，记住建模的初衷即可：模型是思考与沟通的工具，AI 让\"画图\"变得廉价，从而把建模者的精力还给\"想清楚\"。 常用文本化建模语言的对比如下表所示。。"
+      "body": "<ul><li>模型一致性校验与形式化方法一脉相承，第 7 章将讨论 OCL 约束如何与形式化验证结合。</li><li>就本章而言，记住建模的初衷即可：模型是思考与沟通的工具，AI 让\"画图\"变得廉价，从而把建模者的精力还给\"想清楚\"。</li><li>常用文本化建模语言的对比如下表所示。</li></ul>",
+      "narration": "本页要点：模型一致性校验与形式化方法一脉相承，第 7 章将讨论 OCL 约束如何与形式化验证结合。 就本章而言，记住建模的初衷即可：模型是思考与沟通的工具，AI 让\"画图\"变得廉价，从而把建模者的精力还给\"想清楚\"。 常用文本化建模语言的对比如下表所示。。"
     },
     {
       "id": "unit09-44",
@@ -339,7 +338,7 @@ window.SLIDES = {
       "id": "unit09-46",
       "type": "section",
       "title": "智能建模实践（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0501-text-modeling.svg\" alt=\"\" style=\"width:80%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/0501-text-modeling.svg\" alt=\"\" style=\"width:80%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -409,7 +408,7 @@ window.SLIDES = {
       "id": "unit09-56",
       "type": "section",
       "title": "智能建模实践（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0500-nl2uml.svg\" alt=\"\" style=\"width:65%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/0500-nl2uml.svg\" alt=\"\" style=\"width:65%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -451,7 +450,7 @@ window.SLIDES = {
       "id": "unit09-62",
       "type": "section",
       "title": "智能建模实践（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0500-model-as-code.svg\" alt=\"\" style=\"width:80%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/0500-model-as-code.svg\" alt=\"\" style=\"width:80%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -465,22 +464,22 @@ window.SLIDES = {
       "id": "unit09-64",
       "type": "section",
       "title": "本章小结（概述）",
-      "body": "<p class=\"lead\">UML 是可视化建模的表示标准，由事物、关系与图三部分构成，结构图与行为图分别描述系统的静态结构与动态行为。智能建模把 LLM 引入模型生成、代码逆向与一致性校验，让\"画图\"变得廉价，但 NL2UML 生成的前提是\"先定语义后出符号\"——关系类型、多重性、消息顺序与状态条件必须在提示词中显式约束，生成结果须经关系合法性与状态完备性的可执行校验才能进入基线。</p>",
-      "narration": "本章小结。UML 是可视化建模的表示标准，由事物、关系与图构成，结构图和行为图分别描述系统的静态结构与动态行为。智能建模让画图变得廉价，但 NL2UML 的前提是先定语义、后出符号，生成结果必须经过可执行校验才能进入基线。人机协同、验证优先：AI 负责符号转换，语义边界与决策沉淀仍属于人。"
+      "body": "<p class=\"lead\">本章先讲需求工程，再讲 UML，两者互为表里：需求工程决定系统\"是否做对了\"，涵盖获取、分析、规格说明、验证与管理五项活动，需求分业务、用户、系统三个层次，SRS 的质量由正确、无二义、完整等七项特性保证；UML 则把这些需求与设计建模表达为统一的图形符号，由事物、关系与图三部分构成，结构图与行为图分别描述静态结构与动态行为，用例建模正是连接两者的桥梁。</p>",
+      "narration": "本章小结。本章先讲需求工程，再讲 UML，两者互为表里：需求工程决定系统\"是否做对了\"，涵盖获取、分析、规格说明、验证与管理五项活动，需求分业务、用户、系统三个层次，SRS 的质量由正确、无二义、完整等七项特性保证；UML 则把这些需求与设计建模表达为统一的图形符号，由事物、关系与图三部分构成，结构图与行为图分别描述静态结构与动态行为，用例建模正是连接两者的桥梁。"
     },
     {
       "id": "unit09-65",
       "type": "section",
       "title": "本章小结（要点）",
-      "body": "<ul><li>模型是思考与沟通的工具，AI 时代它以文本形式存在，成为与代码同级、可版本化可校验的工程资产；</li><li>语义边界与决策沉淀仍属于人。</li></ul>",
-      "narration": "本页要点：模型是思考与沟通的工具，AI 时代它以文本形式存在，成为与代码同级、可版本化可校验的工程资产； 语义边界与决策沉淀仍属于人。。"
+      "body": "<ul><li>智能化让需求工程与建模都\"更快、更全\"——LLM 自动抽取需求、生成用例与模型初稿，但隐含需求、语义边界与业务判断仍需人工确认；</li><li>NL2UML 生成须\"先定语义后出符号\"，结果须经可执行校验才能进入基线。</li><li>需求即代码与建模即代码把需求、模型与测试连成可版本化、可机器校验的契约，\"需求是否真的符合用户利益\"与决策沉淀仍属于人。</li></ul>",
+      "narration": "本页要点：智能化让需求工程与建模都\"更快、更全\"——LLM 自动抽取需求、生成用例与模型初稿，但隐含需求、语义边界与业务判断仍需人工确认； NL2UML 生成须\"先定语义后出符号\"，结果须经可执行校验才能进入基线。 需求即代码与建模即代码把需求、模型与测试连成可版本化、可机器校验的契约，\"需求是否真的符合用户利益\"与决策沉淀仍属于人。。"
     },
     {
       "id": "unit09-66",
       "type": "section",
       "title": "本章小结（要点 2）",
-      "body": "<ul><li><strong>思考与讨论：</strong> 1. 为什么 NL2UML 生成必须\"先定语义后出符号\"？</li><li>不给语义约束会得到什么结果？</li><li>2. 请用本章的建模校验清单检查一个你熟悉系统的类图与状态图，看看会发现哪些问题。</li></ul>",
-      "narration": "本页要点：思考与讨论： 1. 为什么 NL2UML 生成必须\"先定语义后出符号\"？ 不给语义约束会得到什么结果？ 2. 请用本章的建模校验清单检查一个你熟悉系统的类图与状态图，看看会发现哪些问题。。"
+      "body": "<ul><li><strong>思考与讨论：</strong> 1. 为什么说 AI 扩大的是需求发现的\"覆盖面\"而非\"准确性\"？</li><li>结合需求抽取与 AI 辅助建模，举一个 AI 产出看似合理却遗漏业务规则或语义约束的例子。</li><li>2. 请设计一条从访谈记录生成需求条目与用例、或从自然语言生成类图与顺序图的提示词，并说明你设置了哪些检查项与原因。</li></ul>",
+      "narration": "本页要点：思考与讨论： 1. 为什么说 AI 扩大的是需求发现的\"覆盖面\"而非\"准确性\"？ 结合需求抽取与 AI 辅助建模，举一个 AI 产出看似合理却遗漏业务规则或语义约束的例子。 2. 请设计一条从访谈记录生成需求条目与用例、或从自然语言生成类图与顺序图的提示词，并说明你设置了哪些检查项与原因。。"
     },
     {
       "id": "unit09-end",

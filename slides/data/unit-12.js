@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 12,
   "slug": "unit-12",
@@ -8,7 +7,7 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "",
   "chapters": [
-    "第7章　软件设计"
+    "第5章　软件设计与设计模式"
   ],
   "subtitle": "",
   "count": 40,
@@ -18,14 +17,14 @@ window.SLIDES = {
       "type": "title",
       "title": "第12节　设计原理与体系结构设计",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 12 节《设计原理与体系结构设计》。本节建议用时 60 分钟。我们将掌握高内聚低耦合等设计原理，理解体系结构的核心要素与视图，并认识分层、微服务等经典风格。"
+      "narration": ""
     },
     {
       "id": "unit12-1",
       "type": "section",
       "title": "设计原理（概述）",
       "body": "<p class=\"lead\">设计的基本原理包括：</p>",
-      "narration": "设计的基本原理有模块化、模块独立、复用和启发规则四个方面。模块化通过抽象、逐步求精与信息隐藏组织模块层次；模块独立用耦合性度量子系统之间的关联、内聚性度量子系统内部的相关，耦合越松、内聚越高越易维护。复用则强调类级、构件级与方法的代码复用。"
+      "narration": "UML 由三部分构成：事物、关系与图。事物表示系统中的元素，分为结构事物、行为事物、分组事物和注释事物四类。类是最核心的结构事物，属性写作可见性、名称、类型和默认值，操作写作可见性、名称、参数和返回类型，可见性包括公有的加号、受保护的和私有的减号。关系表示元素之间如何连接，包括关联、依赖、泛化和实现四类。"
     },
     {
       "id": "unit12-2",
@@ -45,7 +44,7 @@ window.SLIDES = {
       "id": "unit12-4",
       "type": "section",
       "title": "设计原理（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap07-design-01.png\" alt=\"\" style=\"width:50%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap07-design-01.png\" alt=\"\" style=\"width:50%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -59,7 +58,7 @@ window.SLIDES = {
       "id": "unit12-6",
       "type": "section",
       "title": "设计原理（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap07-design-03.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap07-design-03.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -95,7 +94,7 @@ window.SLIDES = {
       "type": "section",
       "title": "体系结构设计（概述）",
       "body": "<p class=\"lead\">软件体系结构包括一组软件部件、部件的外部可见特性及其相互关系。体系结构设计的内容包括系统的总体组织与全局控制结构、通信与数据访问协议、设计元素的功能分配、非功能需求、物理部署以及备选方案的选择。</p>",
-      "narration": "软件体系结构包括一组软件部件、部件的外部可见特性及其相互关系。体系结构设计的内容包括总体组织与全局控制结构、通信与数据访问协议、功能分配、非功能需求与物理部署。典型的风格有仓库知识库结构，以中心数据库为核心，适合编译器与 CASE 工具。"
+      "narration": "UML 2.0 定义了 13 种图，按视图分为三类：功能视图只有用例图，用于需求获取，也是测试的依据；结构视图包括类图、对象图、组件图和部署图，刻画静态结构和物理架构；行为视图包括顺序图、协作图、状态图和活动图，刻画动态行为与交互。其中用例图从系统外部描述功能需求，用例之间存在包含、扩展、泛化三种关系。"
     },
     {
       "id": "unit12-12",
@@ -115,7 +114,7 @@ window.SLIDES = {
       "id": "unit12-14",
       "type": "section",
       "title": "体系结构设计（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap06-architecture-05.png\" alt=\"\" style=\"width:45%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap06-architecture-05.png\" alt=\"\" style=\"width:45%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -129,7 +128,7 @@ window.SLIDES = {
       "id": "unit12-16",
       "type": "section",
       "title": "体系结构设计（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap06-architecture-07.png\" alt=\"\" style=\"width:50%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap06-architecture-07.png\" alt=\"\" style=\"width:50%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -143,7 +142,7 @@ window.SLIDES = {
       "id": "unit12-18",
       "type": "section",
       "title": "体系结构设计（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap06-architecture-10.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap06-architecture-10.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -157,7 +156,7 @@ window.SLIDES = {
       "id": "unit12-20",
       "type": "section",
       "title": "体系结构设计（图示 4）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/chap06-architecture-11.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/chap06-architecture-11.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -185,7 +184,7 @@ window.SLIDES = {
       "id": "unit12-24",
       "type": "section",
       "title": "体系结构设计（图示 5）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-07/images/0703-dep-graph.svg\" alt=\"\" style=\"width:85%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0703-dep-graph.svg\" alt=\"\" style=\"width:85%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -193,7 +192,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：高内聚低耦合的两种设计（概述）",
       "body": "<p class=\"lead\"><strong>高内聚、低耦合</strong>不是抽象口号，而是能在类图上直接判断的性质。以“订单处理”需求为例：用户提交订单后，系统需校验库存、计算价格、更新库存并生成账单。</p>",
-      "narration": "高内聚、低耦合不是抽象口号，而是能在类图上直接判断的性质。以订单处理需求为例，同一需求有两种设计方案：坏设计把校验、计价、更新、开账全部塞进一个订单服务类，类职责混杂、改动一处影响处处，属于低内聚与内容耦合；好设计拆为库存校验、价格计算、库存更新、账单生成四个各司其职的类，彼此经接口依赖、可独立替换，每个类高内聚，模块间仅经接口通信，属于低耦合。"
+      "narration": "传统建模依赖建模者逐图手工绘制，工作量大且容易与代码脱节。AI 辅助建模改变了这一点：大语言模型可以从自然语言需求生成用例图、类图和顺序图的初始版本，从已有代码逆向生成 UML 模型，还能从模型生成测试用例和文档。人机协作的典型分工是：人类确定语义与边界，AI 完成符号转换与版本维护，把建模的重心从画图拉回思考。"
     },
     {
       "id": "unit12-26",
@@ -228,7 +227,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：体系结构风格选型（概述）",
       "body": "<p class=\"lead\">体系结构风格没有绝对优劣，只有是否匹配场景。以三类典型场景为例，选型由非功能需求推动，而非设计者的偏好。</p>",
-      "narration": "体系结构风格没有绝对优劣，只有是否匹配场景，选型由非功能需求推动。高并发读多写少适合分层体系结构加缓存，读路径与写路径分离、可独立扩容；强一致性交易适合客户机服务器三层加集中式控制，便于服务端管控事务边界；快速迭代原型适合 MVC，改界面不动模型、便于频繁试错。同一系统不同子系统的非功能需求不同，选型亦可混合。"
+      "narration": "智能建模的常用载体是文本化建模语言，比如 Mermaid 和 PlantUML。用文本描述图形结构，既便于版本管理，又天然适合由大模型生成。实践要点有三条：先定语义后生成符号，让模型输出可编译的建模文本；定期用代码逆向生成类图，与设计文档比对，防止模型与实现漂移；用 OCL 约束语言描述关键不变式，把人工看图升级为机器校验。"
     },
     {
       "id": "unit12-31",
@@ -249,7 +248,7 @@ window.SLIDES = {
       "type": "section",
       "title": "故事：从单体到微服务的演进（概述）",
       "body": "<p class=\"lead\">典型互联网公司的软件架构大多走过同一条路：先是小而美的单体应用，随业务增长逐渐拆分为微服务。推动演进的典型力量是规模、团队与部署频率。</p>",
-      "narration": "典型互联网公司的架构大多从小而美的单体应用逐步拆分为微服务，推动力量是规模、团队与部署频率。单体阶段一个应用部署即上线，但随代码量增长，一次部署牵连所有模块、改动牵一发动全身；拆分阶段按业务能力拆为微服务，各服务独立开发、独立部署、独立扩容。但拆分只是权衡而非银弹，本地事务变成分布式事务，运维也从管一个应用变成管数十个服务。"
+      "narration": "文本化建模的工作流，让模型以文本形式存在，天然可版本化、可评审、可被 LLM 生成与修改。这里要提醒几个常见误区：以为一句话就能生成模型是不对的，生成之前必须明确关联还是聚合、时序如何、状态条件是什么；结果必须经过可执行校验才能进入基线；模型也不该沦为代码的镜像，它要沉淀设计决策。"
     },
     {
       "id": "unit12-34",
@@ -270,7 +269,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：设计文档缺失的代价（概述）",
       "body": "<p class=\"lead\">体系结构设计的价值在项目正常运转时不显山露水，而在人员流动后彻底暴露。一个典型案例：某项目自启动起便没有留下体系结构记录，模块划分、依赖方向与关键权衡都只存在少数几位设计者的脑中。</p>",
-      "narration": "体系结构设计的价值在人员流动后彻底暴露。某项目自启动起便没有留下体系结构记录，模块划分与关键权衡只存在少数设计者的脑中；核心设计者陆续离职后，新工程师无人能回答订单与库存为何这样划分、依赖方向为何被刻意避免，只能反复试错，屡屡撞上当初绕开的坑。文档记录的不只是设计成什么样，更是为什么这样设计。"
+      "narration": "自然语言到 UML 的生成，质量控制靠两道闸门：语义约束和可执行校验。建模的初衷始终是，模型是思考与沟通的工具。AI 让画图变得廉价，从而把建模者的精力还给想清楚，语义边界、关系取舍与决策沉淀，这些仍然只能由人完成。"
     },
     {
       "id": "unit12-37",

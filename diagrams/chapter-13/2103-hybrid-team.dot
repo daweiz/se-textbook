@@ -1,0 +1,33 @@
+digraph G {
+    rankdir=LR;
+    labelloc="t";
+    label="人机混合团队与基础设施";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=1.0, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=10.5, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    subgraph cluster_h {
+        label="工程师·目标定义与把关";
+        style="rounded,dashed";
+        color="#2C5F8A";
+        h1 [label="定义目标\n与验收标准"];
+        h2 [label="审批高风险动作\n与审查关键产出"];
+    }
+
+    subgraph cluster_a {
+        label="智能体·高频可验证执行";
+        style="rounded,dashed";
+        color="#2C5F8A";
+        a1 [label="承担任务集\n原子任务"];
+        a2 [label="产出交付\n接受评测"];
+    }
+
+    hub [label="任务集·评测集\n·审批流\n（团队基础设施）", fillcolor="#2C5F8A", fontcolor="white"];
+
+    { rank=same; h1; hub; a1 }
+    hub -> a1 [label="派发"];
+    a1 -> hub [label="产出"];
+    hub -> h2 [style=dashed, color="#E8833A", fontcolor="#E8833A", label="审批"];
+    h2 -> a2 [label="批准/接管", style=dashed, color="#E8833A", fontcolor="#E8833A"];
+    a2 -> hub [label="评测回灌", style=dashed, color="#E8833A", fontcolor="#E8833A"];
+}

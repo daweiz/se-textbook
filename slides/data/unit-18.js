@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 18,
   "slug": "unit-18",
@@ -8,7 +7,7 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "讨论",
   "chapters": [
-    "第10章　软件测试"
+    "第6章　软件实现与测试"
   ],
   "subtitle": "",
   "count": 47,
@@ -18,14 +17,14 @@ window.SLIDES = {
       "type": "title",
       "title": "第18节　软件测试基础与测试技术",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 18 节《软件测试基础与测试技术》。本节建议用时 60 分钟，含讨论环节。我们将理解测试的基本概念与目标，掌握验证与确认、测试文档与过程，并了解单元、集成、系统测试与白盒黑盒技术。"
+      "narration": ""
     },
     {
       "id": "unit18-1",
       "type": "section",
       "title": "基本概念（概述）",
       "body": "<p class=\"lead\">测试领域有一组容易混淆的基本概念：<strong>错误</strong>（Error）是导致系统可能包含故障的人的行为，如输入错误、需求错误、设计错误；<strong>缺陷</strong>（Defect/Bug）是错误的表现；</p>",
-      "narration": "先理清一组容易混淆的概念。错误，是导致系统可能包含故障的人的行为，比如输入错误、需求错误、设计错误；缺陷，是错误的表现；故障，是系统规格说明与行为之间的偏差。验证回答我们是否在正确地制造产品，强调对过程的检验；确认回答我们是否在制造正确的产品，强调对结果的检验。软件测试的目的，是证明程序有错，而不是证明程序无错误；成功的测试，是发现了至今未发现的错误的测试。"
+      "narration": "基本概念。测试领域有一组容易混淆的基本概念：错误（Error）是导致系统可能包含故障的人的行为，如输入错误、需求错误、设计错误；缺陷（Defect/Bug）是错误的表现；"
     },
     {
       "id": "unit18-2",
@@ -45,7 +44,7 @@ window.SLIDES = {
       "id": "unit18-4",
       "type": "section",
       "title": "基本概念（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-10/images/chap10-testing-01.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/chap10-testing-01.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -67,7 +66,7 @@ window.SLIDES = {
       "type": "section",
       "title": "验证与确认活动（概述）",
       "body": "<p class=\"lead\">验证与确认贯穿生命周期：需求阶段通过用例、形式化方法与需求评审建立测试依据；设计阶段借助断言、契约设计与设计评审；</p>",
-      "narration": "验证与确认贯穿整个生命周期。需求阶段通过用例、形式化方法与需求评审建立测试依据，设计阶段借助断言、契约设计与设计评审，实现阶段以软件测试为主要工具，辅以代码走查、检查与评审。验证方式分静态与动态两类：静态方法靠人工分析、不执行程序，包括评审、走查、检查；动态方法执行程序观察行为，包括单元、集成、系统测试。"
+      "narration": "验证与确认活动。验证与确认贯穿生命周期：需求阶段通过用例、形式化方法与需求评审建立测试依据；设计阶段借助断言、契约设计与设计评审；"
     },
     {
       "id": "unit18-8",
@@ -80,7 +79,7 @@ window.SLIDES = {
       "id": "unit18-9",
       "type": "section",
       "title": "验证与确认活动（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-10/images/chap10-testing-11.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/chap10-testing-11.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -102,13 +101,13 @@ window.SLIDES = {
       "type": "section",
       "title": "测试文档与测试过程（概述）",
       "body": "<p class=\"lead\">标准测试文档包括：<strong>测试计划</strong>（规定测试的范围、方法、资源与进度）、<strong>测试规范</strong>（规定用例的运行环境、生成与执行步骤）、<strong>测试用例</strong>（数据输入与期望结果组成的对）、<strong>缺陷报告</strong>（记录缺陷的严重性与优先级）。软件测试遵循 <strong>V 模型</strong>：单元测试对应详细设计、集成测试对应体系结构设计、系统测试对应需求分析、验收测试对应客户需求。</p>",
-      "narration": "标准测试文档包括测试计划、测试规范、测试用例和缺陷报告。软件测试遵循 V 模型：单元测试对应详细设计，集成测试对应体系结构设计，系统测试对应需求分析，验收测试对应客户需求。单元测试一般由编写该单元的开发者执行，需要驱动模块与桩模块模拟上下层。"
+      "narration": "测试文档与测试过程。标准测试文档包括：测试计划（规定测试的范围、方法、资源与进度）、测试规范（规定用例的运行环境、生成与执行步骤）、测试用例（数据输入与期望结果组成的对）、缺陷报告（记录缺陷的严重性与优先级）。软件测试遵循 V 模型：单元测试对应详细设计、集成测试对应体系结构设计、系统测试对应需求分析、验收测试对应客户需求。"
     },
     {
       "id": "unit18-13",
       "type": "section",
       "title": "测试文档与测试过程（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-10/images/chap10-testing-15.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/chap10-testing-15.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -122,7 +121,7 @@ window.SLIDES = {
       "id": "unit18-15",
       "type": "section",
       "title": "测试文档与测试过程（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-10/images/chap10-testing-technology-02.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/chap10-testing-technology-02.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -130,7 +129,7 @@ window.SLIDES = {
       "type": "section",
       "title": "测试技术（概述）",
       "body": "<p class=\"lead\"><strong>黑盒测试</strong>（功能测试）把测试对象当作黑盒，依据需求规格说明检查功能实现，不关心内部逻辑；<strong>白盒测试</strong>（结构测试）利用程序内部逻辑设计用例，对逻辑路径进行测试。</p>",
-      "narration": "黑盒测试把测试对象当作黑盒，依据需求规格说明检查功能实现，不关心内部逻辑；白盒测试利用程序内部逻辑设计用例，对逻辑路径进行测试。由于穷尽输入与穷尽路径都不可能，必须借助系统化方法：等价类划分把可能的输入分成若干等价类，每类选一个代表用例；边界值分析在等价类边缘选元素，因为错误多发生在边界附近；路径测试基于控制流图分析环路复杂性，导出基本路径集合。"
+      "narration": "测试技术。黑盒测试（功能测试）把测试对象当作黑盒，依据需求规格说明检查功能实现，不关心内部逻辑；白盒测试（结构测试）利用程序内部逻辑设计用例，对逻辑路径进行测试。"
     },
     {
       "id": "unit18-17",
@@ -150,7 +149,7 @@ window.SLIDES = {
       "id": "unit18-19",
       "type": "section",
       "title": "测试技术（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-10/images/chap10-testing-technology-06.png\" alt=\"\" style=\"width:50%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/chap10-testing-technology-06.png\" alt=\"\" style=\"width:50%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -164,7 +163,7 @@ window.SLIDES = {
       "id": "unit18-21",
       "type": "section",
       "title": "测试技术（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-10/images/chap10-testing-technology-07.png\" alt=\"\" style=\"width:50%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/chap10-testing-technology-07.png\" alt=\"\" style=\"width:50%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -178,7 +177,7 @@ window.SLIDES = {
       "id": "unit18-23",
       "type": "section",
       "title": "测试技术（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-10/images/1003-cfg.svg\" alt=\"\" style=\"width:80%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/1003-cfg.svg\" alt=\"\" style=\"width:80%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -213,7 +212,7 @@ window.SLIDES = {
       "id": "unit18-28",
       "type": "section",
       "title": "测试技术（图示 4）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-10/images/1001-test-techniques.svg\" alt=\"\" style=\"width:65%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/1001-test-techniques.svg\" alt=\"\" style=\"width:65%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -256,7 +255,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：等价类划分设计测试用例（概述）",
       "body": "<p class=\"lead\">以\"登录密码规则校验\"函数 <code>validatePassword(pwd)</code> 为例，演示等价类划分的完整过程。该函数按规则返回\"合法\"或\"非法\"：<strong>密码长度 6–20 位，仅含字母与数字，且两者必须同时出现</strong>。</p>",
-      "narration": "看一个完整样例，演示等价类划分设计测试用例的全过程。以登录密码校验函数为例，规则是密码长度六到二十位，仅含字母与数字，且两者必须同时出现。把全部可能的输入划分为有效等价类与无效等价类，长度小于六位、大于二十位、只含字母、只含数字的都属于无效类，每一类只需选一个代表输入即可。"
+      "narration": "样例：等价类划分设计测试用例。以\"登录密码规则校验\"函数 validatePassword(pwd) 为例，演示等价类划分的完整过程。该函数按规则返回\"合法\"或\"非法\"：密码长度 6–20 位，仅含字母与数字，且两者必须同时出现。"
     },
     {
       "id": "unit18-35",
@@ -284,7 +283,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：边界值分析找出真实缺陷（概述）",
       "body": "<p class=\"lead\">经验表明，缺陷往往不出在等价类\"内部\"，而藏在类的<strong>边缘</strong>：恰好等于下界、恰好等于上界、临界值加一或减一的位置。对许多系统，下界恰是 0、上界恰是最大值，于是\"恰好 0、最大、临界值±1\"成为出错最频繁的位置。</p>",
-      "narration": "经验表明，缺陷往往不出在等价类内部，而藏在类的边缘：恰好等于下界、恰好等于上界、临界值加一或减一的位置。继续用上节的密码校验函数，长度下界为六、上界为二十，那么五、六、七与十九、二十、二十一就是必须逐一测到的边界值，漏掉任何一条都可能让缺陷溜走。"
+      "narration": "样例：边界值分析找出真实缺陷。经验表明，缺陷往往不出在等价类\"内部\"，而藏在类的边缘：恰好等于下界、恰好等于上界、临界值加一或减一的位置。对许多系统，下界恰是 0、上界恰是最大值，于是\"恰好 0、最大、临界值±1\"成为出错最频繁的位置。"
     },
     {
       "id": "unit18-39",
@@ -312,7 +311,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：测试不足的代价（概述）",
       "body": "<p class=\"lead\">如果缺陷没有被测试发现，代价可能不是返工，而是生命。<strong>Therac-25 放射治疗机</strong>（1985—1987 年）是软件工程教科书记载的经典悲剧：这台由加拿大原子能有限公司研制的放射治疗设备，在两年间发生多起过量辐射事故，多名患者重伤乃至死亡。</p>",
-      "narration": "如果缺陷没有被测试发现，代价可能不是返工，而是生命。Therac-25 放射治疗机是软件工程教科书上的经典悲剧，两年间发生多起过量辐射事故，多名患者重伤乃至死亡。事故的直接原因之一正是测试不足：并发缺陷仅在快速编辑参数、治疗恰在此时启动的时序下触发，普通测试难以复现，错误处理缺陷又被当作假警报忽略，患者被约百倍剂量的射线照射。"
+      "narration": "案例：测试不足的代价。如果缺陷没有被测试发现，代价可能不是返工，而是生命。Therac 25 放射治疗机（1985—1987 年）是软件工程教科书记载的经典悲剧：这台由加拿大原子能有限公司研制的放射治疗设备，在两年间发生多起过量辐射事故，多名患者重伤乃至死亡。"
     },
     {
       "id": "unit18-43",

@@ -17,24 +17,21 @@ PLANTUML := d:/envroot/idea/pandoc-3.9/plantuml.jar
 
 INPUT := src/frontmatter.md \
 	src/chapter-01/0100-introduction.md \
-	src/chapter-02/0200-method.md \
-	src/chapter-03/0300-process.md \
-	src/chapter-04/0400-requirement.md \
-	src/chapter-05/0500-uml.md \
-	src/chapter-06/0600-analysis.md \
-	src/chapter-07/0700-design.md \
-	src/chapter-08/0800-pattern.md \
-	src/chapter-09/0900-implementation.md \
-	src/chapter-10/1000-testing.md \
-	src/chapter-11/1100-evolution-quality.md \
-	src/chapter-12/1200-formal.md \
-	src/chapter-13/1300-management.md \
-	src/chapter-14/1400-tool.md \
-	src/chapter-15/1500-practice.md \
-	src/chapter-16/1600-ai-engineering.md \
-	src/chapter-17/1700-agent-development.md \
-	src/chapter-18/1800-llm-application.md \
-	src/chapter-19/1900-agent-systems.md \
+	src/chapter-02/0200-method-process.md \
+	src/chapter-03/0300-requirement-uml.md \
+	src/chapter-04/0400-analysis.md \
+	src/chapter-05/0500-design-pattern.md \
+	src/chapter-06/0600-implementation-testing.md \
+	src/chapter-07/0700-evolution-quality.md \
+	src/chapter-08/0800-management.md \
+	src/chapter-09/0900-tools-practice-ethics.md \
+	src/chapter-10/1000-ai-engineering-mlops.md \
+	src/chapter-11/1100-llm-application.md \
+	src/chapter-12/1200-agent-systems.md \
+	src/chapter-13/1300-ai-native.md \
+	src/chapter-14/1400-se30.md \
+	src/chapter-15/1500-autonomous-se.md \
+	src/chapter-16/1600-governance-future.md \
 	src/backmatter.md
 
 all: diagrams init html tex pdf

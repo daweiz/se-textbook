@@ -1,0 +1,25 @@
+digraph G {
+    rankdir=LR;
+    labelloc="t";
+    label="模型迭代与评测回归";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=1.0, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.22,0.12"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.9, penwidth=1.3];
+
+    s1 [label="当前版本 v1\n线上运行\n存档评测基线"];
+    s2 [label="升级候选 v2\n换模型 / 换配置\n长上下文、多模态", fillcolor="#FCE9DB", color="#E8833A"];
+    s3 [label="评测集回归\n对比基线指标"];
+    d1 [label="质量\n回退？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A"];
+    s4 [label="灰度放量\n小流量观察\n再全量", fillcolor="#2C5F8A", fontcolor="white"];
+    b1 [label="切回已知\n良好版本\n（多版本并存）", fillcolor="#FCE9DB", color="#E8833A"];
+
+    { rank=same; s1; s2; s3 }
+    { rank=same; d1; s4; b1 }
+
+    s1 -> s2;
+    s2 -> s3;
+    s3 -> d1;
+    d1 -> s4 [xlabel="否"];
+    d1 -> b1 [xlabel="是"];
+    b1 -> s1 [style=dashed, color="#E8833A", fontcolor="#E8833A", label="回滚"];
+}

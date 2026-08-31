@@ -1,0 +1,30 @@
+digraph G {
+    rankdir=TB;
+    labelloc="t";
+    label="自主软件的生命周期闭环";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.6, ranksep=0.6, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=10.5, margin="0.18,0.09"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    m [label="监控发现\n可观测性"];
+    d [label="诊断定位\n根因分析"];
+    f [label="生成修复\n智能体实施"];
+    v [label="评测验证\n评测集回归"];
+    gate [label="验证\n通过？", shape=diamond, fillcolor="#FFF3D6", color="#E8833A"];
+    g [label="灰度上线\n小流量放量", fillcolor="#2C5F8A", fontcolor="white"];
+    r [label="回滚兜底\n失败即回退", fillcolor="#FCE9DB", color="#E8833A"];
+
+    { rank=same; m; d }
+    { rank=same; f; v }
+    { rank=same; gate }
+    { rank=same; g; r }
+
+    m -> d;
+    d -> f;
+    f -> v;
+    v -> gate;
+    gate -> g [xlabel="是"];
+    gate -> f [xlabel="否", style=dashed, color="#E8833A", fontcolor="#E8833A"];
+    g -> m [style=dashed, color="#E8833A", fontcolor="#E8833A", label="持续循环"];
+    g -> r [style=dashed, color="#E8833A", fontcolor="#E8833A", label="故障"];
+}

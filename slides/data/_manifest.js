@@ -9,110 +9,92 @@ window.CHAPTERS = [
   {
     "num": 2,
     "slug": "chapter-02",
-    "title": "软件开发方法",
+    "title": "软件开发方法与软件过程",
     "file": "data/chapter-02.js"
   },
   {
     "num": 3,
     "slug": "chapter-03",
-    "title": "软件过程与过程模型",
+    "title": "需求工程与用例建模",
     "file": "data/chapter-03.js"
   },
   {
     "num": 4,
     "slug": "chapter-04",
-    "title": "需求工程",
+    "title": "软件分析",
     "file": "data/chapter-04.js"
   },
   {
     "num": 5,
     "slug": "chapter-05",
-    "title": "统一建模语言 UML",
+    "title": "软件设计与设计模式",
     "file": "data/chapter-05.js"
   },
   {
     "num": 6,
     "slug": "chapter-06",
-    "title": "软件分析",
+    "title": "软件实现与测试",
     "file": "data/chapter-06.js"
   },
   {
     "num": 7,
     "slug": "chapter-07",
-    "title": "软件设计",
+    "title": "软件演化与质量保证",
     "file": "data/chapter-07.js"
   },
   {
     "num": 8,
     "slug": "chapter-08",
-    "title": "设计模式",
+    "title": "软件项目管理",
     "file": "data/chapter-08.js"
   },
   {
     "num": 9,
     "slug": "chapter-09",
-    "title": "软件实现",
+    "title": "软件工程工具、实践与伦理",
     "file": "data/chapter-09.js"
   },
   {
     "num": 10,
     "slug": "chapter-10",
-    "title": "软件测试",
+    "title": "AI 系统工程与 MLOps",
     "file": "data/chapter-10.js"
   },
   {
     "num": 11,
     "slug": "chapter-11",
-    "title": "软件演化与软件质量",
+    "title": "大模型应用开发范式",
     "file": "data/chapter-11.js"
   },
   {
     "num": 12,
     "slug": "chapter-12",
-    "title": "形式化方法与质量保证",
+    "title": "智能体系统工程",
     "file": "data/chapter-12.js"
   },
   {
     "num": 13,
     "slug": "chapter-13",
-    "title": "软件项目管理",
+    "title": "AI 原生软件工程",
     "file": "data/chapter-13.js"
   },
   {
     "num": 14,
     "slug": "chapter-14",
-    "title": "CASE 与智能软件工程工具",
+    "title": "软件工程 3.0：大模型驱动的研发新范式",
     "file": "data/chapter-14.js"
   },
   {
     "num": 15,
     "slug": "chapter-15",
-    "title": "智能软件工程实践与伦理",
+    "title": "自主软件工程：智能体网络与自主开发",
     "file": "data/chapter-15.js"
   },
   {
     "num": 16,
     "slug": "chapter-16",
-    "title": "AI 系统工程与 MLOps",
+    "title": "智能软件工程的治理、安全与未来",
     "file": "data/chapter-16.js"
-  },
-  {
-    "num": 17,
-    "slug": "chapter-17",
-    "title": "智能体与提示词驱动的开发范式",
-    "file": "data/chapter-17.js"
-  },
-  {
-    "num": 18,
-    "slug": "chapter-18",
-    "title": "大模型应用开发范式",
-    "file": "data/chapter-18.js"
-  },
-  {
-    "num": 19,
-    "slug": "chapter-19",
-    "title": "智能体系统工程与智能软件工程展望",
-    "file": "data/chapter-19.js"
   }
 ];
 window.UNITS = [
@@ -151,7 +133,7 @@ window.UNITS = [
       "掌握软件生命周期的各阶段活动与两种典型模型",
       "展望智能软件工程：LLM 对开发范式的变革与机遇"
     ],
-    "count": 54,
+    "count": 58,
     "file": "data/unit-02.js"
   },
   {
@@ -163,7 +145,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第2章　软件开发方法"
+      "第2章　软件开发方法与软件过程"
     ],
     "outline": [
       "理解面向过程方法的核心思想与模块化、结构化要点",
@@ -182,7 +164,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第2章　软件开发方法"
+      "第2章　软件开发方法与软件过程"
     ],
     "outline": [
       "认识基于组件与基于服务的开发方式",
@@ -202,7 +184,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第3章　软件过程与过程模型"
+      "第2章　软件开发方法与软件过程"
     ],
     "outline": [
       "理解软件过程的活动构成（描述、开发、验证、演化）",
@@ -221,7 +203,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "",
     "chapters": [
-      "第3章　软件过程与过程模型"
+      "第2章　软件开发方法与软件过程"
     ],
     "outline": [
       "掌握统一过程（RUP）的核心思想与四阶段",
@@ -240,7 +222,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "提问",
     "chapters": [
-      "第4章　需求工程"
+      "第3章　需求工程与用例建模"
     ],
     "outline": [
       "理解软件需求的概念、类型（用户需求与系统需求）",
@@ -259,7 +241,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第4章　需求工程"
+      "第3章　需求工程与用例建模"
     ],
     "outline": [
       "掌握用例建模：参与者、用例与用例图",
@@ -279,7 +261,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "",
     "chapters": [
-      "第5章　统一建模语言 UML"
+      "第3章　需求工程与用例建模"
     ],
     "outline": [
       "掌握 UML 的构成：视图、图、模型元素与通用机制",
@@ -298,14 +280,14 @@ window.UNITS = [
     "minutes": 60,
     "qa": "",
     "chapters": [
-      "第6章　软件分析"
+      "第4章　软件分析"
     ],
     "outline": [
       "理解分析模型的目标与用例视图、逻辑视图等三大视图",
       "掌握边界类、实体类、控制类三种分析类",
       "熟悉面向对象分析的过程与方法"
     ],
-    "count": 38,
+    "count": 50,
     "file": "data/unit-10.js"
   },
   {
@@ -317,14 +299,14 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第6章　软件分析"
+      "第4章　软件分析"
     ],
     "outline": [
       "了解智能分析助手的功能与局限",
       "掌握借助 LLM 完成需求分析与建模的提示技巧",
       "通过实践体会智能分析与人工判断的结合"
     ],
-    "count": 49,
+    "count": 54,
     "file": "data/unit-11.js"
   },
   {
@@ -336,7 +318,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "",
     "chapters": [
-      "第7章　软件设计"
+      "第5章　软件设计与设计模式"
     ],
     "outline": [
       "掌握高内聚低耦合等软件设计基本原理",
@@ -355,7 +337,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第7章　软件设计"
+      "第5章　软件设计与设计模式"
     ],
     "outline": [
       "理解面向对象设计（OOD）与分析的衔接",
@@ -363,7 +345,7 @@ window.UNITS = [
       "了解智能化设计如何辅助生成设计方案",
       "讨论智能设计实践的适用范围"
     ],
-    "count": 48,
+    "count": 47,
     "file": "data/unit-13.js"
   },
   {
@@ -375,7 +357,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "",
     "chapters": [
-      "第8章　设计模式"
+      "第5章　软件设计与设计模式"
     ],
     "outline": [
       "理解设计模式的构成要素（名称、意图、结构、协作等）",
@@ -394,7 +376,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第8章　设计模式"
+      "第5章　软件设计与设计模式"
     ],
     "outline": [
       "结合示例理解设计模式的实际应用",
@@ -413,7 +395,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "",
     "chapters": [
-      "第9章　软件实现"
+      "第6章　软件实现与测试"
     ],
     "outline": [
       "理解软件编码在生命周期中的角色",
@@ -432,14 +414,14 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第9章　软件实现"
+      "第6章　软件实现与测试"
     ],
     "outline": [
       "了解智能编码工具（补全、问答、生成）的能力边界",
       "掌握结合 AI 编码的提示与协作技巧",
       "通过实践体会智能编码对效率与质量的提升"
     ],
-    "count": 46,
+    "count": 45,
     "file": "data/unit-17.js"
   },
   {
@@ -451,7 +433,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第10章　软件测试"
+      "第6章　软件实现与测试"
     ],
     "outline": [
       "理解测试的基本概念与目标",
@@ -470,7 +452,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第10章　软件测试"
+      "第6章　软件实现与测试"
     ],
     "outline": [
       "了解智能测试用例生成与缺陷定位",
@@ -489,7 +471,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "",
     "chapters": [
-      "第11章　软件演化与软件质量"
+      "第7章　软件演化与质量保证"
     ],
     "outline": [
       "理解软件演化的规律（Lehman 定律）",
@@ -508,14 +490,14 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第11章　软件演化与软件质量"
+      "第7章　软件演化与质量保证"
     ],
     "outline": [
       "了解智能化维护在缺陷定位与修复中的作用",
       "掌握借助 LLM 辅助维护的实践",
       "讨论智能维护的局限与人工把关"
     ],
-    "count": 45,
+    "count": 44,
     "file": "data/unit-21.js"
   },
   {
@@ -527,7 +509,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "",
     "chapters": [
-      "第12章　形式化方法与质量保证"
+      "第7章　软件演化与质量保证"
     ],
     "outline": [
       "掌握有穷状态机（FSM）的概念、表示与应用",
@@ -546,7 +528,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第12章　形式化方法与质量保证"
+      "第7章　软件演化与质量保证"
     ],
     "outline": [
       "掌握 Z 语言的基本语法与规范书写",
@@ -565,14 +547,14 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第13章　软件项目管理"
+      "第8章　软件项目管理"
     ],
     "outline": [
       "理解软件项目的人员组织与管理方式",
       "掌握项目沟通计划与规划要点",
       "认识软件风险的类型与风险管理的步骤"
     ],
-    "count": 47,
+    "count": 50,
     "file": "data/unit-24.js"
   },
   {
@@ -584,14 +566,14 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第13章　软件项目管理"
+      "第8章　软件项目管理"
     ],
     "outline": [
       "理解软件配置管理：版本控制、变更管理与基线",
       "了解智能化项目管理如何辅助进度与决策",
       "通过实践体会智能化管理的收益与边界"
     ],
-    "count": 54,
+    "count": 62,
     "file": "data/unit-25.js"
   },
   {
@@ -603,7 +585,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "演示",
     "chapters": [
-      "第14章　CASE 与智能软件工程工具"
+      "第9章　软件工程工具、实践与伦理"
     ],
     "outline": [
       "了解 CASE 工具的分类与作用",
@@ -622,7 +604,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第15章　智能软件工程实践与伦理"
+      "第9章　软件工程工具、实践与伦理"
     ],
     "outline": [
       "认识软件工程师的素质要求与团队协作",
@@ -641,14 +623,14 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第16章　AI 系统工程与 MLOps"
+      "第10章　AI 系统工程与 MLOps"
     ],
     "outline": [
       "理解 AI 系统的工程特性（数据驱动、非确定性、随数据漂移老化）",
       "掌握数据工程的流程：采集、清洗、标注、版本管理",
       "掌握模型开发与评测的流程与指标，理解部署与监控"
     ],
-    "count": 55,
+    "count": 54,
     "file": "data/unit-28.js"
   },
   {
@@ -660,15 +642,15 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第16章　AI 系统工程与 MLOps",
-      "第18章　大模型应用开发范式"
+      "第10章　AI 系统工程与 MLOps",
+      "第11章　大模型应用开发范式"
     ],
     "outline": [
       "认识 AI 系统测试的难点与评测方法",
       "了解 LLMOps 的实践与智能化展望",
       "认识 LLM 应用系统的架构形态、模型路由与 RAG 工程化"
     ],
-    "count": 76,
+    "count": 95,
     "file": "data/unit-29.js"
   },
   {
@@ -680,8 +662,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第17章　智能体与提示词驱动的开发范式",
-      "第18章　大模型应用开发范式"
+      "第11章　大模型应用开发范式"
     ],
     "outline": [
       "掌握提示词工程的基本结构与优化方法",
@@ -689,7 +670,7 @@ window.UNITS = [
       "了解 LLM 应用评测的评测集构建、多维指标与护栏",
       "理解 LLM 应用的可观测性与成本治理"
     ],
-    "count": 83,
+    "count": 85,
     "file": "data/unit-30.js"
   },
   {
@@ -701,14 +682,14 @@ window.UNITS = [
     "minutes": 60,
     "qa": "交流",
     "chapters": [
-      "第17章　智能体与提示词驱动的开发范式"
+      "第11章　大模型应用开发范式"
     ],
     "outline": [
       "了解 LLM 智能体的概念与开发框架",
       "掌握人机协同开发范式与 Agent 分工",
       "讨论智能体的质量、安全与治理"
     ],
-    "count": 42,
+    "count": 40,
     "file": "data/unit-31.js"
   },
   {
@@ -720,7 +701,7 @@ window.UNITS = [
     "minutes": 60,
     "qa": "讨论",
     "chapters": [
-      "第19章　智能体系统工程与智能软件工程展望"
+      "第12章　智能体系统工程"
     ],
     "outline": [
       "理解智能体系统的工程架构与单智能体的工具、规划、执行",
@@ -728,7 +709,107 @@ window.UNITS = [
       "了解智能体评测与安全治理、AI 驱动开发的组织效能",
       "展望智能软件工程的演进方向"
     ],
-    "count": 67,
+    "count": 80,
     "file": "data/unit-32.js"
+  },
+  {
+    "num": 33,
+    "slug": "unit-33",
+    "title": "AI 原生开发范式",
+    "module": "模块六　智能软件工程与 AI 系统工程",
+    "moduleNum": 6,
+    "minutes": 60,
+    "qa": "讨论",
+    "chapters": [
+      "第13章　AI 原生软件工程"
+    ],
+    "outline": [
+      "理解 AI 原生软件工程的定义与范式转变：四层能力栈与三个支点",
+      "掌握意图驱动的开发流程与规格即代码的工程化",
+      "了解上下文与知识资产的组织、验证优先的分级质量门禁",
+      "认识 AI 原生开发的组织与流程再造，展望从编码到全流程的 AI 原生"
+    ],
+    "count": 68,
+    "file": "data/unit-33.js"
+  },
+  {
+    "num": 34,
+    "slug": "unit-34",
+    "title": "AI 原生平台、组织与智能软件工程未来",
+    "module": "模块六　智能软件工程与 AI 系统工程",
+    "moduleNum": 6,
+    "minutes": 60,
+    "qa": "讨论",
+    "chapters": [
+      "第13章　AI 原生软件工程"
+    ],
+    "outline": [
+      "理解 AI 原生平台：模型、工具、知识资产与治理成为共享基础设施",
+      "掌握人机混合团队的构成与治理，认识从工具链到平台的演进",
+      "了解智能软件工程的度量与治理闭环、未来工程师的四项核心能力",
+      "回望四条进路，引出从 AI 原生到自主软件工程与软件工程 3.0"
+    ],
+    "count": 59,
+    "file": "data/unit-34.js"
+  },
+  {
+    "num": 35,
+    "slug": "unit-35",
+    "title": "软件工程 3.0：大模型驱动的研发新范式",
+    "module": "模块六　智能软件工程与 AI 系统工程",
+    "moduleNum": 6,
+    "minutes": 60,
+    "qa": "讨论",
+    "chapters": [
+      "第14章　软件工程 3.0：大模型驱动的研发新范式"
+    ],
+    "outline": [
+      "理解软件工程三代范式的演进脉络：结构化过程化、敏捷对象化、大模型驱动",
+      "掌握软件工程 3.0 的定义与五大特征，理解软件即模型的复合构成",
+      "认识大模型对软件、工程、生态与安全的四个重新定义",
+      "了解 Vibe Coding 与智能体工程两种新兴方法论，展望超级个体与自主执行"
+    ],
+    "count": 72,
+    "file": "data/unit-35.js"
+  },
+  {
+    "num": 36,
+    "slug": "unit-36",
+    "title": "自主软件工程：智能体网络与自主开发",
+    "module": "模块六　智能软件工程与 AI 系统工程",
+    "moduleNum": 6,
+    "minutes": 60,
+    "qa": "讨论",
+    "chapters": [
+      "第15章　自主软件工程：智能体网络与自主开发"
+    ],
+    "outline": [
+      "理解自主软件工程的概念与自主化三底线：低风险才自动、能验证才交付、能记录必记录",
+      "掌握自主性分级模型 L0–L5 与人机职责划分",
+      "认识自主开发工作流与智能体网络的规模化协作",
+      "理解信任与验证的关系、风险与治理手段，展望从自主任务到自主软件"
+    ],
+    "count": 63,
+    "file": "data/unit-36.js"
+  },
+  {
+    "num": 37,
+    "slug": "unit-37",
+    "title": "智能软件工程的治理、安全与未来",
+    "module": "模块六　智能软件工程与 AI 系统工程",
+    "moduleNum": 6,
+    "minutes": 60,
+    "qa": "讨论",
+    "chapters": [
+      "第16章　智能软件工程的治理、安全与未来"
+    ],
+    "outline": [
+      "认识大模型时代的四类新型安全威胁与全程可信的安全范式",
+      "掌握智能软件工程治理框架与组织、人才演进",
+      "理解度量、审计与责任的体系化设计",
+      "展望软件工程 3.0 的未来路线，以全书结语回望五条进路"
+    ],
+    "count": 73,
+    "file": "data/unit-37.js"
   }
 ];

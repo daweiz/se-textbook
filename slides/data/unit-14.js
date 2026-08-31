@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 14,
   "slug": "unit-14",
@@ -8,7 +7,7 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "",
   "chapters": [
-    "第8章　设计模式"
+    "第5章　软件设计与设计模式"
   ],
   "subtitle": "",
   "count": 41,
@@ -18,14 +17,14 @@ window.SLIDES = {
       "type": "title",
       "title": "第14节　设计模式（上）：要素与分类",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 14 节《设计模式（上）：要素与分类》。本节建议用时 60 分钟。我们将理解设计模式的构成要素，掌握创建型、结构型、行为型三类模式，并认识经典模式的用途。"
+      "narration": ""
     },
     {
       "id": "unit14-1",
       "type": "section",
       "title": "模式的基本要素与价值（概述）",
       "body": "<p class=\"lead\">一个完整的设计模式包含四个要素：</p>",
-      "narration": "一个完整的设计模式包含四个要素：模式名称便于交流思考，问题说明何时使用，解决方案描述组成与协作，效果说明应用的得失。其价值在于复用良好设计、提供交流语言、提升抽象程度。"
+      "narration": "模式的基本要素与价值。一个完整的设计模式包含四个要素："
     },
     {
       "id": "unit14-2",
@@ -66,7 +65,7 @@ window.SLIDES = {
       "id": "unit14-7",
       "type": "section",
       "title": "模式的基本要素与价值（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/0801-pattern-four.svg\" alt=\"\" style=\"width:85%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0801-pattern-four.svg\" alt=\"\" style=\"width:85%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -81,7 +80,7 @@ window.SLIDES = {
       "type": "section",
       "title": "模式的分类（概述）",
       "body": "<p class=\"lead\">GoF 将 23 个模式分为三类：</p>",
-      "narration": "GoF 将二十三个经典模式分为三类。创建型模式解决对象实例化，把创建什么与如何创建分离，典型的有单例、工厂方法、抽象工厂、生成器和原型；结构型模式组织类与对象的结构，避免职责过多，典型的有适配器、桥接等。"
+      "narration": "模式的分类。GoF 将 23 个模式分为三类："
     },
     {
       "id": "unit14-10",
@@ -94,7 +93,7 @@ window.SLIDES = {
       "id": "unit14-11",
       "type": "section",
       "title": "模式的分类（图示）",
-      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-08/images/singleton_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"><img src=\"../src/chapter-08/images/factory-method-implementation-uml-class-diagram.png\" alt=\"\" style=\"width:45%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-08/images/abstract-factory-pattern.png\" alt=\"\" style=\"width:45%\"></div>",
+      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-05/images/singleton_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"><img src=\"../src/chapter-05/images/factory-method-implementation-uml-class-diagram.png\" alt=\"\" style=\"width:45%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-05/images/abstract-factory-pattern.png\" alt=\"\" style=\"width:45%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -108,7 +107,7 @@ window.SLIDES = {
       "id": "unit14-13",
       "type": "section",
       "title": "模式的分类（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/composite-design-pattern-example-uml-class-diagram.png\" alt=\"\" style=\"width:45%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/composite-design-pattern-example-uml-class-diagram.png\" alt=\"\" style=\"width:45%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -122,7 +121,7 @@ window.SLIDES = {
       "id": "unit14-15",
       "type": "section",
       "title": "模式的分类（图示 3）",
-      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-08/images/observer_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"><img src=\"../src/chapter-08/images/strategy_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"></div>",
+      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-05/images/observer_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"><img src=\"../src/chapter-05/images/strategy_implementation_-_uml_class_diagram.png\" alt=\"\" style=\"width:45%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -150,7 +149,7 @@ window.SLIDES = {
       "id": "unit14-19",
       "type": "section",
       "title": "模式的分类（图示 4）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-08/images/0803-pattern-catalog.svg\" alt=\"\" style=\"width:75%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-05/images/0803-pattern-catalog.svg\" alt=\"\" style=\"width:75%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -158,7 +157,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：策略模式的应用（概述）",
       "body": "<p class=\"lead\">订单折扣计算是<strong>策略模式</strong>（Strategy，封装可互换的算法族）的典型场景。假设一个电商系统按订单计算折扣：普通用户不打折、会员享 95 折、节假日全场 85 折。</p>",
-      "narration": "先看一个策略模式的应用样例。电商系统按订单计算折扣：普通用户不打折、会员九五折、节假日八五折。若用 if-else 硬编码，每新增一种折扣都要改动计算逻辑本身，违背开闭原则。"
+      "narration": "样例：策略模式的应用。订单折扣计算是策略模式（Strategy，封装可互换的算法族）的典型场景。假设一个电商系统按订单计算折扣：普通用户不打折、会员享 95 折、节假日全场 85 折。"
     },
     {
       "id": "unit14-21",
@@ -193,7 +192,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：观察者模式的应用（概述）",
       "body": "<p class=\"lead\">天气 App 的\"订阅推送\"是<strong>观察者模式</strong>（Observer，定义一对多的依赖，状态变化时通知所有依赖者）的典型场景。气象站测得新数据后，手机通知、首页卡片、地图图层等多个界面都要同步更新，且新增界面不应改动气象站。</p>",
-      "narration": "再看观察者模式的应用。天气 App 里，气象站测得新数据后，手机通知、首页卡片、地图图层等界面都要同步更新，且新增界面不应改动气象站。把气象站作为主题、各界面作为观察者，就构成了发布—订阅关系。"
+      "narration": "样例：观察者模式的应用。天气 App 的\"订阅推送\"是观察者模式（Observer，定义一对多的依赖，状态变化时通知所有依赖者）的典型场景。气象站测得新数据后，手机通知、首页卡片、地图图层等多个界面都要同步更新，且新增界面不应改动气象站。"
     },
     {
       "id": "unit14-26",
@@ -235,7 +234,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：模式滥用的反例（概述）",
       "body": "<p class=\"lead\">一个<strong>典型的反例</strong>是：为只有两三个类的简单逻辑，强行套上十几层模式。某团队曾为一个\"取文件路径并保存\"的小需求，引入抽象工厂创建路径、外观封装接口、装饰叠加缓存、代理拦截访问，还配了一套观察者做变更通知——实际上一个函数就能完成。</p>",
-      "narration": "再看一个反例。某团队为一个取文件路径并保存的小需求，强行引入抽象工厂、外观、装饰、代理和观察者，实际上一个函数就能完成。结果代码行数暴涨、调用链深不可测，模式齐全却毫无可维护性——问题不在模式本身，而在滥用。"
+      "narration": "案例：模式滥用的反例。一个典型的反例是：为只有两三个类的简单逻辑，强行套上十几层模式。某团队曾为一个\"取文件路径并保存\"的小需求，引入抽象工厂创建路径、外观封装接口、装饰叠加缓存、代理拦截访问，还配了一套观察者做变更通知——实际上一个函数就能完成。"
     },
     {
       "id": "unit14-32",
@@ -270,7 +269,7 @@ window.SLIDES = {
       "type": "section",
       "title": "故事：GoF 与《设计模式》（概述）",
       "body": "<p class=\"lead\">1994 年，Erich Gamma、Richard Helm、Ralph Johnson 与 John Vlissides 四位软件工程师合作出版了《设计模式》（Design Patterns: Elements of Reusable Object-Oriented Software，Addison-Wesley），后世称这四人为\"<strong>四人组</strong>\"（GoF）。这本书后来成为软件工程领域被引用最多的著作之一，也是\"模式运动\"的开端。</p>",
-      "narration": "讲一个故事。一九九四年，Gamma、Helm、Johnson 与 Vlissides 四位软件工程师出版了《设计模式》，后世称他们为四人组，也就是 GoF。这本书成为软件工程领域被引用最多的著作之一，也是模式运动的开端。"
+      "narration": "故事：GoF 与《设计模式》。1994 年，Erich Gamma、Richard Helm、Ralph Johnson 与 John Vlissides 四位软件工程师合作出版了《设计模式》（Design Patterns: Elements of Reusable Object Oriented Software，Addison Wesley），后世称这四人为\"四人组\"（GoF）。这本书后来成为软件工程领域被引用最多的著作之一，也是\"模式运动\"的开端。"
     },
     {
       "id": "unit14-37",

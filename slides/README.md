@@ -1,7 +1,7 @@
 # 《智能软件工程基础》幻灯片系统
 
-基于书稿 `../src/`（19 章 Markdown）生成的**零依赖、纯前端、离线可用**幻灯片播放器。
-全书按教学划分为 **32 个小节**（每节 60 分钟，是否含提问/交流/讨论环节见小节封面），**每节一套讲解用 deck**，支持：
+基于书稿 `../src/`（16 章 Markdown）生成的**零依赖、纯前端、离线可用**幻灯片播放器。
+全书按教学划分为 **37 个小节**（每节 60 分钟，是否含提问/交流/讨论环节见小节封面），**每节一套讲解用 deck**，支持：
 
 - 🖥 **全屏播放**（Fullscreen API，`F` 键）
 - 🔊 **语音朗读**（浏览器内置 Web Speech API，中文 TTS，音色/语速/音调/音量可调）
@@ -42,17 +42,17 @@
 
 ```
 slides/
-  index.html            # 小节菜单页（6 模块分组，32 节卡片）
+  index.html            # 小节菜单页（6 模块分组，37 节卡片）
   player.html           # 播放器页（URL 参数 ?u=unit-NN，兼容 ?ch=chapter-NN）
   css/player.css        # 播放器样式（亮/暗两套主题 + 小节封面样式）
   js/player.js          # 播放器核心逻辑
   data/_manifest.js     # 章节清单（window.CHAPTERS）+ 小节清单（window.UNITS）
   data/chapter-NN.js    # 每章幻灯片数据（生成，作为小节数据源与历史备份）
   data/unit-NN.js       # 每小节讲解用 deck（生成 + 封面旁白注入）
-  tools/units.js        # 32 节划分表（单一事实来源：每节覆盖哪些章节内容片、时长、环节）
+  tools/units.js        # 37 节划分表（单一事实来源：每节覆盖哪些章节内容片、时长、环节）
   tools/generate.js     # 生成器：src → chapter-NN.js → unit-NN.js（拆细）
   tools/apply-narration.js  # 合并人工旁白到数据文件
-  tools/narration/      # 人工旁白：unit-covers.js（32 篇封面）+ chapter-*.js（19 章导语）
+  tools/narration/      # 人工旁白：unit-covers.js（37 篇封面）+ chapter-*.js（16 章导语）
   tools/verify.js       # 校验：数据可解析、图片存在、旁白完整、每节 ≥30 页、内容片覆盖不重不漏
 ```
 
@@ -67,7 +67,7 @@ slides/
 ## 重新生成（改动书稿或划分后）
 
 ```bash
-# 1. 从书稿 src/ 重新生成章节数据与 32 节讲解 deck
+# 1. 从书稿 src/ 重新生成章节数据与 37 节讲解 deck
 node slides/tools/generate.js
 
 # 2. 合并人工旁白（封面旁白在 tools/narration/unit-covers.js，可选限定小节/章节）
@@ -80,7 +80,7 @@ node slides/tools/verify.js
 ```
 
 > 旁白单独存放在 `tools/narration/*.js`，重新生成数据文件不会丢失人工旁白。
-> 调整 32 节划分只改 `tools/units.js`（每节的 `parts` 字段 = 覆盖的章节内容片区间），重新生成即可。
+> 调整 37 节划分只改 `tools/units.js`（每节的 `parts` 字段 = 覆盖的章节内容片区间），重新生成即可。
 
 ## 生成规则摘要（tools/generate.js）
 
@@ -100,7 +100,7 @@ node slides/tools/verify.js
 
 ## 校验（tools/verify.js）
 
-- 19 章数据可解析、id 唯一、旁白非空、图片引用齐全；
-- 32 节时长 ∈ [35,60]、含封面片（type=title、旁白非空）、id 唯一、图片齐全；
-- **每节 ≥30 页**：32 节讲解 deck 页数均不少于 30；
-- **覆盖校验**：各章内容片被 32 节逐一分配、不重不漏（对照 `tools/units.js`，总数动态计算）。
+- 16 章数据可解析、id 唯一、旁白非空、图片引用齐全；
+- 37 节时长 ∈ [35,60]、含封面片（type=title、旁白非空）、id 唯一、图片齐全；
+- **每节 ≥30 页**：37 节讲解 deck 页数均不少于 30；
+- **覆盖校验**：各章内容片被 37 节逐一分配、不重不漏（对照 `tools/units.js`，总数动态计算）。

@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 1,
   "slug": "unit-01",
@@ -18,7 +17,7 @@ window.SLIDES = {
       "type": "title",
       "title": "第1节　软件危机与软件工程",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 1 节《软件危机与软件工程》。本节建议用时 60 分钟，中间设有提问环节。我们将回顾计算机软件的发展历程，理解软件危机的表现与根源，并认识软件工程的定义与目标。"
+      "narration": ""
     },
     {
       "id": "unit01-1",

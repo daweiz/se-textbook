@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 16,
   "slug": "unit-16",
@@ -8,7 +7,7 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "",
   "chapters": [
-    "第9章　软件实现"
+    "第6章　软件实现与测试"
   ],
   "subtitle": "",
   "count": 43,
@@ -18,14 +17,14 @@ window.SLIDES = {
       "type": "title",
       "title": "第16节　软件编码、规范与代码审查",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 16 节《软件编码、规范与代码审查》。本节建议用时 60 分钟。我们将理解编码在生命周期中的角色，掌握编码规范的常见要求，并了解代码检查与同行评审的做法。"
+      "narration": ""
     },
     {
       "id": "unit16-1",
       "type": "section",
       "title": "软件编码的工作（概述）",
       "body": "<p class=\"lead\">软件编码包括六个环节：<strong>程序设计</strong>（理解需求与设计模型、补充遗漏的详细设计、设计代码结构）、<strong>设计审查</strong>（检查设计结果并记录缺陷）、<strong>编写代码</strong>（遵循编码规范、保证代码易验证）、<strong>代码走查</strong>（确认代码完成既定工作、记录缺陷）、<strong>编译代码</strong>（修正语法错误）、<strong>测试代码</strong>（单元测试与调试）。六个环节的任务与目的如下表所示。</p>",
-      "narration": "软件编码包括六个环节：程序设计、设计审查、编写代码、代码走查、编译代码、测试代码。六者环环相扣，从理解设计到产出可运行的代码，共同保证编码有据可依、质量可控。"
+      "narration": "面向对象分析以用例驱动，从三个相互补充的视角建立模型。功能模型从用户角度描述系统功能，由用例和场景组成；分析对象模型描述系统的概念实体，由类图和对象图组成；动态模型描述对象之间的交互行为，由状态图和顺序图组成。分析阶段的制品包括分析类、用例实现、分析包与体系结构描述。"
     },
     {
       "id": "unit16-2",
@@ -38,7 +37,7 @@ window.SLIDES = {
       "id": "unit16-3",
       "type": "section",
       "title": "软件编码的工作（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-09/images/implementation-01.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/implementation-01.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -46,7 +45,7 @@ window.SLIDES = {
       "type": "section",
       "title": "编码规范（概述）",
       "body": "<p class=\"lead\">编码规范是与语言相关的代码编写规则集合，其目的是提高编码质量、增强可读性、可重用性与可移植性。规范从几个方面展开：</p>",
-      "narration": "编码规范是与语言相关的代码编写规则集合，目标是提高编码质量与可读性。基本要求结构清晰、多用标准库；可读性第一、效率第二；命名望文知义；禁止 GOTO、单入口单出口；程序首先要正确。"
+      "narration": "三大视图从不同角度互补地刻画系统，其关系如图所示。功能模型回答系统做什么，对象模型回答有哪些概念实体、如何组织，动态模型回答对象之间如何交互，三者合在一起才构成完整的分析模型。"
     },
     {
       "id": "unit16-5",
@@ -87,7 +86,7 @@ window.SLIDES = {
       "id": "unit16-10",
       "type": "section",
       "title": "编码规范（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-09/images/0903-code-standard.svg\" alt=\"\" style=\"width:75%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-09/images/implementation-02.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/0903-code-standard.svg\" alt=\"\" style=\"width:75%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-06/images/implementation-02.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -101,7 +100,7 @@ window.SLIDES = {
       "id": "unit16-12",
       "type": "section",
       "title": "编码规范（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-09/images/0904-module-dep.svg\" alt=\"\" style=\"width:70%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/0904-module-dep.svg\" alt=\"\" style=\"width:70%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -109,7 +108,7 @@ window.SLIDES = {
       "type": "section",
       "title": "代码检查与审查（概述）",
       "body": "<p class=\"lead\">编译没有错误绝不意味着程序没有错误。<strong>代码检查</strong>通过静态阅读代码发现逻辑、计算、接口、数据处理与文档等各类缺陷，并按严重性（严重/中等/很小）排序调度修正工作。</p>",
-      "narration": "记住，编译没有错误绝不意味着程序没有错误。代码检查按清单静态阅读代码、按严重性排序缺陷；代码走查由作者讲解、小组验证；代码审查由同行以会议形式系统性检查，是发现缺陷、分享知识的重要手段。"
+      "narration": "用例实现是从设计和分析追溯到需求的方法：动态上以直接对应用例事件序列的交互图表示，静态上以反映参与用例的类及其关系的类图表示。三类分析类的职责与识别要点可对照上表：实体类对应现实世界的\"事物\"，边界类对应参与者与系统的交互，控制类封装事件流控制逻辑。"
     },
     {
       "id": "unit16-14",
@@ -136,7 +135,7 @@ window.SLIDES = {
       "id": "unit16-17",
       "type": "section",
       "title": "代码检查与审查（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-09/images/0901-review-types.svg\" alt=\"\" style=\"width:85%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-06/images/0901-review-types.svg\" alt=\"\" style=\"width:85%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -151,7 +150,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：命名从糟糕到良好（概述）",
       "body": "<p class=\"lead\">命名是编码规范中最立竿见影的一环：标识符是读者理解代码的第一线索，<strong>望文知义的命名</strong>让意图直接可见，糟糕的命名则逼读者逐行推理。下面同一段逻辑——计算图书借阅超期天数与罚款——先给出糟糕的命名版本：</p>",
-      "narration": "先看命名的样例。命名是编码规范中最立竿见影的一环，标识符是读者理解代码的第一线索。同一段计算图书超期天数与罚款的逻辑，糟糕的命名版本里 handle、a、d1 很难看出意图。"
+      "narration": "这张图展示的是实体类之间如何通过关系连接、形成领域结构。比如订单系统中，顾客、订单与支付记录的关系就能用实体关系图清晰地表达出来，这是领域模型的基础。"
     },
     {
       "id": "unit16-20",
@@ -193,7 +192,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：代码审查抓住的经典缺陷（概述）",
       "body": "<p class=\"lead\">代码审查的价值常被概括为\"<strong>第二双眼睛</strong>\"：作者熟悉自己的意图，容易\"想当然\"跳过边界，而旁观者总能问出\"这里真的对吗\"。一个典型的例子是边界条件——<code>&lt;=</code> 与 <code>&lt;</code> 的一字之差。</p>",
-      "narration": "再看代码审查的经典案例。审查常被概括为第二双眼睛。满一百元免运费写成 total 小于一百才收费，恰好一百元的订单被错收运费。同事一句一百元整的订单呢，就抓住了这个边界缺陷。"
+      "narration": "以图书借阅系统为例，完整走一遍分析建模的过程。系统主要支持读者借书、还书与查询图书，从问题域中不难找出图书、读者、借阅记录等候选类，再按分析类的三种类型归类，便形成上表所示的候选清单。实体类对应问题域中的\"事物\"，边界类对应用例中参与者与系统的交互点，控制类封装用例的事件流。"
     },
     {
       "id": "unit16-26",
@@ -235,7 +234,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：注释与文档的规范写法（概述）",
       "body": "<p class=\"lead\">注释是写给下一个维护者看的，而不是写给编译器。规范写法的第一原则是：<strong>注释解释\"为什么\"，而非复述\"是什么\"</strong>。</p>",
-      "narration": "再来看注释的规范写法。注释写给下一个维护者，第一原则是解释为什么，而非复述是什么。复述代码的注释只是噪音，解释取舍、约束与历史原因的注释才传递知识。"
+      "narration": "从一段典型的需求描述到初步类图，可走\"读需求、找名词、定类、画关联\"四步。先通读全文圈出名词——读者、借书证、图书、索书号、还书日期、滞纳金；再区分类、属性与同义词，读者、图书是类；于是得到以借阅记录为中心的初步类图，已具备类、属性与关联这些关键要素，补充需求在后续迭代中逐步加入。"
     },
     {
       "id": "unit16-32",
@@ -277,7 +276,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：一份可读的代码胜过十页文档（概述）",
       "body": "<p class=\"lead\">\"代码即文档\"（code as documentation）的含义是：可读的代码本身就是最可靠的文档——它时刻与实际行为一致，不需要维护，也<strong>不会过期</strong>。注释与文档都可能撒谎，代码不会。</p>",
-      "narration": "这个案例印证了代码即文档。可读的代码时刻与实际行为一致、不会过期，注释与文档却可能撒谎。接手遗留系统时，无注释但命名清晰的模块，远比注释满篇却混乱的模块更易维护。"
+      "narration": "LLM 分析助手的四类能力最终都汇交给分析人员决策，AI 压缩的是文本处理与候选枚举的成本，领域判断始终由分析人员作出。从需求文档到分析模型，典型工作流分五步：统一术语、生成数据字典草稿；识别候选类、按三类枚举并标注依据；分配职责、把事件流动作映射到候选类。把前几步落到提示词上，便是从需求文档到分析模型的模板。"
     },
     {
       "id": "unit16-38",

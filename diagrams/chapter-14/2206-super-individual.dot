@@ -1,0 +1,33 @@
+digraph G {
+    rankdir=LR;
+    labelloc="t";
+    label="超级个体与人机混合研发";
+    graph [fontname="Microsoft YaHei", bgcolor="white", nodesep=0.5, ranksep=0.8, splines=ortho, pad=0.3, fontsize=15, fontcolor="#2C5F8A"];
+    node [fontname="Microsoft YaHei", shape=box, style="rounded,filled", fillcolor="#DCE9F7", color="#2C5F8A", fontcolor="#333333", penwidth=1.3, fontsize=11, margin="0.2,0.1"];
+    edge [fontname="Microsoft YaHei", fontsize=10, color="#9AA7B4", fontcolor="#333333", arrowsize=0.8, penwidth=1.2];
+
+    subgraph cluster_team {
+        label="传统 / 人机混合团队";
+        color="#9AA7B4";
+        style=rounded;
+        t1 [label="多人分工\n各司其职"];
+        t2 [label="评审与把关\n流程协作"];
+    }
+
+    hub [label="人机混合研发\n核心在定义与判断", fillcolor="#2C5F8A", fontcolor="white"];
+
+    subgraph cluster_super {
+        label="超级个体";
+        color="#9AA7B4";
+        style=rounded;
+        s1 [label="定义目标与规格"];
+        s2 [label="编排智能体团队"];
+        s3 [label="策展与审查产出"];
+    }
+
+    t1 -> hub;
+    t2 -> hub;
+    hub -> s1;
+    hub -> s2;
+    hub -> s3;
+}

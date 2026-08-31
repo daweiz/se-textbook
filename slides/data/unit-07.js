@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 7,
   "slug": "unit-07",
@@ -8,7 +7,7 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "提问",
   "chapters": [
-    "第4章　需求工程"
+    "第3章　需求工程与用例建模"
   ],
   "subtitle": "",
   "count": 37,
@@ -18,14 +17,14 @@ window.SLIDES = {
       "type": "title",
       "title": "第7节　软件需求与需求工程过程",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 7 节《软件需求与需求工程过程》。本节建议用时 60 分钟，中间设有提问环节。我们将理解软件需求的概念与类型，掌握需求工程的过程，并了解常用的需求获取技术。"
+      "narration": ""
     },
     {
       "id": "unit07-1",
       "type": "section",
       "title": "软件需求的概念（概述）",
       "body": "<p class=\"lead\">软件需求是指：用户解决问题或达到目标所需的条件或能力，以及系统或系统部件为满足合同、标准、规范所需具备的条件或能力。它既包含用户视角的<strong>外部行为</strong>，也包含开发人员视角的<strong>内部特性</strong>，关键在于需求必须<strong>文档化</strong>。</p>",
-      "narration": "先明确什么是软件需求。它指用户解决问题或达到目标所需的条件与能力，也指系统为满足合同、标准、规范所应具备的条件。它既含用户视角的外部行为，也含开发人员视角的内部特性，关键在于需求必须文档化。需求分三个层次：业务需求定义项目的远景与范围；用户需求从用户角度描述功能与非功能需求，容易理解但容易含糊；系统需求面向开发人员，常借助分析模型，是软件设计的基础。"
+      "narration": "任务是过程的基本单位，指一项具体的、有明确产物的工作。这里要区分两种思维：任务思维只看单个活动，过程思维则强调活动的顺序、依赖与质量准则，这正是工程化区别于作坊式开发的分水岭。"
     },
     {
       "id": "unit07-2",
@@ -45,7 +44,7 @@ window.SLIDES = {
       "id": "unit07-4",
       "type": "section",
       "title": "软件需求的概念（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-04/images/chap02-requirement-06.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap02-requirement-06.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -67,13 +66,13 @@ window.SLIDES = {
       "type": "section",
       "title": "需求工程的过程（概述）",
       "body": "<p class=\"lead\">需求工程是应用已证实有效的原理与方法，通过合适的工具和符号系统描述待开发系统及其行为特征和相关约束的工程活动，包括五项活动：</p>",
-      "narration": "需求工程是描述待开发系统及其行为特征与约束的工程活动，包含五项活动：需求获取，聆听客户、观察用户，识别并协调相关者要求；需求分析，提炼审查需求、建立分析模型，找出错误、遗漏与不一致；需求规格说明，以文档精确阐述功能、性能与限制；需求验证，通过评审、原型评价等手段确认需求符合用户意愿；需求管理，控制需求变更、进行版本控制与需求跟踪。"
+      "narration": "先看经典过程模型。瀑布模型把生命周期阶段线性排列，前一阶段完成才进入下一阶段，简单清晰但难适应需求变更。快速原型先构建可运行的原型供用户反馈，再开发正式系统。增量模型把系统分为可独立交付的构件，分批交付、提前释放风险。"
     },
     {
       "id": "unit07-8",
       "type": "section",
       "title": "需求工程的过程（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-04/images/chap02-requirement-09.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap02-requirement-09.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -108,7 +107,7 @@ window.SLIDES = {
       "id": "unit07-13",
       "type": "section",
       "title": "需求工程的过程（图示 2）",
-      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-04/images/chap02-requirement-30.png\" alt=\"\" style=\"width:55%\"><img src=\"../src/chapter-04/images/chap02-requirement-33.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-03/images/chap02-requirement-30.png\" alt=\"\" style=\"width:55%\"><img src=\"../src/chapter-03/images/chap02-requirement-33.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -122,7 +121,7 @@ window.SLIDES = {
       "id": "unit07-15",
       "type": "section",
       "title": "需求工程的过程（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-04/images/0404-change-flow.svg\" alt=\"\" style=\"width:65%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/0404-change-flow.svg\" alt=\"\" style=\"width:65%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -130,7 +129,7 @@ window.SLIDES = {
       "type": "section",
       "title": "需求获取技术（概述）",
       "body": "<p class=\"lead\">常用获取技术包括：<strong>用户面谈</strong>（理解业务功能最有效，应做好谈前准备、谈中深究、谈后整理）；<strong>需求专题讨论会</strong>（项目主要风险承担人 1~2 天集中讨论，快速达成共识并建立团队）；</p>",
-      "narration": "常用需求获取技术包括：用户面谈，是理解业务功能最有效的方式，要做好谈前准备、谈中深究、谈后整理；需求专题讨论会，让主要风险承担人集中一两天讨论，快速达成共识；问卷调查适合确认假设、收集统计倾向，但难以探索新领域；现场考察通过观察真实工作流程理解业务细节；原型化方法则用部分实现让用户的想象具体化，解决早期需求不确定的问题。"
+      "narration": "这张表对照四种经典模型：瀑布靠阶段线性与文档评审，适合需求稳定的小项目；原型先建原型再正式开发，适合需求难描述的情形；增量分批交付、提前释放风险；螺旋以迭代为核心，适合大型高风险项目。"
     },
     {
       "id": "unit07-17",
@@ -164,7 +163,7 @@ window.SLIDES = {
       "id": "unit07-21",
       "type": "section",
       "title": "需求获取技术（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-04/images/0403-req-elicit.svg\" alt=\"\" style=\"width:85%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-04/images/chap02-requirement-10.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/0403-req-elicit.svg\" alt=\"\" style=\"width:85%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap02-requirement-10.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -172,7 +171,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：需求错误的代价随阶段增长（概述）",
       "body": "<p class=\"lead\">需求错误的代价与发现时机密切相关：<strong>缺陷发现得越晚，修复成本越高</strong>。软件工程经济学奠基人 Boehm 对 IBM 等大型项目统计出的经验广为引用：需求阶段发现并修复缺陷的相对代价记为 1，进入设计阶段约为 3～6，编码阶段约 10，测试阶段约 15～40，而系统上线后再去修复，代价可达需求阶段的数十倍。</p>",
-      "narration": "这是一个经典案例。软件工程经济学奠基人 Boehm 对大型项目的统计显示：缺陷发现得越晚，修复成本越高。需求阶段发现并修复缺陷的代价记为 1，设计阶段约 3 到 6，编码阶段约 10，测试阶段约 15 到 40，系统上线后再修复可达数十倍。以图书馆系统的借阅期限为例，需求阶段发现问题，改动代价最低。"
+      "narration": "一个示意性案例能说明纯瀑布的代价：某企业系统按瀑布推进，到联调阶段才遭遇关键需求变更，影响范围大、返工成本陡增、进度一再顺延。这并非个例，而是需求不稳定项目的普遍命运。但对需求稳定的简单系统，瀑布依然合适，教训是模型要与项目匹配。"
     },
     {
       "id": "unit07-23",
@@ -193,7 +192,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：模糊需求与明确需求的改写（概述）",
       "body": "<p class=\"lead\">模糊需求之所以危险，在于它<strong>无法度量、无法验证、无法验收</strong>。以\"系统要快\"为例，不同人对\"快\"的理解完全不同——有人指首页打开，有人指查询返回，还有人指批量导出。</p>",
-      "narration": "再看一个样例。模糊需求之所以危险，在于它无法度量、无法验证、无法验收。比如系统要快，不同人对快的理解完全不同。把模糊需求改写为明确需求，核心是补全三要素：可度量的指标、明确的边界条件、可接受的阈值。例如，系统要快可改写为：常规查询在百分之九十五的情况下，一秒内返回。"
+      "narration": "这张表从需求变化、早期反馈、风险暴露三个维度对比瀑布与迭代：瀑布只能跨阶段回退、反馈集中在后期测试；迭代在后续消化变化、每轮结束即可演示、风险逐轮暴露。在十二周的开发中，两种模型的进度感受明显不同。"
     },
     {
       "id": "unit07-26",
@@ -221,7 +220,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：需求评审挽救项目的典型经历（概述）",
       "body": "<p class=\"lead\">以下是一个<strong>典型的示意性案例</strong>。某高校图书馆委托开发图书预订系统，客户在访谈中多次提到\"读者要能支付押金与逾期罚款\"，分析员默认为\"线下到馆交款\"，并据此设计了\"读者到馆后由前台确认收款\"的流程。</p>",
-      "narration": "这是一个典型的示意性案例。某高校图书馆委托开发图书预订系统，客户在访谈中多次提到读者要能支付押金与逾期罚款，分析员默认为线下到馆交款。直到评审会上一位馆员随口问道，支付宝扫码是不是直接弹出，大家才意识到客户期待的是在线支付，两种理解对应完全不同的数据流、安全要求与交互界面。评审发生在编码之前，纠正成本只是改写若干需求条目，这正是评审的价值所在：让不同相关者对同一句话达成一致理解。"
+      "narration": "对照可见，瀑布把看得见的成果推迟到后期，迭代则让成果与风险早期可见。对变化频繁的项目，迭代反而具有更高的可预期性。"
     },
     {
       "id": "unit07-30",
@@ -242,7 +241,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：从访谈记录到需求条目的映射（概述）",
       "body": "<p class=\"lead\">需求获取的产出必须能追溯来源，形成<strong>证据链</strong>：每一条需求条目都能回到访谈中的原话。以下是一段简短的客户访谈记录（示意），演示如何把它映射为功能需求（FR）与非功能需求（NFR）条目。</p>",
-      "narration": "这个样例演示需求获取的产出如何追溯来源、形成证据链。一段简短的访谈记录中，客户说刷校园卡直接借、不用先办证，被映射为功能需求 FR-1：支持校园卡直接识别读者并借书。每一条需求条目都能回到访谈中的原话，这正是需求可跟踪性的体现。"
+      "narration": "再看一个案例：过程选错。过程没有绝对优劣，关键在与项目匹配。轻量项目套用重过程的文档制度，会陷入为过程而过程的疲惫；大型项目只用轻量方式，又会出现接口失配与集成混乱。两种失败指向同一结论：过程的选择依据是项目特征。"
     },
     {
       "id": "unit07-33",

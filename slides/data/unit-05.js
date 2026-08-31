@@ -1,4 +1,3 @@
-// 由 slides/tools/generate.js 生成，旁白由 tools/apply-narration.js 合并
 window.SLIDES = {
   "unit": 5,
   "slug": "unit-05",
@@ -8,7 +7,7 @@ window.SLIDES = {
   "minutes": 60,
   "qa": "讨论",
   "chapters": [
-    "第3章　软件过程与过程模型"
+    "第2章　软件开发方法与软件过程"
   ],
   "subtitle": "",
   "count": 35,
@@ -18,20 +17,20 @@ window.SLIDES = {
       "type": "title",
       "title": "第5节　软件过程与经典过程模型",
       "body": "",
-      "narration": "欢迎学习《智能软件工程基础》第 5 节《软件过程与经典过程模型》。本节建议用时 60 分钟，含讨论环节。我们将理解软件过程的活动构成，掌握过程框架，并辨析瀑布、增量、迭代与演化等经典过程模型。"
+      "narration": ""
     },
     {
       "id": "unit05-1",
       "type": "section",
       "title": "过程与任务（概述）",
       "body": "<p class=\"lead\">任务是过程的基本单位，指一项具体的、有明确产物的工作。<strong>任务思维</strong>只关心单个活动本身，而<strong>过程思维</strong>强调活动的顺序、依赖、输入输出与质量准则——这正是工程化区别于作坊式开发的分水岭。</p>",
-      "narration": "任务是过程的基本单位，指一项具体的、有明确产物的工作。这里要区分两种思维：任务思维只看单个活动，过程思维则强调活动的顺序、依赖与质量准则，这正是工程化区别于作坊式开发的分水岭。"
+      "narration": "本章小结。软件开发方法回答如何组织开发，从结构化到面向对象、从组件服务到敏捷，演进始终围绕控制复杂性。智能化方法以模型为中心、以人机结对为形态，AI 承担起草与执行、人保留定义与把关。五步流程——定约束、备上下文、生成自检、验证审查、度量改进——让智能开发沉淀为团队纪律，验证优先是质量底线。"
     },
     {
       "id": "unit05-2",
       "type": "section",
       "title": "过程与任务（图示）",
-      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-03/images/chap12-process-proc-02.png\" alt=\"\" style=\"width:45%\"><img src=\"../src/chapter-03/images/chap12-process-proc-03.png\" alt=\"\" style=\"width:45%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap12-process-proc-05.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-pair\"><img src=\"../src/chapter-02/images/chap12-process-proc-02.png\" alt=\"\" style=\"width:45%\"><img src=\"../src/chapter-02/images/chap12-process-proc-03.png\" alt=\"\" style=\"width:45%\"></div>\n<div class=\"img-single\"><img src=\"../src/chapter-02/images/chap12-process-proc-05.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -39,7 +38,7 @@ window.SLIDES = {
       "type": "section",
       "title": "过程框架（概述）",
       "body": "<p class=\"lead\">软件过程由一组<strong>基本活动</strong>和若干<strong>辅助活动</strong>构成。基本活动包括：</p>",
-      "narration": "软件过程由基本活动和辅助活动构成。基本活动包括：规格说明回答做什么，开发回答怎么做、做出来，确认回答做对了吗，演化负责适应变化。辅助活动如项目管理、配置管理贯穿始终，过程框架定义了总体结构，具体项目再据此裁剪。"
+      "narration": "过程框架。软件过程由一组基本活动和若干辅助活动构成。基本活动包括："
     },
     {
       "id": "unit05-4",
@@ -66,7 +65,7 @@ window.SLIDES = {
       "id": "unit05-7",
       "type": "section",
       "title": "过程框架（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap12-process-framework.png\" alt=\"\" style=\"width:45%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-02/images/chap12-process-framework.png\" alt=\"\" style=\"width:45%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -74,13 +73,13 @@ window.SLIDES = {
       "type": "section",
       "title": "经典过程模型（概述）",
       "body": "<p class=\"lead\"><strong>瀑布模型</strong>是最经典的过程模型，将生命周期阶段线性排列，前一个阶段完成后才进入下一阶段，要求需求在早期充分冻结。它简单清晰、易于管理，但难以适应需求变更，实际项目中常以文档评审回退缓解这一缺陷。</p>",
-      "narration": "先看经典过程模型。瀑布模型把生命周期阶段线性排列，前一阶段完成才进入下一阶段，简单清晰但难适应需求变更。快速原型先构建可运行的原型供用户反馈，再开发正式系统。增量模型把系统分为可独立交付的构件，分批交付、提前释放风险。"
+      "narration": "经典过程模型。瀑布模型是最经典的过程模型，将生命周期阶段线性排列，前一个阶段完成后才进入下一阶段，要求需求在早期充分冻结。它简单清晰、易于管理，但难以适应需求变更，实际项目中常以文档评审回退缓解这一缺陷。"
     },
     {
       "id": "unit05-9",
       "type": "section",
       "title": "经典过程模型（图示）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap12-process-proc-11.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-02/images/chap12-process-proc-11.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -94,7 +93,7 @@ window.SLIDES = {
       "id": "unit05-11",
       "type": "section",
       "title": "经典过程模型（图示 2）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap12-process-proc-12.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-02/images/chap12-process-proc-12.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -108,7 +107,7 @@ window.SLIDES = {
       "id": "unit05-13",
       "type": "section",
       "title": "经典过程模型（图示 3）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap12-process-proc-13.png\" alt=\"\" style=\"width:55%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-02/images/chap12-process-proc-13.png\" alt=\"\" style=\"width:55%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -122,15 +121,15 @@ window.SLIDES = {
       "id": "unit05-15",
       "type": "section",
       "title": "经典过程模型（图示 4）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/chap12-process-proc-14.png\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-02/images/chap12-process-proc-14.png\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
       "id": "unit05-16",
       "type": "section",
       "title": "经典过程模型（要点 4）",
-      "body": "<ul><li>此外还有强调无过程冗余的<strong>形式化过程模型</strong>（第 12 章讨论）、以复用为宗旨的<strong>基于组件的过程模型</strong>，以及开源社区特有的<strong>开源过程</strong>。</li><li>四种经典模型的核心思想、优点与适用场景可对照如下表所示。</li></ul>",
-      "narration": "本页要点：此外还有强调无过程冗余的 形式化过程模型 （第 12 章讨论）、以复用为宗旨的 基于组件的过程模型 ，以及开源社区特有的 开源过程 。 四种经典模型的核心思想、优点与适用场景可对照如下表所示。。"
+      "body": "<ul><li>此外还有强调无过程冗余的<strong>形式化过程模型</strong>（第 7 章讨论）、以复用为宗旨的<strong>基于组件的过程模型</strong>，以及开源社区特有的<strong>开源过程</strong>。</li><li>四种经典模型的核心思想、优点与适用场景可对照如下表所示。</li></ul>",
+      "narration": "本页要点：此外还有强调无过程冗余的 形式化过程模型 （第 7 章讨论）、以复用为宗旨的 基于组件的过程模型 ，以及开源社区特有的 开源过程 。 四种经典模型的核心思想、优点与适用场景可对照如下表所示。。"
     },
     {
       "id": "unit05-17",
@@ -150,7 +149,7 @@ window.SLIDES = {
       "id": "unit05-19",
       "type": "section",
       "title": "经典过程模型（图示 5）",
-      "body": "<div class=\"img-single\"><img src=\"../src/chapter-03/images/0302-model-selection.svg\" alt=\"\" style=\"width:60%\"></div>",
+      "body": "<div class=\"img-single\"><img src=\"../src/chapter-02/images/0302-model-selection.svg\" alt=\"\" style=\"width:60%\"></div>",
       "narration": "请看本页图示，帮助理解本节内容。"
     },
     {
@@ -158,7 +157,7 @@ window.SLIDES = {
       "type": "section",
       "title": "故事：瀑布模型的由来（概述）",
       "body": "<p class=\"lead\"><strong>瀑布模型</strong>的来历常被误读。1970 年，Winston Royce 在论文《管理大型软件系统的开发》中，以阶段图描述了\"需求—设计—实现—测试—交付\"的顺序过程，但他同时强调阶段间应有<strong>反馈回路</strong>，还建议\"至少实现两次\"——本意更接近迭代，而非纯线性。</p>",
-      "narration": "先讲一个故事：瀑布模型的由来。1970 年 Royce 描述顺序过程时，特别强调阶段间要有反馈回路、至少实现两次，本意更接近迭代。后来阶段图被简化成纯线性瀑布并被军标固化，教科书里的瀑布，其实是业界对 Royce 原意的简化与偏离。"
+      "narration": "故事：瀑布模型的由来。瀑布模型的来历常被误读。1970 年，Winston Royce 在论文《管理大型软件系统的开发》中，以阶段图描述了\"需求—设计—实现—测试—交付\"的顺序过程，但他同时强调阶段间应有反馈回路，还建议\"至少实现两次\"——本意更接近迭代，而非纯线性。"
     },
     {
       "id": "unit05-21",
@@ -179,7 +178,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：瀑布模型的实践教训（概述）",
       "body": "<p class=\"lead\">一个<strong>典型的示意性场景</strong>可以说明纯瀑布的代价：某企业信息系统采用纯瀑布推进，需求分析阶段耗时约数月，随后设计、编码相继完成，直到系统联调阶段，业务方提出关键需求变更——流程与数月前的假设相左。</p>",
-      "narration": "一个示意性案例能说明纯瀑布的代价：某企业系统按瀑布推进，到联调阶段才遭遇关键需求变更，影响范围大、返工成本陡增、进度一再顺延。这并非个例，而是需求不稳定项目的普遍命运。但对需求稳定的简单系统，瀑布依然合适，教训是模型要与项目匹配。"
+      "narration": "案例：瀑布模型的实践教训。一个典型的示意性场景可以说明纯瀑布的代价：某企业信息系统采用纯瀑布推进，需求分析阶段耗时约数月，随后设计、编码相继完成，直到系统联调阶段，业务方提出关键需求变更——流程与数月前的假设相左。"
     },
     {
       "id": "unit05-24",
@@ -200,7 +199,7 @@ window.SLIDES = {
       "type": "section",
       "title": "样例：迭代开发与瀑布的进度对比（概述）",
       "body": "<p class=\"lead\">把瀑布与迭代开发放在同一张表里对比，差异一目了然。下表就\"需求变化、早期反馈、风险暴露\"三个维度给出<strong>示意性对照</strong>。</p>",
-      "narration": "这张表从需求变化、早期反馈、风险暴露三个维度对比瀑布与迭代：瀑布只能跨阶段回退、反馈集中在后期测试；迭代在后续消化变化、每轮结束即可演示、风险逐轮暴露。在十二周的开发中，两种模型的进度感受明显不同。"
+      "narration": "样例：迭代开发与瀑布的进度对比。把瀑布与迭代开发放在同一张表里对比，差异一目了然。下表就\"需求变化、早期反馈、风险暴露\"三个维度给出示意性对照。"
     },
     {
       "id": "unit05-27",
@@ -235,7 +234,7 @@ window.SLIDES = {
       "type": "section",
       "title": "案例：过程选错的典型项目（概述）",
       "body": "<p class=\"lead\">过程的\"轻重\"没有绝对优劣，关键在<strong>是否与项目匹配</strong>。选错过程的失败可归结为两种<strong>典型形态</strong>。</p>",
-      "narration": "再看一个案例：过程选错。过程没有绝对优劣，关键在与项目匹配。轻量项目套用重过程的文档制度，会陷入为过程而过程的疲惫；大型项目只用轻量方式，又会出现接口失配与集成混乱。两种失败指向同一结论：过程的选择依据是项目特征。"
+      "narration": "案例：过程选错的典型项目。过程的\"轻重\"没有绝对优劣，关键在是否与项目匹配。选错过程的失败可归结为两种典型形态。"
     },
     {
       "id": "unit05-32",
