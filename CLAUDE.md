@@ -47,7 +47,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 当前书稿共 **16 章、约 16 万字**：`src/frontmatter.md`（前言）、`src/chapter-01/`~`src/chapter-16/` 各章（第一章至第九章为传统软件工程基础，第十至第十六章为智能软件工程专章：AI 系统工程与 MLOps、大模型应用开发范式、智能体系统工程、AI 原生软件工程、软件工程 3.0、自主软件工程、智能软件工程的治理安全与未来（全书结语））、`src/backmatter.md`（后记）。内容编写参照 `D:/bookspace/se_textbook/se` 的章节组织；图片放各章 `images/` 目录，`make init` 会将其汇总到 `build/images/`；`make diagrams` 把 `diagrams/chapter-NN/` 下的图源渲染为各章 `images/` 的 SVG/PNG。
 
-幻灯片系统：`slides/` 由书稿生成，划分表为 `slides/tools/units.js`（37 节、每节 60 分钟、6 模块），配套 `slides/tools/verify.js` 校验（每节 ≥30 页、内容片覆盖不重不漏）；改书稿或划分后运行 `/slides`（生成 → 合并旁白 → 校验）。
+幻灯片系统：`docs/` 由书稿生成，划分表为 `docs/tools/units.js`（37 节、每节 60 分钟、6 模块），配套 `docs/tools/verify.js` 校验（每节 ≥30 页、内容片覆盖不重不漏）；改书稿或划分后运行 `/slides`（生成 → 合并旁白 → 校验）。
 
 ## 交互日志系统
 

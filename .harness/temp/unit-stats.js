@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 function loadUnit(n) {
-  const f = path.join('slides/data', 'unit-' + String(n).padStart(2, '0') + '.js');
+  const f = path.join('docs/data', 'unit-' + String(n).padStart(2, '0') + '.js');
   const src = fs.readFileSync(f, 'utf8').replace(/window\.SLIDES\s*=/, 'globalThis.__D =');
   const m = src.match(/globalThis\.__D =([\s\S]*);?\s*$/);
   eval(m[0]);

@@ -190,7 +190,7 @@ def main():
             shutil.move(dsrc, os.path.join(DIAG, f"chapter-{new_ch:02d}"))
     shutil.rmtree(TMP, ignore_errors=True)
 
-    print("\n完成：16 章已落位。请检查 Makefile、slides 数据与交叉引用。")
+    print("\n完成：16 章已落位。请检查 Makefile、docs 数据与交叉引用。")
 
     # —— 字数量复：新章现字数 ——
     print("\n新章字数：")

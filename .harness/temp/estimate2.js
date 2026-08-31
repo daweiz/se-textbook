@@ -1,10 +1,10 @@
 // 合理细粒度估算：导引页=1页（不吸收后续列表）、列表每4条1页、表格整表1页、图1页、h3并入
 const fs = require('fs');
 const path = require('path');
-const units = require(path.resolve('slides/tools/units.js'));
+const units = require(path.resolve('docs/tools/units.js'));
 
 function loadUnitData(n) {
-  const src = fs.readFileSync('slides/data/unit-' + String(n).padStart(2, '0') + '.js', 'utf8');
+  const src = fs.readFileSync('docs/data/unit-' + String(n).padStart(2, '0') + '.js', 'utf8');
   const m = src.match(/window\.SLIDES\s*=\s*([\s\S]*?);\s*$/);
   globalThis.__D = eval('(' + m[1] + ')');
   return globalThis.__D;

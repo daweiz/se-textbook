@@ -1,7 +1,7 @@
 // 查看提示词页 body 原文
 const fs = require('fs');
 function load(n) {
-  const src = fs.readFileSync('slides/data/unit-' + String(n).padStart(2, '0') + '.js', 'utf8');
+  const src = fs.readFileSync('docs/data/unit-' + String(n).padStart(2, '0') + '.js', 'utf8');
   const m = src.match(/window\.SLIDES\s*=\s*([\s\S]*?);\s*$/);
   return eval('(' + m[1] + ')');
 }

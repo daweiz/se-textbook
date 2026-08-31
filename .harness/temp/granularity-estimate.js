@@ -1,10 +1,10 @@
 // 细粒度估算：若拆细策略改为 导引1页/列表按条目拆/表格拆行/图1页，各节能到多少页
 const fs = require('fs');
 const path = require('path');
-const units = require(path.resolve('slides/tools/units.js'));
+const units = require(path.resolve('docs/tools/units.js'));
 
 function loadUnitData(n) {
-  const f = 'slides/data/unit-' + String(n).padStart(2, '0') + '.js';
+  const f = 'docs/data/unit-' + String(n).padStart(2, '0') + '.js';
   const src = fs.readFileSync(f, 'utf8');
   const m = src.match(/window\.SLIDES\s*=\s*([\s\S]*?);\s*$/);
   globalThis.__D = eval('(' + m[1] + ')');

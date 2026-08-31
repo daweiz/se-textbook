@@ -1,11 +1,11 @@
 // 提取每章薄弱节边界：薄弱节覆盖的最后一个内容片标题 + 下一节（第二个 unit）起始片标题
 const fs = require('fs');
 const path = require('path');
-const units = require(path.resolve('slides/tools/units.js'));
+const units = require(path.resolve('docs/tools/units.js'));
 const thin = new Set([1, 3, 5, 7, 10, 12, 14, 16, 18, 20, 22, 24, 28]);
 
 function chSlides(ch) {
-  const src = fs.readFileSync('slides/data/' + ch + '.js', 'utf8');
+  const src = fs.readFileSync('docs/data/' + ch + '.js', 'utf8');
   const m = src.match(/window\.SLIDES\s*=\s*([\s\S]*?);\s*$/);
   return eval('(' + m[1] + ')').slides;
 }
