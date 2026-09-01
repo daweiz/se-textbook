@@ -5,3 +5,5 @@
 {"v":1,"id":"e_mtilan5b_6je6snsp","cid":"c_9vug5o617z","ts":1788262457519,"localDay":"2026-09-01","localHour":19,"tz":480,"type":"view","page":"home"}
 {"v":1,"id":"e_mtilaod3_rejsip6g","cid":"c_9vug5o617z","ts":1788262459095,"localDay":"2026-09-01","localHour":19,"tz":480,"type":"view","page":"player","slug":"unit-01"}
 {"v":1,"id":"e_mtilatvl_1ydj1g8u","cid":"c_9vug5o617z","ts":1788262466241,"localDay":"2026-09-01","localHour":19,"tz":480,"type":"session","sid":"s_mtilaoddw5gce9","slug":"unit-01","mode":"unit","title":"软件危机与软件工程","slides":43,"start":1788262459105,"end":1788262466241,"duration":7136,"fiveMin":false,"reachedEnd":false,"completed":false,"maxSlide":0,"nav":{"next":0,"prev":0,"jump":0},"tts":{"plays":1,"sec":3},"features":{"fullscreen":0,"overview":0,"theme":0,"zoom":0,"recording":0},"pageDwell":[[0,7136]]}
+{"v":1,"id":"e_mtilprnz_z4hyctxt","cid":"c_1ur2q08c20","ts":1788263163215,"localDay":"2026-09-01","localHour":19,"tz":480,"type":"view","page":"home"}
+{"v":1,"id":"e_mtilptew_g0qpvzlu","cid":"c_1ur2q08c20","ts":1788263165480,"localDay":"2026-09-01","localHour":19,"tz":480,"type":"view","page":"player","slug":"unit-01"}

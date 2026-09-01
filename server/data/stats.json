@@ -1,9 +1,9 @@
 {
   "startedAt": "2026-09-01T11:02:03.846Z",
-  "totalVisits": 11,
+  "totalVisits": 13,
   "totalDurationSec": 0,
   "firstVisitAt": "2026-09-01T11:02:03.846Z",
-  "lastVisitAt": "2026-09-01T11:45:18.791Z",
+  "lastVisitAt": "2026-09-01T11:46:05.350Z",
   "downloads": {
     "book": 2,
     "whitepaper": 16
@@ -118,6 +118,26 @@
       "ua": "Mozilla/5.0 (Linux; Android 10; CDY-AN00 Build/HUAWEICDY-AN00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/142.0.7444.173 Mobile Safari/537.36 XWEB/1420283 MMWEBSDK/20260604 MMWEBID/3593 REV/8089b8d255290595e78974ee543624b63b45efc9 MicroMessenger/8.0.77.3160(0x28004D33) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64",
       "referrer": "http://willow.net.cn/se-textbook/book/",
       "page": "book"
+    },
+    {
+      "id": "othaogfh05qmtilpro5",
+      "start": "2026-09-01T11:46:03.060Z",
+      "end": null,
+      "duration": 0,
+      "ip": "175.163.94.95",
+      "ua": "Mozilla/5.0 (Linux; Android 10; CDY-AN00 Build/HUAWEICDY-AN00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/142.0.7444.173 Mobile Safari/537.36 XWEB/1420283 MMWEBSDK/20260604 MMWEBID/3593 REV/8089b8d255290595e78974ee543624b63b45efc9 MicroMessenger/8.0.77.3160(0x28004D33) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64",
+      "referrer": "http://willow.net.cn/se-textbook/slides/",
+      "page": "slides-index"
+    },
+    {
+      "id": "8px6bgas5lwmtilptey",
+      "start": "2026-09-01T11:46:05.350Z",
+      "end": null,
+      "duration": 0,
+      "ip": "175.163.94.95",
+      "ua": "Mozilla/5.0 (Linux; Android 10; CDY-AN00 Build/HUAWEICDY-AN00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/142.0.7444.173 Mobile Safari/537.36 XWEB/1420283 MMWEBSDK/20260604 MMWEBID/3593 REV/8089b8d255290595e78974ee543624b63b45efc9 MicroMessenger/8.0.77.3160(0x28004D33) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64",
+      "referrer": "http://willow.net.cn/se-textbook/slides/player.html?u=unit-01",
+      "page": "slides-player"
     }
   ]
 }
