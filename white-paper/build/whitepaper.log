@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.26)  1 SEP 2026 11:04
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.26)  1 SEP 2026 19:55
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -8674,6 +8674,18 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [330
 
 ]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[331]
 
 Package caption Warning: Unused \captionsetup[table] on input line 50.
 See the caption package documentation for explanation.
@@ -8687,7 +8699,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[331] (build/whitepaper.aux)
+[332] (build/whitepaper.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/08/05>
@@ -8704,4 +8716,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  93i,13n,111p,1198b,645s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on build/whitepaper.xdv (331 pages, 4283236 bytes).
+Output written on build/whitepaper.xdv (332 pages, 4283916 bytes).
