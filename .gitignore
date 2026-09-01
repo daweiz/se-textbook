@@ -1,9 +1,3 @@
-build/
-white-paper/build/
 fenced_divs-*.log
 .vscode/
 node_modules/
-
-# 动态服务器运行时统计（server/server.mjs 产生，保留目录占位）
-server/data/*
-!server/data/.gitkeep
