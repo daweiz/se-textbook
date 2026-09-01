@@ -5,6 +5,7 @@
 //   node server/server.mjs             启动（默认端口 8080，可用 PORT 环境变量覆盖）
 //   node server/server.mjs --port 9000 指定端口
 //   node server/server.mjs --stats     打印访问统计摘要后退出（不开服务器）
+// 环境变量：PORT=8080 端口；BASE_PATH=/se-textbook 部署子路径（留空按根路径发布，经 nginx 反代时设此值）
 //
 // 路由：
 //   / 或 /index.html      引导页 server/landing.html（不埋点）
@@ -18,6 +19,7 @@
 //   /echarts.min.js       ECharts 库（本地托管，统计页图表用）
 //   /stats                页面访问统计（ECharts 数据可视化，server/stats.html）
 //   /stats.json           页面访问 JSON（含聚合分析：小时/每日/时长/来源/平台/IP/页面/下载）
+//   /slides-stats         课件学习统计（ECharts 数据可视化，server/slides-stats.html，数据 fetch /api/stats）
 //   POST /api/collect     幻灯片行为统计采集（js/stats.js 上报，事件落盘 server/data/slides-events.jsonl）
 //   GET  /api/stats       幻灯片行为统计聚合报表（原 docs/stats.html 消费，报表页已删除，接口保留）
 //   GET  /api/raw         幻灯片原始事件导出（?limit=、?after= 可选）
@@ -35,6 +37,9 @@ import * as stats from './stats.mjs'
 import * as slidesStats from './slides-stats.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+// 部署子路径（经 nginx 挂在 /se-textbook 下时设 BASE_PATH=/se-textbook；留空按根路径发布）
+const BASE_PATH = (process.env.BASE_PATH || '').replace(/\/+$/, '')
+const route = (p) => BASE_PATH + p
 const BUILD_DIR = path.resolve(__dirname, '..', 'build')
 const BOOK_HTML = path.join(BUILD_DIR, 'md_writing.html')
 const BOOK_PDF = path.join(BUILD_DIR, 'md_writing.pdf')
@@ -43,6 +48,7 @@ const WHITEPAPER_DIR = path.resolve(__dirname, '..', 'white-paper', 'build')
 const TRACK_FILE = path.join(__dirname, 'track.js')
 const LANDING_FILE = path.join(__dirname, 'landing.html')
 const STATS_PAGE_FILE = path.join(__dirname, 'stats.html')
+const SLIDES_STATS_PAGE_FILE = path.join(__dirname, 'slides-stats.html')
 const ECHARTS_FILE = path.join(__dirname, 'echarts.min.js')
 
 // 1×1 透明 GIF（hex 构造，避免源码内嵌非打印字符），埋点信标统一返回它
@@ -94,6 +100,14 @@ try {
   console.error(`[server] 读取 ${STATS_PAGE_FILE} 失败：${err.message}`)
 }
 
+// 预读课件学习统计页；失败则 /slides-stats 退回 404 并告警
+let SLIDES_STATS_PAGE_HTML = null
+try {
+  SLIDES_STATS_PAGE_HTML = fs.readFileSync(SLIDES_STATS_PAGE_FILE, 'utf8')
+} catch (err) {
+  console.error(`[server] 读取 ${SLIDES_STATS_PAGE_FILE} 失败：${err.message}`)
+}
+
 // 预读 ECharts 库；失败则统计页图表不可用，但页面仍可返回
 let ECHARTS_JS = ''
 try {
@@ -104,7 +118,7 @@ try {
 
 // 幻灯片统计上报端点：由服务端注入到幻灯片页（/slides/ 下 index.html / player.html），
 // 使页面自动向同源服务器上报行为统计（无需手工配置端点；file:// 直开时无此注入，统计保持关闭）
-const SLIDES_ENDPOINT_TAG = `\n<script>window.SLIDE_STATS_ENDPOINT="/";</script>\n`
+const SLIDES_ENDPOINT_TAG = `\n<script>window.SLIDE_STATS_ENDPOINT="${BASE_PATH}/";</script>\n`
 
 // ---------- 小工具 ----------
 
@@ -325,6 +339,18 @@ function serveStatsPage(res) {
   })
 }
 
+// 课件学习统计网页：读预存的 slides-stats.html（数据由前端 fetch /api/stats）
+function serveSlidesStatsPage(res) {
+  if (SLIDES_STATS_PAGE_HTML == null) {
+    send404(res)
+    return
+  }
+  send(res, 200, SLIDES_STATS_PAGE_HTML, {
+    'Content-Type': MIME['.html'],
+    'Cache-Control': 'no-store',
+  })
+}
+
 /** 统计页与 /stats.json 共用的完整数据负载 */
 function statsData() {
   const s = stats.summary()
@@ -403,17 +429,17 @@ const server = http.createServer((req, res) => {
   const p = url.pathname
 
   if (req.method === 'OPTIONS') return send(res, 204, '', jsonHeaders())
-  if (p === '/' || p === '/index.html') return serveLanding(res)
-  if (p === '/book') return send(res, 301, '', { Location: '/book/' })
-  if (p === '/book/') return serveBook(res)
-  if (p === '/slides') return send(res, 301, '', { Location: '/slides/' })
-  if (p === '/slides/') {
+  if (p === route('/') || p === route('/index.html')) return serveLanding(res)
+  if (p === route('/book')) return send(res, 301, '', { Location: route('/book/') })
+  if (p === route('/book/')) return serveBook(res)
+  if (p === route('/slides')) return send(res, 301, '', { Location: route('/slides/') })
+  if (p === route('/slides/')) {
     return serveStatic(res, SLIDES_DIR, '/index.html', { injectPage: 'slides-index', injectSlidesEndpoint: true })
   }
   // 埋点信标：教材页 /book/ 与幻灯片页 /slides/ 的相对 track.gif 实际请求带前缀，
   // 与 /track.gif 都路由到同一处理（endsWith 兼容任意前缀）
   if (p.endsWith('/track.gif')) return serveTrack(req, res, url.searchParams)
-  if (p === '/echarts.min.js') {
+  if (p === route('/echarts.min.js')) {
     if (!ECHARTS_JS) return send404(res)
     return send(res, 200, ECHARTS_JS, {
       'Content-Type': 'text/javascript; charset=utf-8',
@@ -421,36 +447,37 @@ const server = http.createServer((req, res) => {
     })
   }
   // 幻灯片行为统计：采集 / 报表 / 原始事件 / 健康检查（与页面访问统计 /stats 相互独立）
-  if (req.method === 'POST' && p === '/api/collect') return handleSlidesCollect(req, res)
-  if (req.method === 'GET' && p === '/api/stats') {
+  if (req.method === 'POST' && p === route('/api/collect')) return handleSlidesCollect(req, res)
+  if (req.method === 'GET' && p === route('/api/stats')) {
     return send(res, 200, JSON.stringify(slidesStats.report()), jsonHeaders())
   }
-  if (req.method === 'GET' && p === '/api/raw') {
+  if (req.method === 'GET' && p === route('/api/raw')) {
     const limit = Math.max(1, Math.min(5000, parseInt(url.searchParams.get('limit') || '500', 10)))
     const after = parseInt(url.searchParams.get('after') || '0', 10)
     return send(res, 200, JSON.stringify(slidesStats.rawEvents(limit, after)), jsonHeaders())
   }
-  if (req.method === 'GET' && p === '/api/health') {
+  if (req.method === 'GET' && p === route('/api/health')) {
     return send(res, 200, JSON.stringify(slidesStats.health()), jsonHeaders())
   }
-  if (p === '/stats') return serveStatsPage(res)
-  if (p === '/stats.json') {
+  if (p === route('/stats')) return serveStatsPage(res)
+  if (p === route('/slides-stats')) return serveSlidesStatsPage(res)
+  if (p === route('/stats.json')) {
     return send(res, 200, JSON.stringify(statsData(), null, 2), {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'no-store',
     })
   }
-  if (p === '/whitepaper.pdf') {
+  if (p === route('/whitepaper.pdf')) {
     const wp = findWhitepaperPdf()
     return wp ? servePdf(res, wp, () => stats.recordDownload('whitepaper')) : send404(res)
   }
-  if (p === '/book.pdf') return servePdf(res, BOOK_PDF, () => stats.recordDownload('book'))
+  if (p === route('/book.pdf')) return servePdf(res, BOOK_PDF, () => stats.recordDownload('book'))
   // 教材其余静态资源（images/ 等）从 build/ 解析
-  if (p.startsWith('/book/')) return serveStatic(res, BUILD_DIR, p.slice('/book'.length))
+  if (p.startsWith(route('/book/'))) return serveStatic(res, BUILD_DIR, p.slice(route('/book').length))
   // 幻灯片其余静态资源（css/js/data/favicon 等）从 docs/ 解析；
   // index/player 页注入访问埋点与统计端点（自动连到同源服务器）
-  if (p.startsWith('/slides/')) {
-    const rel = p.slice('/slides'.length)
+  if (p.startsWith(route('/slides/'))) {
+    const rel = p.slice(route('/slides').length)
     const fileName = path.basename(rel).toLowerCase()
     const opts = {}
     if (fileName === 'index.html') {
@@ -483,11 +510,12 @@ function main() {
   if (portIdx !== -1 && args[portIdx + 1]) port = Number(args[portIdx + 1])
 
   server.listen(port, () => {
-    console.log(`[server] 发布 http://localhost:${port}/（引导页）`)
-    console.log(`[server] 教材 http://localhost:${port}/book/ · 幻灯片 http://localhost:${port}/slides/`)
-    console.log(`[server] 教材PDF http://localhost:${port}/book.pdf · 白皮书 http://localhost:${port}/whitepaper.pdf`)
-    console.log(`[server] 访问统计 http://localhost:${port}/stats`)
-    console.log(`[server] 幻灯片上报 POST /api/collect · 聚合 GET /api/stats`)
+    const base = BASE_PATH || ''
+    console.log(`[server] 发布 http://localhost:${port}${base}/（引导页）`)
+    console.log(`[server] 教材 http://localhost:${port}${base}/book/ · 幻灯片 http://localhost:${port}${base}/slides/`)
+    console.log(`[server] 教材PDF http://localhost:${port}${base}/book.pdf · 白皮书 http://localhost:${port}${base}/whitepaper.pdf`)
+    console.log(`[server] 访问统计 http://localhost:${port}${base}/stats`)
+    console.log(`[server] 幻灯片上报 POST ${base}/api/collect · 聚合 GET ${base}/api/stats`)
   })
 
   const shutdown = () => {

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!-- 课件学习统计页：由 server.mjs 在 /slides-stats 发布，数据来自 fetch('api/stats')（slides-stats.mjs 聚合）。
+  ECharts 本地托管（/echarts.min.js），配色与访问统计页一致（浅色模式），风格可参照 server/stats.html。 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>课件学习统计 · 智能软件工程基础</title>
+<script src="echarts.min.js"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --page-plane: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --hairline: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11, 11, 11, 0.10);
+    --s1: #2a78d6;   /* blue */
+    --s2: #eb6834;   /* orange */
+    --s3: #1baf7a;   /* aqua */
+    --s4: #eda100;   /* yellow */
+    --s5: #e87ba4;   /* magenta */
+    --s6: #008300;   /* green */
+    --s7: #4a3aa7;   /* violet */
+    --s8: #e34948;   /* red */
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+    background: var(--page-plane);
+  }
+  .head { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem .25rem; }
+  h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+  .muted { color: var(--muted); font-size: .85rem; }
+  .cards { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+  .card {
+    flex: 1; min-width: 150px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 8px; padding: 1rem;
+  }
+  .card b { display: block; font-size: 1.8rem; line-height: 1.2; font-weight: 600; }
+  .card span { color: var(--ink-2); font-size: .85rem; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
+  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; }
+  .chart {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1rem .5rem;
+  }
+  .chart h3 { margin: 0 0 .25rem; font-size: .95rem; }
+  .chart div { width: 100%; height: 300px; }
+  h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-top: .5rem; }
+  th, td { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid var(--hairline); font-size: .9rem; white-space: nowrap; }
+  th { background: #efefea; color: var(--ink-2); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  td.slug { color: var(--muted); font-size: .75rem; }
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>课件学习统计 · 智能软件工程基础</h1>
+  <p class="muted" id="meta"></p>
+</div>
+<div class="wrap">
+  <div class="cards" id="cards"></div>
+
+  <div class="charts">
+    <div class="chart"><h3>近60天学习趋势（会话 / 首页打开）</h3><div id="c-daily"></div></div>
+    <div class="chart"><h3>24小时会话分布</h3><div id="c-hourly"></div></div>
+    <div class="chart"><h3>各节会话次数 Top</h3><div id="c-units"></div></div>
+    <div class="chart"><h3>全局停留最久页面 Top</h3><div id="c-dwell"></div></div>
+  </div>
+
+  <h2>各节学习明细</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>课件</th><th>会话</th><th>平均时长</th><th>总时长</th><th>≥5分</th>
+          <th>学完</th><th>翻到底</th><th>最大页</th><th>TTS播放</th>
+          <th>全屏</th><th>概览</th><th>缩放</th><th>录制</th><th>最久停留页</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</div>
+<script>
+(function () {
+  'use strict'
+  var PALETTE = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#e34948']
+  var S1 = '#2a78d6', S2 = '#eb6834', S3 = '#1baf7a', S7 = '#4a3aa7'
+  var charts = {}
+
+  function $ (id) { return document.getElementById(id) }
+
+  function esc (s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+  }
+
+  function fmtDuration (sec) {
+    sec = Number(sec) || 0
+    var h = Math.floor(sec / 3600)
+    var m = Math.floor((sec % 3600) / 60)
+    var s = Math.floor(sec % 60)
+    if (h > 0) return h + '时' + m + '分' + s + '秒'
+    if (m > 0) return m + '分' + s + '秒'
+    return s + '秒'
+  }
+
+  function fmtTime (ts) {
+    if (!ts) return '—'
+    var d = new Date(ts)
+    function p (n) { return String(n).padStart(2, '0') }
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes())
+  }
+
+  function axisGrid () { return { left: 8, right: 16, top: 36, bottom: 8, containLabel: true } }
+  function axisLabelStyle () { return { color: '#52514e', fontSize: 11 } }
+  function splitLine () { return { lineStyle: { color: '#e1e0d9' } } }
+
+  function lineOption (daily) {
+    return {
+      tooltip: { trigger: 'axis' },
+      legend: { top: 0, textStyle: { color: '#52514e' } },
+      grid: axisGrid(),
+      xAxis: { type: 'category', data: daily.map(function (d) { return d.day }), axisLabel: axisLabelStyle(), axisLine: { lineStyle: { color: '#c3c2b7' } } },
+      yAxis: { type: 'value', minInterval: 1, axisLabel: axisLabelStyle(), splitLine: splitLine() },
+      series: [
+        { name: '会话', type: 'line', smooth: true, symbolSize: 5, itemStyle: { color: S1 }, lineStyle: { width: 2 }, data: daily.map(function (d) { return d.sessions }) },
+        { name: '首页打开', type: 'line', smooth: true, symbolSize: 5, itemStyle: { color: S3 }, lineStyle: { width: 2 }, data: daily.map(function (d) { return d.home }) }
+      ]
+    }
+  }
+
+  function barOption (labels, values, color) {
+    return {
+      tooltip: { trigger: 'axis' },
+      grid: axisGrid(),
+      xAxis: { type: 'category', data: labels, axisLabel: axisLabelStyle(), axisLine: { lineStyle: { color: '#c3c2b7' } } },
+      yAxis: { type: 'value', minInterval: 1, axisLabel: axisLabelStyle(), splitLine: splitLine() },
+      series: [{
+        type: 'bar', barMaxWidth: 26,
+        itemStyle: { color: color || S1, borderRadius: [3, 3, 0, 0] },
+        label: { show: true, position: 'top', fontSize: 10, color: '#52514e' },
+        data: values
+      }]
+    }
+  }
+
+  function hbarOption (rows, color) {
+    return {
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      grid: { left: 8, right: 48, top: 8, bottom: 8, containLabel: true },
+      xAxis: { type: 'value', minInterval: 1, axisLabel: axisLabelStyle(), splitLine: splitLine() },
+      yAxis: { type: 'category', data: rows.map(function (r) { return r.name }), axisLabel: axisLabelStyle() },
+      series: [{
+        type: 'bar', barMaxWidth: 20,
+        itemStyle: { color: color || S7, borderRadius: [0, 3, 3, 0] },
+        label: { show: true, position: 'right', fontSize: 11, color: '#52514e', formatter: function (p) { return p.value } },
+        data: rows.map(function (r) { return r.value })
+      }]
+    }
+  }
+
+  function renderCards (d) {
+    var c = d.counts || {}
+    var views = (c.home || 0) + (c.player || 0)
+    var avg = c.sessions ? Math.round((c.durationSec || 0) / c.sessions) : 0
+    var items = [
+      ['课件浏览(首页+播放)', views],
+      ['学习会话', c.sessions || 0],
+      ['总学习时长', fmtDuration(c.durationSec || 0)],
+      ['平均会话时长', fmtDuration(avg)],
+      ['观看 ≥5分钟', c.fiveMin || 0],
+      ['学完课件', c.completed || 0],
+      ['翻到底', c.reachedEnd || 0],
+      ['客户端数', c.clients || 0]
+    ]
+    $('cards').innerHTML = items.map(function (it) {
+      return '<div class="card"><b>' + esc(it[1]) + '</b><span>' + esc(it[0]) + '</span></div>'
+    }).join('')
+    $('meta').textContent = '数据更新于 ' + fmtTime(d.generatedAt) + ' · 服务器已运行 ' + fmtDuration(d.uptimeSec)
+  }
+
+  function renderTable (units) {
+    var sorted = (units || []).slice().sort(function (a, b) { return (b.sessions || 0) - (a.sessions || 0) })
+    var rows = sorted.map(function (u) {
+      var top = u.top && u.top.length ? ('P' + (u.top[0][0] + 1) + ' · ' + fmtDuration(u.top[0][1])) : '—'
+      var fe = u.features || {}
+      var tts = u.tts || {}
+      return '<tr>' +
+        '<td><div>' + esc(u.title || u.slug || '未命名') + '</div><div class="slug">' + esc(u.slug || '') + '</div></td>' +
+        '<td>' + (u.sessions || 0) + '</td>' +
+        '<td>' + fmtDuration(u.avgSec) + '</td>' +
+        '<td>' + fmtDuration(u.totalSec) + '</td>' +
+        '<td>' + (u.fiveMin || 0) + '</td>' +
+        '<td>' + (u.completed || 0) + '</td>' +
+        '<td>' + (u.reachedEnd || 0) + '</td>' +
+        '<td>' + (u.maxSlide || 0) + '</td>' +
+        '<td>' + (tts.plays || 0) + '</td>' +
+        '<td>' + (fe.fullscreen || 0) + '</td>' +
+        '<td>' + (fe.overview || 0) + '</td>' +
+        '<td>' + (fe.zoom || 0) + '</td>' +
+        '<td>' + (fe.recording || 0) + '</td>' +
+        '<td>' + top + '</td>' +
+        '</tr>'
+    }).join('')
+    $('rows').innerHTML = rows || '<tr><td colspan="14" class="muted">暂无课件学习记录</td></tr>'
+  }
+
+  function render () {
+    fetch('api/stats')
+      .then(function (r) { return r.json() })
+      .then(function (d) {
+        renderCards(d)
+        renderTable(d.units || [])
+
+        charts.daily = echarts.init($('c-daily'))
+        charts.daily.setOption(lineOption(d.daily || []))
+
+        var hours = []
+        for (var i = 0; i < 24; i++) hours.push(String(i).padStart(2, '0') + ':00')
+        charts.hourly = echarts.init($('c-hourly'))
+        charts.hourly.setOption(barOption(hours, (d.hourly || []).map(function (h) { return h.sessions }), S2))
+
+        var topUnits = (d.units || []).slice().sort(function (a, b) { return (b.sessions || 0) - (a.sessions || 0) }).slice(0, 8)
+        charts.units = echarts.init($('c-units'))
+        charts.units.setOption(hbarOption(
+          topUnits.map(function (u) { return { name: u.title || u.slug, value: u.sessions || 0 } }),
+          S3
+        ))
+
+        charts.dwell = echarts.init($('c-dwell'))
+        charts.dwell.setOption(hbarOption(
+          (d.dwellTop || []).map(function (t) { return { name: (t.slug || '') + ' P' + (t.i + 1), value: t.sec } }),
+          S7
+        ))
+      })
+      .catch(function (e) {
+        var el = $('c-daily')
+        if (el) el.textContent = '图表加载失败：' + e.message
+      })
+  }
+
+  window.addEventListener('resize', function () {
+    for (var k in charts) if (charts[k]) charts[k].resize()
+  })
+  render()
+})()
+</script>
+</body>
+</html>

@@ -17,17 +17,19 @@
 
 [Unit]
 Description=se-textbook server with visit stats
-Documentation=file:/home/ubuntu/app/se-textbook/server/server.mjs
+Documentation=file:/home/ubuntu/app/se-textbook-2026/server/server.mjs
 After=network.target
 
 [Service]
 Type=simple
 # 以文件属主运行，保证可读 build/ docs/ white-paper/ 并写 server/data/stats.json
 User=ubuntu
-WorkingDirectory=/home/ubuntu/app/se-textbook
-# 默认 8080；如需改端口，改这里后 systemctl daemon-reload && restart
-Environment=PORT=8080
-ExecStart=/home/ubuntu/.nvm/versions/node/v24.18.0/bin/node /home/ubuntu/app/se-textbook/server/server.mjs
+WorkingDirectory=/home/ubuntu/app/se-textbook-2026
+# 端口 8081（8080 被 sd-textbook 占用）；nginx 反代到 /se-textbook，
+# BASE_PATH 须与 nginx 挂载路径一致（完整 URI 透传，服务端按此前缀解析）。改后 daemon-reload && restart
+Environment=PORT=8081
+Environment=BASE_PATH=/se-textbook
+ExecStart=/home/ubuntu/.nvm/versions/node/v24.18.0/bin/node /home/ubuntu/app/se-textbook-2026/server/server.mjs
 # 崩溃后自动重启
 Restart=on-failure
 RestartSec=5
