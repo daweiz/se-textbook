@@ -9,7 +9,7 @@
 //
 // 路由：
 //   / 或 /index.html      引导页 server/landing.html（不埋点）
-//   /book/                教材 HTML build/md_writing.html（服务端注入 track.js 埋点）
+//   /book/                教材 HTML build/index.html（服务端注入 track.js 埋点）
 //   /book/images/*        静态发布 build/images/*（教材相对 images/ 引用在此解析）
 //   /book.pdf             教材 PDF（build/md_writing.pdf）
 //   /slides/              幻灯片首页 docs/index.html（注入 track.js）
@@ -41,7 +41,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const BASE_PATH = (process.env.BASE_PATH || '').replace(/\/+$/, '')
 const route = (p) => BASE_PATH + p
 const BUILD_DIR = path.resolve(__dirname, '..', 'build')
-const BOOK_HTML = path.join(BUILD_DIR, 'md_writing.html')
+const BOOK_HTML = path.join(BUILD_DIR, 'index.html')
 const BOOK_PDF = path.join(BUILD_DIR, 'md_writing.pdf')
 const SLIDES_DIR = path.resolve(__dirname, '..', 'docs')
 const WHITEPAPER_DIR = path.resolve(__dirname, '..', 'white-paper', 'build')
@@ -173,7 +173,7 @@ function injectSlidesEndpoint(html) {
 
 // ---------- 发布处理 ----------
 
-// 教材 HTML：读 build/md_writing.html，注入埋点后返回
+// 教材 HTML：读 build/index.html，注入埋点后返回
 function serveBook(res) {
   fs.readFile(BOOK_HTML, 'utf8', (err, html) => {
     if (err) {

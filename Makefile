@@ -50,10 +50,11 @@ html:
 		-F pandoc-crossref \
 		--number-sections \
 		--top-level-division=chapter \
+		--toc \
 		--template=src/main/templates/html/book/book.html \
 		$(INPUT) \
 		-output-directory=build \
-		-o build/$(OUTPUT).html
+		-o build/index.html
 
 tex:
 	pandoc --verbose --pdf-engine=xelatex --resource-path=$(PANDOCX) \
