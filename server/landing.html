@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- 引导页：se-textbook 服务器入口导航。
+  所有链接均为相对路径，以便在 nginx 子路径 /se-textbook/ 下正确解析。
+  占位符 {{totalVisits}} / {{totalDurationSec}} / {{bookDownloads}} / {{whitepaperDownloads}}
+  由 server.mjs 服务时替换为实时统计。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>智能软件工程基础</title>
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    color: #1a1a1a;
+    background: #f0f1f4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    color: #f9fafb;
+    padding: 4rem 1.5rem 3rem;
+    text-align: center;
+  }
+  .hero .kicker {
+    display: inline-block;
+    font-size: .85rem;
+    letter-spacing: .2em;
+    color: #9ca3af;
+    border: 1px solid #4b5563;
+    border-radius: 999px;
+    padding: .3rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 { font-size: 2.2rem; margin: 0 0 .75rem; line-height: 1.25; }
+  .hero .subtitle { font-size: 1.1rem; color: #d1d5db; margin: 0 0 1.25rem; }
+  .hero .author { font-size: .95rem; color: #9ca3af; }
+  .wrap { flex: 1; width: 100%; max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 3rem; box-sizing: border-box; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+  .card {
+    display: block;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+  .card .icon { font-size: 2.2rem; display: block; margin-bottom: .75rem; }
+  .card .name { font-size: 1.05rem; font-weight: 600; margin-bottom: .35rem; }
+  .card .desc { font-size: .85rem; color: #6b7280; line-height: 1.5; }
+  .statsline {
+    margin-top: 2.5rem;
+    text-align: center;
+    color: #6b7280;
+    font-size: .9rem;
+  }
+  .statsline b { color: #374151; }
+  .footer { text-align: center; color: #9ca3af; font-size: .8rem; padding: 1.5rem; border-top: 1px solid #e5e7eb; }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <span class="kicker">张大为 · 智能软件工程教材</span>
+    <h1>智能软件工程基础</h1>
+    <p class="subtitle">从传统软件工程走向智能软件工程 · 16 章完整内容</p>
+    <p class="author">张大为</p>
+  </header>
+
+  <main class="wrap">
+    <div class="cards">
+      <a class="card" href="book/">
+        <span class="icon">📖</span>
+        <div class="name">打开教材</div>
+        <div class="desc">在线阅读全书 · 16 章完整内容</div>
+      </a>
+      <a class="card" href="slides/">
+        <span class="icon">🎞️</span>
+        <div class="name">在线幻灯片</div>
+        <div class="desc">37 节教学课件 · 每节 60 分钟</div>
+      </a>
+      <a class="card" href="whitepaper.pdf">
+        <span class="icon">📄</span>
+        <div class="name">白皮书</div>
+        <div class="desc">《智能软件工程基础》项目白皮书 PDF</div>
+      </a>
+      <a class="card" href="book.pdf">
+        <span class="icon">📚</span>
+        <div class="name">教材 PDF 版</div>
+        <div class="desc">全书排版 PDF，可离线阅读</div>
+      </a>
+      <a class="card" href="stats">
+        <span class="icon">📊</span>
+        <div class="name">访问统计</div>
+        <div class="desc">查看访问次数、时长与时间分布</div>
+      </a>
+    </div>
+
+    <p class="statsline">本站累计访问 <b>{{totalVisits}}</b> 次 · 累计停留 <b>{{totalDurationSec}}</b> 秒 · 教材 PDF 下载 <b>{{bookDownloads}}</b> 次 · 白皮书下载 <b>{{whitepaperDownloads}}</b> 次</p>
+  </main>
+
+  <footer class="footer">se-textbook 服务器 · 动态发布与访问统计</footer>
+</body>
+</html>

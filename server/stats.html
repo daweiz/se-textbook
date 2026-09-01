@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!-- 访问统计页：由 server.mjs 在 /stats 发布，数据来自 fetch('stats.json')。
+  ECharts 本地托管（/echarts.min.js），图表配色参照 dataviz 参考调色板（浅色模式）。 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>访问统计 · 智能软件工程基础</title>
+<script src="echarts.min.js"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --page-plane: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --hairline: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11, 11, 11, 0.10);
+    --s1: #2a78d6;   /* blue */
+    --s2: #eb6834;   /* orange */
+    --s3: #1baf7a;   /* aqua */
+    --s4: #eda100;   /* yellow */
+    --s5: #e87ba4;   /* magenta */
+    --s6: #008300;   /* green */
+    --s7: #4a3aa7;   /* violet */
+    --s8: #e34948;   /* red */
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+    background: var(--page-plane);
+  }
+  .head { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem .25rem; }
+  h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+  .muted { color: var(--muted); font-size: .85rem; }
+  .cards { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+  .card {
+    flex: 1; min-width: 150px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 8px; padding: 1rem;
+  }
+  .card b { display: block; font-size: 1.8rem; line-height: 1.2; font-weight: 600; }
+  .card span { color: var(--ink-2); font-size: .85rem; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
+  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; }
+  .chart {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1rem .5rem;
+  }
+  .chart h3 { margin: 0 0 .25rem; font-size: .95rem; }
+  .chart div { width: 100%; height: 300px; }
+  h2 { font-size: 1.1rem; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-top: .5rem; }
+  th, td { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid var(--hairline); font-size: .9rem; }
+  th { background: #efefea; color: var(--ink-2); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>访问统计 · 智能软件工程基础</h1>
+  <p class="muted" id="period"></p>
+</div>
+<div class="wrap">
+  <div class="cards" id="cards"></div>
+
+  <div class="charts">
+    <div class="chart"><h3>近14天访问趋势</h3><div id="c-daily"></div></div>
+    <div class="chart"><h3>24小时时段分布</h3><div id="c-hourly"></div></div>
+    <div class="chart"><h3>资源访问分布</h3><div id="c-pages"></div></div>
+    <div class="chart"><h3>停留时长分布</h3><div id="c-durations"></div></div>
+    <div class="chart"><h3>访问来源分布</h3><div id="c-referrers"></div></div>
+    <div class="chart"><h3>浏览器/平台分布</h3><div id="c-platforms"></div></div>
+    <div class="chart"><h3>Top IP</h3><div id="c-ips"></div></div>
+  </div>
+
+  <h2>最近 20 次访问</h2>
+  <table>
+    <thead><tr><th>时间</th><th>时长</th><th>页面</th><th>IP</th><th>用户代理</th><th>来源</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+<script>
+(function () {
+  'use strict'
+  var PALETTE = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#e34948']
+  var S1 = '#2a78d6', S2 = '#eb6834', S3 = '#1baf7a', S7 = '#4a3aa7'
+  var charts = {}
+
+  function $ (id) { return document.getElementById(id) }
+
+  function esc (s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+  }
+
+  function fmtDuration (sec) {
+    sec = Number(sec) || 0
+    var h = Math.floor(sec / 3600)
+    var m = Math.floor((sec % 3600) / 60)
+    var s = Math.floor(sec % 60)
+    if (h > 0) return h + '时' + m + '分' + s + '秒'
+    if (m > 0) return m + '分' + s + '秒'
+    return s + '秒'
+  }
+
+  function fmtTime (iso) {
+    if (!iso) return '—'
+    var d = new Date(iso)
+    function p (n) { return String(n).padStart(2, '0') }
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes())
+  }
+
+  function axisGrid () { return { left: 8, right: 16, top: 36, bottom: 8, containLabel: true } }
+  function axisLabelStyle () { return { color: '#52514e', fontSize: 11 } }
+  function splitLine () { return { lineStyle: { color: '#e1e0d9' } } }
+
+  function lineOption (daily) {
+    return {
+      tooltip: { trigger: 'axis' },
+      grid: axisGrid(),
+      xAxis: { type: 'category', data: daily.map(function (d) { return d.date }), axisLabel: axisLabelStyle(), axisLine: { lineStyle: { color: '#c3c2b7' } } },
+      yAxis: { type: 'value', minInterval: 1, axisLabel: axisLabelStyle(), splitLine: splitLine() },
+      series: [{
+        type: 'line', smooth: true, symbolSize: 6,
+        itemStyle: { color: S1 },
+        lineStyle: { width: 2 },
+        areaStyle: { opacity: 0.12, color: S1 },
+        data: daily.map(function (d) { return d.visits })
+      }]
+    }
+  }
+
+  function barOption (labels, values, color) {
+    return {
+      tooltip: { trigger: 'axis' },
+      grid: axisGrid(),
+      xAxis: { type: 'category', data: labels, axisLabel: axisLabelStyle(), axisLine: { lineStyle: { color: '#c3c2b7' } } },
+      yAxis: { type: 'value', minInterval: 1, axisLabel: axisLabelStyle(), splitLine: splitLine() },
+      series: [{
+        type: 'bar', barMaxWidth: 26,
+        itemStyle: { color: color || S1, borderRadius: [3, 3, 0, 0] },
+        label: { show: true, position: 'top', fontSize: 10, color: '#52514e' },
+        data: values
+      }]
+    }
+  }
+
+  function hbarOption (rows, color) {
+    return {
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      grid: { left: 8, right: 48, top: 8, bottom: 8, containLabel: true },
+      xAxis: { type: 'value', minInterval: 1, axisLabel: axisLabelStyle(), splitLine: splitLine() },
+      yAxis: { type: 'category', data: rows.map(function (r) { return r.name }), axisLabel: axisLabelStyle() },
+      series: [{
+        type: 'bar', barMaxWidth: 20,
+        itemStyle: { color: color || S7, borderRadius: [0, 3, 3, 0] },
+        label: { show: true, position: 'right', fontSize: 11, color: '#52514e' },
+        data: rows.map(function (r) { return r.value })
+      }]
+    }
+  }
+
+  function pieOption (rows) {
+    return {
+      tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+      series: [{
+        type: 'pie', radius: ['38%', '66%'], center: ['50%', '44%'],
+        label: { show: true, fontSize: 11, color: '#52514e', formatter: '{b} {c}', lineHeight: 16 },
+        labelLine: { length: 8, length2: 6 },
+        itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 1 },
+        data: rows.map(function (r, i) {
+          return { name: r.name, value: r.value, itemStyle: { color: PALETTE[i % PALETTE.length] } }
+        })
+      }]
+    }
+  }
+
+  function renderCards (d) {
+    var items = [
+      ['总访问次数', d.totalVisits],
+      ['今日访问', d.todayVisits],
+      ['独立访客(IP)', d.uniqueVisitors],
+      ['总停留时长', fmtDuration(d.totalDurationSec)],
+      ['平均停留时长', fmtDuration(d.avgDurationSec)],
+      ['教材 PDF 下载', (d.downloads || {}).book || 0],
+      ['白皮书下载', (d.downloads || {}).whitepaper || 0]
+    ]
+    $('cards').innerHTML = items.map(function (it) {
+      return '<div class="card"><b>' + esc(it[1]) + '</b><span>' + esc(it[0]) + '</span></div>'
+    }).join('')
+    $('period').textContent = '首次访问 ' + fmtTime(d.firstVisitAt) + ' · 最近访问 ' + fmtTime(d.lastVisitAt)
+  }
+
+  function renderTable (recent) {
+    var rows = recent.map(function (v) {
+      return '<tr>' +
+        '<td>' + esc(fmtTime(v.start)) + '</td>' +
+        '<td>' + esc(fmtDuration(v.duration)) + '</td>' +
+        '<td>' + esc(v.page || '—') + '</td>' +
+        '<td>' + esc(v.ip) + '</td>' +
+        '<td title="' + esc(v.ua) + '">' + esc(v.ua ? String(v.ua).slice(0, 60) + (v.ua.length > 60 ? '…' : '') : '') + '</td>' +
+        '<td title="' + esc(v.referrer) + '">' + esc(v.referrer ? String(v.referrer).slice(0, 40) + (v.referrer.length > 40 ? '…' : '') : '') + '</td>' +
+        '</tr>'
+    }).join('')
+    $('rows').innerHTML = rows || '<tr><td colspan="6" class="muted">暂无访问记录</td></tr>'
+  }
+
+  function render () {
+    fetch('stats.json')
+      .then(function (r) { return r.json() })
+      .then(function (d) {
+        renderCards(d)
+        renderTable(d.recent || [])
+
+        charts.daily = echarts.init($('c-daily'))
+        charts.daily.setOption(lineOption(d.daily))
+
+        var hours = []
+        for (var i = 0; i < 24; i++) hours.push(String(i).padStart(2, '0') + ':00')
+        charts.hourly = echarts.init($('c-hourly'))
+        charts.hourly.setOption(barOption(hours, d.hourly, S1))
+
+        charts.pages = echarts.init($('c-pages'))
+        charts.pages.setOption(hbarOption(d.pages || [], S3))
+
+        charts.durations = echarts.init($('c-durations'))
+        charts.durations.setOption(barOption(
+          d.durations.map(function (b) { return b.name }),
+          d.durations.map(function (b) { return b.value }),
+          S2
+        ))
+
+        charts.referrers = echarts.init($('c-referrers'))
+        charts.referrers.setOption(pieOption(d.referrers))
+
+        charts.platforms = echarts.init($('c-platforms'))
+        charts.platforms.setOption(pieOption(d.platforms))
+
+        charts.ips = echarts.init($('c-ips'))
+        charts.ips.setOption(hbarOption(d.topIPs, S7))
+      })
+      .catch(function (e) {
+        var el = $('c-daily')
+        if (el) el.textContent = '图表加载失败：' + e.message
+      })
+  }
+
+  window.addEventListener('resize', function () {
+    for (var k in charts) if (charts[k]) charts[k].resize()
+  })
+  render()
+})()
+</script>
+</body>
+</html>

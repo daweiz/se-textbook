@@ -1,0 +1,44 @@
+# systemd 服务单元：把 server/server.mjs 作为系统服务启动。
+# 参照 sd_harmony/book/server/sd-textbook.service。
+#
+# 安装：
+#   sudo cp server/se-textbook.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now se-textbook
+#
+# 常用命令：
+#   systemctl status se-textbook            查看状态
+#   systemctl restart se-textbook           重启
+#   systemctl stop se-textbook              停止
+#   journalctl -u se-textbook -f            实时查看日志（访问/统计信标）
+#
+# 注意：ExecStart 中的 node 为绝对路径（nvm 安装），升级 node 后需同步修改本文件
+# 并执行 daemon-reload；WorkingDirectory 需改成实际部署路径。
+
+[Unit]
+Description=se-textbook server with visit stats
+Documentation=file:/home/ubuntu/app/se-textbook/server/server.mjs
+After=network.target
+
+[Service]
+Type=simple
+# 以文件属主运行，保证可读 build/ docs/ white-paper/ 并写 server/data/stats.json
+User=ubuntu
+WorkingDirectory=/home/ubuntu/app/se-textbook
+# 默认 8080；如需改端口，改这里后 systemctl daemon-reload && restart
+Environment=PORT=8080
+ExecStart=/home/ubuntu/.nvm/versions/node/v24.18.0/bin/node /home/ubuntu/app/se-textbook/server/server.mjs
+# 崩溃后自动重启
+Restart=on-failure
+RestartSec=5
+
+# 安全加固（最小集，不影响读写 build/docs/white-paper 与 stats.json）
+NoNewPrivileges=true
+PrivateTmp=true
+
+# 日志进 journald（含 [track] 访问信标）
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

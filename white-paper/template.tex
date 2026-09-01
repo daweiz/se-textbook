@@ -1,0 +1,123 @@
+\documentclass[12pt,a4paper,twoside,openany]{ctexbook}
+
+% ===== 字体 =====
+\setCJKmainfont{SimSun}[BoldFont=SimHei,ItalicFont=KaiTi]
+\setCJKsansfont{SimHei}
+\setCJKmonofont{FangSong}
+\setmainfont{Times New Roman}
+
+% ===== 页面 =====
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.3em}
+
+% ===== 数学（\numberwithin 依赖） =====
+\usepackage{amsmath,amssymb}
+
+% ===== 页眉页脚 =====
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\leftmark}
+\fancyhead[RO]{\small\rightmark}
+\fancyfoot[LE,RO]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ===== 标题格式 =====
+\ctexset{
+  chapter={format={\raggedright\bfseries\Huge},beforeskip={0pt},afterskip={20pt}},
+  section={format={\raggedright\bfseries\Large},beforeskip={15pt},afterskip={10pt}},
+  subsection={format={\raggedright\bfseries\large},beforeskip={10pt},afterskip={8pt}},
+}
+
+% ===== 图表标题 =====
+\usepackage{caption}
+\captionsetup{font=small,skip=6pt}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+
+% ===== 表格 =====
+\usepackage{array,booktabs,longtable,tabularx,multirow,makecell,calc}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{4pt}
+% 表格满宽 + 小号字
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\AtBeginEnvironment{longtable}{\footnotesize}
+\AtBeginEnvironment{table}{\footnotesize}
+\captionsetup[table]{font=footnotesize}
+
+% ===== 图片 =====
+\usepackage{graphicx}
+\setkeys{Gin}{width=\textwidth,keepaspectratio}
+\usepackage{float}
+
+% ===== 超链接/引用 =====
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% ===== 代码 =====
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,showstringspaces=false}
+% pandoc 语法高亮（Shaded 环境）所需
+\usepackage{fancyvrb}
+$highlighting-macros$
+
+% ===== 其他 =====
+\usepackage{indentfirst}
+
+% ===== pandoc 兼容 =====
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
+\newcounter{none}
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$author$}
+$endif$
+
+\begin{document}
+
+% ===== 封面 =====
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries $title$\par}
+$if(subtitle)$
+\vspace{0.8cm}
+{\LARGE $subtitle$\par}
+$endif$
+\vspace{2.5cm}
+{\Large $author$\par}
+\vspace{1cm}
+{\large $institute$\par}
+\vspace{1.5cm}
+{\large $date$\par}
+$if(email)$
+\vspace{1cm}
+{\normalsize $email$\par}
+$endif$
+\vfill
+\end{titlepage}
+
+% ===== 摘要与关键词 =====
+$if(abstract)$
+\chapter*{摘要}
+$abstract$
+$if(keywords)$
+\par\vspace{1em}
+\noindent\textbf{关键词：}$keywords$。
+$endif$
+\clearpage
+$endif$
+
+$if(toc)$
+\tableofcontents
+$endif$
+
+$body$
+
+\end{document}

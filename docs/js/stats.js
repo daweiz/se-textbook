@@ -1,19 +1,20 @@
 /* ============================================================
    智能软件工程基础 · 幻灯片行为统计采集器
    功能：首页/小节打开、≥5 分钟播放、完播、浏览时长、浏览习惯的采集与上报
-   数据流：本地聚合 → 静默上报 → 统计服务 stats-server.js → stats.html 报表
+   数据流：本地聚合 → 静默上报 → 服务器 /api/collect（server/ 内置） → 聚合报表
    ============================================================
-   端点配置优先级（三者取最先命中）：
-     1) 页面内联：<script>window.SLIDE_STATS_ENDPOINT="https://…";</script>（在 stats.js 之前）
-     2) localStorage：slides-stats-endpoint（可用 console 或 setEndpoint() 覆盖）
-     3) 默认：http://localhost:3939
+   端点配置（未显式配置则统计默认关闭，绝不发起连接，杜绝 ERR_CONNECTION_REFUSED 噪音）：
+     1) 页面内联：<script>window.SLIDE_STATS_ENDPOINT="/";</script>（在 stats.js 之前，
+        经 server/ 发布时由 server.mjs 自动注入，同源上报）
+     2) localStorage：slides-stats-endpoint（setEndpoint() 写入）
+   均未配置 → 统计关闭；仅 getEndpoint() 读取时回退 "/"（同源，供报表等消费方预填）。
    端点设为空串 / 'off' / 'false' / '0' / 'none' 时统计禁用。
    服务不可达 / 禁用时本模块一切静默降级，绝不抛异常、绝不影响幻灯片使用。
    ============================================================ */
 (function () {
   "use strict";
 
-  var DEFAULT_ENDPOINT = "http://localhost:3939";
+  var DEFAULT_ENDPOINT = "/";
   var ENDPOINT_KEY = "slides-stats-endpoint";
   var QUEUE_KEY = "slides-stats-queue";
   var CID_KEY = "slides-stats-cid";
@@ -47,7 +48,22 @@
     return DEFAULT_ENDPOINT;
   }
 
+  /** 端点是否被显式配置（内联 / localStorage / setEndpoint 任一命中）；默认回退值不算 */
+  function hasExplicitEndpoint() {
+    if (runtimeEndpoint !== null) return true;
+    try {
+      if (window.SLIDE_STATS_ENDPOINT !== undefined) return true;
+    } catch (e) {}
+    try {
+      var ls = localStorage.getItem(ENDPOINT_KEY);
+      if (ls != null && String(ls).trim() !== "") return true;
+    } catch (e) {}
+    return false;
+  }
+
   function isEnabled() {
+    // 未显式配置端点 → 保持关闭，不发任何请求（杜绝服务未启动时的 ERR_CONNECTION_REFUSED）
+    if (!hasExplicitEndpoint()) return false;
     var ep = getEndpoint();
     if (!ep) return false;
     var low = ep.toLowerCase();
@@ -313,7 +329,7 @@
     }, HEARTBEAT_INTERVAL);
   }
 
-  // 供报表页 stats.html 复用：GET 聚合报表，超时/失败返回 null
+  // 供报表消费方复用：GET 聚合报表，超时/失败返回 null
   function fetchStats(url) {
     return new Promise(function (resolve) {
       if (!isEnabled()) { resolve(null); return; }
@@ -335,7 +351,7 @@
 
   /* ---------- 启动 ---------- */
 
-  // stats.html 设置 window.SLIDE_STATS_NO_AUTO=true 时只暴露 API，不自动采集/上报
+  // 设置 window.SLIDE_STATS_NO_AUTO=true 时只暴露 API，不自动采集/上报
   if (!window.SLIDE_STATS_NO_AUTO) {
     window.addEventListener("pagehide", function () {
       endSession();

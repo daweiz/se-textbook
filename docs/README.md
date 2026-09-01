@@ -44,7 +44,6 @@
 docs/
   index.html            # 小节菜单页（6 模块分组，37 节卡片）
   player.html           # 播放器页（URL 参数 ?u=unit-NN，兼容 ?ch=chapter-NN）
-  stats.html            # 使用统计报表页（读统计服务 /api/stats，纯前端仪表盘）
   css/player.css        # 播放器样式（亮/暗两套主题 + 小节封面样式）
   js/player.js          # 播放器核心逻辑
   js/stats.js           # 行为统计采集器（首页/小节打开、≥5分钟、完播、时长、习惯；静默上报）
@@ -54,11 +53,10 @@ docs/
   tools/units.js        # 37 节划分表（单一事实来源：每节覆盖哪些章节内容片、时长、环节）
   tools/generate.js     # 生成器：src → chapter-NN.js → unit-NN.js（拆细）
   tools/apply-narration.js  # 合并人工旁白到数据文件
-  tools/stats-server.js # 可选统计服务（零依赖 Node：POST /api/collect + GET /api/stats，JSONL 持久化）
   tools/narration/      # 人工旁白：unit-covers.js（37 篇封面）+ chapter-*.js（16 章导语）
   tools/verify.js       # 校验：数据可解析、图片存在、旁白完整、每节 ≥30 页、内容片覆盖不重不漏
 ```
-> 统计运行时数据 `stats-data/`（仓库根，被 .gitignore 忽略）由 stats-server.js 生成，勿提交。
+> 幻灯片行为统计由根目录 `server/`（`server/server.mjs` + `server/slides-stats.mjs`）提供，运行时数据存 `server/data/`（git 忽略），详见下文「动态发布服务器（server/）」。原独立的 `tools/stats-server.js` 已删除。
 
 ## 数据说明
 
@@ -86,40 +84,36 @@ node docs/tools/verify.js
 > 旁白单独存放在 `tools/narration/*.js`，重新生成数据文件不会丢失人工旁白。
 > 调整 37 节划分只改 `tools/units.js`（每节的 `parts` 字段 = 覆盖的章节内容片区间），重新生成即可。
 
-## 使用统计（可选）
+## 使用统计
 
 幻灯片自带**静默行为统计**：统计首页打开次数、每小节打开次数、5 分钟播放次数、完播次数、浏览时间与浏览习惯（翻页/朗读/缩放/全屏/总览/录屏、单页停留 TOP、按小时分布）。统计**完全可选**——服务未启动时幻灯片照常工作，采集器静默降级，不产生任何报错。
 
-**数据流**
+**数据流**（由根目录 `server/` 内置提供，不再需要独立统计服务）
 
 ```
-index.html / player.html
+index.html / player.html（被 server/ 服务时自动注入 window.SLIDE_STATS_ENDPOINT="/"）
    └─ js/stats.js（客户端采集 + 本地聚合）
-        └─ POST /api/collect ──▶ tools/stats-server.js（JSONL 持久化 + 内存聚合）
-                                    └─ stats-data/events.jsonl（运行时生成，不入库）
-                                          └─ GET /api/stats ◀── stats.html（报表仪表盘）
+        └─ POST /api/collect ──▶ server/server.mjs → server/slides-stats.mjs（JSONL 持久化 + 内存聚合）
+                                     └─ server/data/slides-events.jsonl（运行时生成，git 忽略）
+                                           └─ GET /api/stats（聚合报表 JSON，供外部消费）
 ```
 
-**启动服务**（零依赖，仅 Node 内置模块）：
+**启动**：
 
 ```bash
-node docs/tools/stats-server.js          # 默认 http://localhost:3939
-PORT=9090 node docs/tools/stats-server.js    # 换端口
-DATA_DIR=D:/tmp/stats node docs/tools/stats-server.js   # 换数据目录
+node server/server.mjs   # 默认端口 8080；幻灯片统计端点 POST /api/collect · GET /api/stats
 ```
 
-然后打开 `stats.html` 查看报表（地址默认 `http://localhost:3939`，可在页面上方输入框改）。
+聚合数据经 `GET /api/stats`（同源服务器）提供；原报表仪表盘 `docs/stats.html` 已删除，需要时可直接消费该 JSON。
 
-**上报端点覆盖优先级**（js/stats.js）：
+**上报端点（js/stats.js）**：统计**默认关闭**——未显式配置端点时采集器不发起任何请求（杜绝服务未启动时的 `ERR_CONNECTION_REFUSED` 控制台噪音）。启用方式：
 
-1. 内联 `window.SLIDE_STATS_ENDPOINT`（在三个 HTML 中 stats.js 之前设置）
-2. localStorage `slides-stats-endpoint`（stats.html 输入框保存后生效）
-3. 默认 `http://localhost:3939`
+1. **经 server 发布**（推荐）：`/slides/` 下页面被服务时自动注入 `window.SLIDE_STATS_ENDPOINT="/"`，同源上报；
+2. **内联变量**：在页面 stats.js 之前设 `<script>window.SLIDE_STATS_ENDPOINT="https://…";</script>`。
 
-设为 `off` / `false` / `0` / `none`（或空串）即完全禁用统计。
+设为 `off` / `false` / `0` / `none`（或空串）即完全禁用统计。`getEndpoint()` 读取时若未配置，回退默认 `/`（同源，供报表等消费方预填）。
 
-**部署注意（GitHub Pages）**：Pages 站点是 https，若统计服务是 http 会被浏览器以混合内容拦截。线上统计服务须为 https（云主机反代 / Cloudflare Tunnel 等），并在三个 HTML 的 stats.js 之前内联端点：
-`<script>window.SLIDE_STATS_ENDPOINT="https://统计服务域名"</script>`。本地 `file://` 与 `http://localhost` 不受此限。
+**部署注意**：统计端点须与页面同源（或 https），GitHub Pages 这类纯静态托管无法运行 Node 统计服务，幻灯片统计仅在根目录 `server/` 部署时生效；本地 `file://` 直开统计保持关闭。
 
 ## 生成规则摘要（tools/generate.js）
 
@@ -143,3 +137,33 @@ DATA_DIR=D:/tmp/stats node docs/tools/stats-server.js   # 换数据目录
 - 37 节时长 ∈ [35,60]、含封面片（type=title、旁白非空）、id 唯一、图片齐全；
 - **每节 ≥30 页**：37 节讲解 deck 页数均不少于 30；
 - **覆盖校验**：各章内容片被 37 节逐一分配、不重不漏（对照 `tools/units.js`，总数动态计算）。
+
+## 动态发布服务器（server/）
+
+`server/` 是参照 sd_harmony/book 搭建的**零依赖发布服务器**（仅 Node 内置模块），一次性发布教材与幻灯片四类产物，并做页面访问统计与 ECharts 可视化：
+
+```bash
+node server/server.mjs              # 默认端口 8080（可用 PORT 或 --port 覆盖）
+node server/server.mjs --stats      # 打印统计摘要后退出
+```
+
+| 路由 | 内容 |
+|------|------|
+| `/` | 引导页（server/landing.html，展示实时累计访问/下载） |
+| `/book/` | 教材 HTML（`build/md_writing.html`，自动注入访问埋点） |
+| `/book/images/*` | 教材图片（`build/images/`） |
+| `/book.pdf` | 教材 PDF（`build/md_writing.pdf`） |
+| `/slides/` | 幻灯片首页（`docs/index.html`，注入埋点） |
+| `/slides/*` | 幻灯片其余资源（player.html / css / js / data） |
+| `/whitepaper.pdf` | 白皮书 PDF（`white-paper/build/`，文件名容错） |
+| `/stats` | 页面访问统计页（ECharts：趋势 / 时段 / 资源分布 / 来源 / 平台 / IP） |
+| `/stats.json` | 页面访问统计 JSON（含页面与 PDF 下载维度） |
+| `POST /api/collect` | 幻灯片行为统计采集（`js/stats.js` 上报） |
+| `GET /api/stats` | 幻灯片行为统计聚合报表 JSON（原 `slides/stats.html` 报表页已删除） |
+| `GET /api/raw` · `GET /api/health` | 幻灯片原始事件导出 · 健康检查 |
+
+- 页面访问统计数据存 `server/data/stats.json`，幻灯片行为事件存 `server/data/slides-events.jsonl`（均 git 忽略）；
+- 埋点经 `track.js` 注入到教材与幻灯片 HTML 的 `</body>` 前，`track.gif` 信标记录访问 / 停留时长；
+- PDF 下载独立计数（教材 / 白皮书），与页面访问统计分开展示；
+- **幻灯片行为统计（会话 / 完播 / 浏览习惯）由本服务器内置**：`server/slides-stats.mjs` 承担采集与聚合，`/slides/` 下页面被服务时自动注入 `window.SLIDE_STATS_ENDPOINT="/"` 同源上报，聚合数据经 `GET /api/stats` 提供（原 `slides/stats.html` 报表页已删除）；
+- 原独立的 `docs/tools/stats-server.js`（端口 3939）已删除，统计仅由本服务器提供；`js/stats.js` 默认关闭、仅在显式配置端点（含本服务器注入）后上报。
