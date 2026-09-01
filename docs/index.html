@@ -136,13 +136,18 @@
 
     <div class="footer">
       数据与播放器均为纯前端实现，双击打开 index.html 即可离线使用，无需服务器。<br>
-      重新生成：<code>node docs/tools/generate.js</code> ｜ 合并旁白：<code>node docs/tools/apply-narration.js</code> ｜ 校验：<code>node docs/tools/verify.js</code>
+      重新生成：<code>node docs/tools/generate.js</code> ｜ 合并旁白：<code>node docs/tools/apply-narration.js</code> ｜ 校验：<code>node docs/tools/verify.js</code><br>
+      <a href="stats.html">📊 使用统计报表</a>
+      （可选：运行 <code>node docs/tools/stats-server.js</code> 启动统计服务后生效；服务未启动完全不影响幻灯片使用）
     </div>
   </div>
 
   <script src="data/_manifest.js"></script>
+  <script src="js/stats.js"></script>
   <script>
     (function () {
+      // 统计：首页打开次数（每次加载恰好一次）
+      if (window.SlideStats) window.SlideStats.pageview("home");
       var box = document.getElementById("modules");
       var units = window.UNITS || [];
       if (!units.length) { box.innerHTML = '<div class="loading">未找到小节清单（data/_manifest.js）</div>'; return; }

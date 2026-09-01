@@ -70,6 +70,15 @@
 
   /* ---------- 初始化播放器 ---------- */
   function initPlayer() {
+    // 统计：会话开始（= 每小节/章节打开次数），initPlayer 是数据加载成功后的唯一入口
+    if (window.SlideStats) SlideStats.startSession({
+      slug: CHAPTER.slug,
+      mode: params().u ? "unit" : "chapter",
+      slides: CHAPTER.slides.length,
+      title: CHAPTER.title,
+      unit: CHAPTER.unit || null,
+      minutes: CHAPTER.minutes || null,
+    });
     $("chapter-title").textContent = CHAPTER.unit
       ? "第" + CHAPTER.unit + "节　" + CHAPTER.title + "（" + CHAPTER.minutes + " 分钟）"
       : "第" + CHAPTER.num + "章　" + CHAPTER.title;
@@ -139,6 +148,7 @@
     if (ZOOM > 1.6) ZOOM = 1.6;
     if (ZOOM < 0.8) ZOOM = 0.8;
     applyZoom();
+    if (window.SlideStats) SlideStats.trackFeature("zoom");
   }
   function initZoom() {
     let z = 1;
@@ -156,8 +166,14 @@
     if (!CHAPTER) return;
     i = Math.max(0, Math.min(CHAPTER.slides.length - 1, i));
     if (i === CUR) return;
+    const from = CUR;
     CUR = i;
     render();
+    // 统计：翻页方向（next/prev/jump）与单页停留结算（所有翻页入口最终汇入此处）
+    if (window.SlideStats) {
+      SlideStats.trackNav(i === from + 1 ? "next" : i === from - 1 ? "prev" : "jump");
+      SlideStats.setSlide(i, CHAPTER.slides.length);
+    }
   }
   const next = () => go(CUR + 1);
   const prev = () => go(CUR - 1);
@@ -247,6 +263,8 @@
     if (!text) { toast("本页无旁白文本"); return; }
 
     stopTTS(true);
+    // 统计：TTS 播放次数 + 朗读段起点（音色/语速/音量变更重播也如实计为一次新播）
+    if (window.SlideStats) { SlideStats.trackTTS("play"); SlideStats.trackTTS("start"); }
 
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "zh-CN";
@@ -276,6 +294,7 @@
       }, 500);
     };
     u.onend = () => {
+      if (window.SlideStats) SlideStats.trackTTS("stop");   // 自然读完结算朗读时长（幂等）
       speaking = false;
       clearTimeout(u._fallback);
       clearTimeout(fallbackHighlight._tEnd);
@@ -309,6 +328,7 @@
   }
 
   function stopTTS(silent) {
+    if (window.SlideStats) SlideStats.trackTTS("stop");   // 手动停止 + 自动翻页取消都结算（幂等，防计时泄漏）
     if (window.speechSynthesis) speechSynthesis.cancel();
     speaking = false;
     setActivePhrase(-1);
@@ -327,6 +347,7 @@
   function toggleFullscreen() {
     if (document.fullscreenElement) document.exitFullscreen();
     else document.documentElement.requestFullscreen().catch(() => toast("无法进入全屏"));
+    if (window.SlideStats) SlideStats.trackFeature("fullscreen");
   }
 
   /* ---------- 录屏 ---------- */
@@ -392,6 +413,7 @@
       REC = { rec, t0: Date.now(), timer: null };
 
       rec.start();
+      if (window.SlideStats) SlideStats.trackFeature("recording");   // 成功启动录屏才计
       startRecordingUI();
       // 用户点击浏览器"停止共享"时自动收尾
       display.getVideoTracks()[0].addEventListener("ended", () => rec.stop());
@@ -437,6 +459,7 @@
 
   /* ---------- 网格总览 ---------- */
   function openOverview() {
+    if (window.SlideStats) SlideStats.trackFeature("overview");
     const ov = $("overview");
     const grid = $("ov-grid");
     grid.innerHTML = "";
@@ -472,7 +495,7 @@
       case "Enter": toggleTTS(); break;
       case "-": case "_": setZoom(-0.1); break;
       case "=": case "+": setZoom(0.1); break;
-      case "0": ZOOM = 1; applyZoom(); break;
+      case "0": ZOOM = 1; applyZoom(); if (window.SlideStats) SlideStats.trackFeature("zoom"); break;
       default: break;
     }
   }
@@ -524,6 +547,7 @@
     html.setAttribute("data-theme", dark ? "light" : "dark");
     $("btn-theme").textContent = dark ? "暗色" : "亮色";
     try { localStorage.setItem("slides-theme", dark ? "light" : "dark"); } catch {}
+    if (window.SlideStats) SlideStats.trackFeature("theme");
   }
   function initTheme() {
     let t = "light";
@@ -537,6 +561,8 @@
   initZoom();
   const autoNext = $("auto-next");
   const p = params();
+  // 统计：播放器打开（含数据加载失败的情况）
+  if (window.SlideStats) SlideStats.pageview("player", { slug: p.u || p.ch || null });
   if (p.u) loadUnit(p.u);
   else if (p.ch) loadChapter(p.ch);
   else {

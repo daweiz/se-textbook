@@ -2,3 +2,4 @@ build/
 fenced_divs-*.log
 .vscode/
 node_modules/
+stats-data/

@@ -44,17 +44,21 @@
 docs/
   index.html            # 小节菜单页（6 模块分组，37 节卡片）
   player.html           # 播放器页（URL 参数 ?u=unit-NN，兼容 ?ch=chapter-NN）
+  stats.html            # 使用统计报表页（读统计服务 /api/stats，纯前端仪表盘）
   css/player.css        # 播放器样式（亮/暗两套主题 + 小节封面样式）
   js/player.js          # 播放器核心逻辑
+  js/stats.js           # 行为统计采集器（首页/小节打开、≥5分钟、完播、时长、习惯；静默上报）
   data/_manifest.js     # 章节清单（window.CHAPTERS）+ 小节清单（window.UNITS）
   data/chapter-NN.js    # 每章幻灯片数据（生成，作为小节数据源与历史备份）
   data/unit-NN.js       # 每小节讲解用 deck（生成 + 封面旁白注入）
   tools/units.js        # 37 节划分表（单一事实来源：每节覆盖哪些章节内容片、时长、环节）
   tools/generate.js     # 生成器：src → chapter-NN.js → unit-NN.js（拆细）
   tools/apply-narration.js  # 合并人工旁白到数据文件
+  tools/stats-server.js # 可选统计服务（零依赖 Node：POST /api/collect + GET /api/stats，JSONL 持久化）
   tools/narration/      # 人工旁白：unit-covers.js（37 篇封面）+ chapter-*.js（16 章导语）
   tools/verify.js       # 校验：数据可解析、图片存在、旁白完整、每节 ≥30 页、内容片覆盖不重不漏
 ```
+> 统计运行时数据 `stats-data/`（仓库根，被 .gitignore 忽略）由 stats-server.js 生成，勿提交。
 
 ## 数据说明
 
@@ -81,6 +85,41 @@ node docs/tools/verify.js
 
 > 旁白单独存放在 `tools/narration/*.js`，重新生成数据文件不会丢失人工旁白。
 > 调整 37 节划分只改 `tools/units.js`（每节的 `parts` 字段 = 覆盖的章节内容片区间），重新生成即可。
+
+## 使用统计（可选）
+
+幻灯片自带**静默行为统计**：统计首页打开次数、每小节打开次数、5 分钟播放次数、完播次数、浏览时间与浏览习惯（翻页/朗读/缩放/全屏/总览/录屏、单页停留 TOP、按小时分布）。统计**完全可选**——服务未启动时幻灯片照常工作，采集器静默降级，不产生任何报错。
+
+**数据流**
+
+```
+index.html / player.html
+   └─ js/stats.js（客户端采集 + 本地聚合）
+        └─ POST /api/collect ──▶ tools/stats-server.js（JSONL 持久化 + 内存聚合）
+                                    └─ stats-data/events.jsonl（运行时生成，不入库）
+                                          └─ GET /api/stats ◀── stats.html（报表仪表盘）
+```
+
+**启动服务**（零依赖，仅 Node 内置模块）：
+
+```bash
+node docs/tools/stats-server.js          # 默认 http://localhost:3939
+PORT=9090 node docs/tools/stats-server.js    # 换端口
+DATA_DIR=D:/tmp/stats node docs/tools/stats-server.js   # 换数据目录
+```
+
+然后打开 `stats.html` 查看报表（地址默认 `http://localhost:3939`，可在页面上方输入框改）。
+
+**上报端点覆盖优先级**（js/stats.js）：
+
+1. 内联 `window.SLIDE_STATS_ENDPOINT`（在三个 HTML 中 stats.js 之前设置）
+2. localStorage `slides-stats-endpoint`（stats.html 输入框保存后生效）
+3. 默认 `http://localhost:3939`
+
+设为 `off` / `false` / `0` / `none`（或空串）即完全禁用统计。
+
+**部署注意（GitHub Pages）**：Pages 站点是 https，若统计服务是 http 会被浏览器以混合内容拦截。线上统计服务须为 https（云主机反代 / Cloudflare Tunnel 等），并在三个 HTML 的 stats.js 之前内联端点：
+`<script>window.SLIDE_STATS_ENDPOINT="https://统计服务域名"</script>`。本地 `file://` 与 `http://localhost` 不受此限。
 
 ## 生成规则摘要（tools/generate.js）
 
